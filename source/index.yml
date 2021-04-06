@@ -1,19 +1,22 @@
-title: API Reference
+title: Live Coin Watch API Documentation
 
 language_tabs:
-   - bash
-   - ruby
-   - python
+   - shell
    - javascript
 
 toc_footers:
-   - <a href=https://github.com/center-key/node-slate>node-slate on GitHub</a>
-   - <a href=https://www.npmjs.com/package/node-slate>Documentation powered by Slate</a>
+  - <a href="https://www.livecoinwatch.com/tools/api" target="_blank">Sign Up for Free Developer Key</a>
 
 includes:
-   - main
-   - _errors
+   - introduction
+   - environments
+   - concepts
+   - resources
+   - errors
+   - limits
 
 search: true
 
-highlight_theme: monokai
+code_clipboard: true
+
+highlight_theme: gruvbox-dark
