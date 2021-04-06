@@ -2,10 +2,6 @@
 
 We've tried to keep the API surface simple and efficient, so let's discuss few [concepts](#concepts) that apply to the entirety of the API.
 
-<aside class="notice">
-Note that you can copy all the code examples by clicking an icon in the top right of it.
-</aside>
-
 ## There Is Only One **Domain**
 
 ```shell
