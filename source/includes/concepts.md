@@ -10,7 +10,7 @@ curl -X POST 'https://api.livecoinwatch.com/status' \
 ```
 
 ```javascript
-await fetch(new Request('https://api.livecoinwatch.com/credits'), {
+await fetch(new Request('https://api.livecoinwatch.com/status'), {
   method: 'POST',
   headers: new Headers({ 'content-type': 'application/json' })
 })
@@ -41,13 +41,13 @@ Try running code examples and see for yourself.
 ## There Is Only One **Key**
 
 ```shell
-curl -X POST 'https://api.livecoinwatch.com/status' \
+curl -X POST 'https://api.livecoinwatch.com/credits' \
   -H 'content-type: application/json' \
   -H 'x-api-key: <YOUR_API_KEY>'
 ```
 
 ```javascript
-await fetch(new Request('https://api.livecoinwatch.com/status'), {
+await fetch(new Request('https://api.livecoinwatch.com/credits'), {
   method: 'POST',
   headers: new Headers({
     'content-type': 'application/json',
