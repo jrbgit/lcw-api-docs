@@ -33,12 +33,12 @@
          <div class=dark-box></div>
          <div class=content>
             <h1 id="introduction">Introduction</h1>
-            <p>Welcome to <a href="https://alpha.livecoinwatch.com">Live Coin Watch</a> API documentation page!</p>
-            <p>If you&#39;re extremely impatient, just jump to <a href="https://alpha.livecoinwatch.com/tools/api">API playground</a></p>
+            <p>Welcome to <a href="https://www.livecoinwatch.com">Live Coin Watch</a> API documentation page!</p>
+            <p>If you&#39;re extremely impatient, just jump to <a href="https://www.livecoinwatch.com/tools/api">API playground</a></p>
             <p>In this document, you should be able to find everything you need to know to use our API, but if you need help, you&#39;re welcome to drop in and ask questions at few places:</p>
             <ul>
                <li><a href="mailto:contact+api@livecoinwatch.com">Simple mail</a> always works.</li>
-               <li><a href="https://alpha.livecoinwatch.com">Trollbox</a> on our site.</li>
+               <li><a href="https://www.livecoinwatch.com">Trollbox</a> on our site.</li>
                <li><a href="https://twitter.com">Our Twitter</a>, if it&#39;s really that bad.</li>
                <li><a href="https://telegram.com">Telegram channel</a> is very fun as well.</li>
             </ul>
@@ -46,15 +46,15 @@
             <p>Now, to follow remainder of the document, let&#39;s set you up with your preferred <a href="#environments">environment</a> of choice...</p>
             <aside class="success"> Print it or take it offline! This guide contains fairly reliable stylesheet for print screens. It should be easy for you to use your browser's Print dialog. </aside>
             <h1 id="environments">Environments</h1>
-            <p>If you&#39;re interested in only exploring the API, there&#39;s not better place than <a href="https://alpha.livecoinwatch.com/tools/api">API playground</a>, in which case you can ignore this chapter.</p>
+            <p>If you&#39;re interested in only exploring the API, there&#39;s not better place than <a href="https://www.livecoinwatch.com/tools/api">API playground</a>, in which case you can ignore this chapter.</p>
             <p>The following are environments we officialy support, though you&#39;re welcome to write-up a wrapper - it&#39;s all simple and standard protocols really. Be sure to <a href="mailto:contact+api@livecoinwatch.com">let us know about it</a>, so we can maybe include it in the documentation!</p>
             <h2 id="shell">Shell</h2>
-            <pre class="highlight shell"><code>curl -X POST https://alpha-public-api.livecoinwatch.com \
+            <pre class="highlight shell"><code>curl -X POST https://api.livecoinwatch.com \
   -H &#x27;content-type: application/json&#x27;</code></pre>
             <p>For just exploring and playing around with the API, this might be the simplest option. All examples should run in most shells, as the only command used is the <a href="https://curl.haxx.se/">all-mighty cURL</a>.</p>
             <aside class="success"> Developers recommend using <a href="https://stedolan.github.io/jq/" target='_blank'>jq</a> in the pipeline, at least for pretty printing of responses. </aside>
             <h2 id="javascript">JavaScript</h2>
-            <pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com&#x27;</span>), {
+            <pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({ <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span> })
 })</code></pre>
@@ -62,10 +62,9 @@
             <p>Most examples should be easily portable to run in other JavaScript environments like <a href="https://nodejs.org/en/about/releases/">Node.js</a> or not even needing any changes from browser version with <a href="https://deno.land">Deno</a>.</p>
             <h1 id="concepts">Concepts</h1>
             <p>We&#39;ve tried to keep the API surface simple and efficient, so let&#39;s discuss few <a href="#concepts">concepts</a> that apply to the entirety of the API.</p>
-            <aside class="notice"> Note that you can copy all the code examples by clicking an icon in the top right of it. </aside>
             <h2 id="there-is-only-one-domain">There Is Only One <strong>Domain</strong></h2>
-            <pre class="highlight shell"><code>curl -X POST &#x27;https://alpha-public-api.livecoinwatch.com/status&#x27; \
-  -H &#x27;content-type: application/json&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/credits&#x27;</span>), {
+            <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/status&#x27; \
+  -H &#x27;content-type: application/json&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/status&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({ <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span> })
 })</code></pre>
@@ -83,12 +82,12 @@
     <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;We&#x27;re temporarily offline for maintenance. Please try again later.&quot;</span>
   }
 }</code></pre>
-            <p>Everything runs from a single domain, and that is <code>alpha-public-api.livecoinwatch.com</code>. All your HTTPS requests go there.</p>
+            <p>Everything runs from a single domain, and that is <code>api.livecoinwatch.com</code>. All your HTTPS requests go there.</p>
             <p>Try running code examples and see for yourself.</p>
             <h2 id="there-is-only-one-key">There Is Only One <strong>Key</strong></h2>
-            <pre class="highlight shell"><code>curl -X POST &#x27;https://alpha-public-api.livecoinwatch.com/status&#x27; \
+            <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/credits&#x27; \
   -H &#x27;content-type: application/json&#x27; \
-  -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/status&#x27;</span>), {
+  -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/credits&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({
     <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -102,14 +101,14 @@
   <span class="hljs-attr">&quot;dailyCreditsLimit&quot;</span>: <span class="hljs-number">10000</span>,
   <span class="hljs-attr">&quot;dailyCreditsRemaining&quot;</span>: <span class="hljs-number">4321</span>
 }</code></pre>
-            <p>Live Coin Watch uses API keys to access all end-points. You can generate a new API key at your <a href="https://alpha.livecoinwatch.com/profile">profile page</a>. Authorizing with your API key is as simple as providing HTTP header <code>x-api-key: &lt;YOUR_API_KEY&gt;</code>.</p>
+            <p>Live Coin Watch uses API keys to access all end-points. You can generate a new API key at your <a href="https://www.livecoinwatch.com/profile">profile page</a>. Authorizing with your API key is as simple as providing HTTP header <code>x-api-key: &lt;YOUR_API_KEY&gt;</code>.</p>
             <p>All (<a href="#status">but one</a>) API end-points need to include this header.</p>
             <p>You can only ever have one active key, but you can regenerate that one, in the case you lose it or you don&#39;t trust it being secret anymore.</p>
             <p>Keep the key somewhere private, safe &amp; handy.</p>
             <aside class="notice"> Astute reader will notice that, by having multiple profiles, they will effectively have more than one key. They would be correct. </aside>
             <h2 id="there-is-only-one-method">There Is Only One <strong>Method</strong></h2>
-            <pre class="highlight shell"><code>curl &#x27;https://alpha-public-api.livecoinwatch.com/status&#x27; \
-  -H &#x27;content-type: application/json&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/status&#x27;</span>), {
+            <pre class="highlight shell"><code>curl &#x27;https://api.livecoinwatch.com/status&#x27; \
+  -H &#x27;content-type: application/json&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/status&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;GET&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({ <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span> })
 })</code></pre>
@@ -138,9 +137,9 @@
             <p>There is only one publicly available version of the API.</p>
             <p><a href="https://github.com/LiveCoinWatch/lcw-api-docs">Watch this repository</a>! It&#39;ll always update before the actual API updates.</p>
             <h2 id="there-is-only-one-limit">There Is Only One <strong>Limit</strong></h2>
-            <pre class="highlight shell"><code>curl -X POST &#x27;https://alpha-public-api.livecoinwatch.com/credits&#x27; \
+            <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/credits&#x27; \
   -H &#x27;content-type: application/json&#x27; \
-  -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/credits&#x27;</span>), {
+  -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/credits&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({
     <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -155,12 +154,12 @@
   <span class="hljs-attr">&quot;dailyCreditsRemaining&quot;</span>: <span class="hljs-number">4321</span>
 }</code></pre>
             <p>Let&#39;s call it <em>credits</em>, and you can read about them <a href="#limits">in detail</a>, but summarized - they map directly to your requests 1-to-1.</p>
-            <p>You can always easily check your credits status at <code>/credits</code> end-point, as well as on your Live Coin Watch <a href="https://alpha.livecoinwatch.com/profile">profile page</a>.</p>
+            <p>You can always easily check your credits status at <code>/credits</code> end-point, as well as on your Live Coin Watch <a href="https://www.livecoinwatch.com/profile">profile page</a>.</p>
             <h1 id="resources">Resources</h1>
             <p>This describes API resource fetching via HTTPS calls.</p>
             <h2 id="status"><code>/status</code></h2>
-            <pre class="highlight shell"><code>curl -X POST &#x27;https://alpha-public-api.livecoinwatch.com/status&#x27; \
-  -H &#x27;content-type: application/json&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/status&#x27;</span>), {
+            <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/status&#x27; \
+  -H &#x27;content-type: application/json&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/status&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({ <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span> })
 })</code></pre>
@@ -173,9 +172,9 @@
             <h3 id="response">Response</h3>
             <p>Ideally, responds with nothing which means everything is hopefully running fine. One of the <a href="#errors">errors</a> objects otherwise.</p>
             <h2 id="credits"><code>/credits</code></h2>
-            <pre class="highlight shell"><code>curl -X POST &#x27;https://alpha-public-api.livecoinwatch.com/credits&#x27; \
+            <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/credits&#x27; \
   -H &#x27;content-type: application/json&#x27; \
-  -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/credits&#x27;</span>), {
+  -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/credits&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({
     <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -226,10 +225,10 @@
             </table>
             <h2 id="overview"><code>/overview</code></h2>
             <p>Get current aggregated data for all coins.</p>
-            <pre class="highlight shell"><code>curl -X POST &#x27;https://alpha-public-api.livecoinwatch.com/overview&#x27; \
+            <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/overview&#x27; \
   -H &#x27;content-type: application/json&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/overview&#x27;</span>), {
+  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/overview&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({
     <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -297,10 +296,10 @@
             </table>
             <h2 id="overviewhistory"><code>/overview/history</code></h2>
             <p>Get historical aggregated data of entire market.</p>
-            <pre class="highlight shell"><code>curl -X POST&#x27;https://alpha-public-api.livecoinwatch.com/overview/history&#x27; \
+            <pre class="highlight shell"><code>curl -X POST&#x27;https://api.livecoinwatch.com/overview/history&#x27; \
   -H &#x27;content-type: application/json&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;start&quot;:1606232700000,&quot;end&quot;:1606233000000}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/overview/history&#x27;</span>), {
+  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;start&quot;:1606232700000,&quot;end&quot;:1606233000000}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/overview/history&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({
     <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -397,10 +396,10 @@
             </table>
             <h2 id="coinssingle"><code>/coins/single</code></h2>
             <p>All information about a single coin at latest moment in time.</p>
-            <pre class="highlight shell"><code>curl -X POST &#x27;https://alpha-public-api.livecoinwatch.com/coins/single&#x27; \
+            <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/coins/single&#x27; \
   -H &#x27;content-type: application/json&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;code&quot;:&quot;ETH&quot;,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/coins/single&#x27;</span>), {
+  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;code&quot;:&quot;ETH&quot;,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/coins/single&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({
     <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -565,10 +564,10 @@
             </table>
             <h2 id="coinssinglehistory"><code>/coins/single/history</code></h2>
             <p>Historical values for coin.</p>
-            <pre class="highlight shell"><code>curl -X POST &#x27;https://alpha-public-api.livecoinwatch.com/coins/single/history&#x27; \
+            <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/coins/single/history&#x27; \
   -H &#x27;content-type: application/json&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;code&quot;:&quot;BTC&quot;,&quot;start&quot;:1617035100000,&quot;end&quot;:1617035400000,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/coins/single/history&#x27;</span>), {
+  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;code&quot;:&quot;BTC&quot;,&quot;start&quot;:1617035100000,&quot;end&quot;:1617035400000,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/coins/single/history&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({
     <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -747,10 +746,10 @@
             </table>
             <h2 id="coinslist"><code>/coins/list</code></h2>
             <p>Assorted information for a list of coins.</p>
-            <pre class="highlight shell"><code>curl -X POST &#x27;https://alpha-public-api.livecoinwatch.com/coins/list&#x27; \
+            <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/coins/list&#x27; \
   -H &#x27;content-type: application/json&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;limit&quot;:2,&quot;sort&quot;:&quot;rank&quot;,&quot;order&quot;:&quot;ascending&quot;,&quot;meta&quot;:false}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/coins/list&#x27;</span>), {
+  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;limit&quot;:2,&quot;sort&quot;:&quot;rank&quot;,&quot;order&quot;:&quot;ascending&quot;,&quot;meta&quot;:false}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/coins/list&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({
     <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -928,9 +927,9 @@
             </table>
             <h2 id="fiatsall"><code>/fiats/all</code></h2>
             <p>List of all the fiats.</p>
-            <pre class="highlight shell"><code>curl -X POST &#x27;https://alpha-public-api.livecoinwatch.com/fiats/all&#x27; \
+            <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/fiats/all&#x27; \
   -H &#x27;content-type: application/json&#x27; \
-  -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/fiats/all&#x27;</span>), {
+  -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/fiats/all&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({
     <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -999,10 +998,10 @@
             </table>
             <h2 id="exchangessingle"><code>/exchanges/single</code></h2>
             <p>Assorted exchange information.</p>
-            <pre class="highlight shell"><code>curl -X POST &#x27;https://alpha-public-api.livecoinwatch.com/exchanges/single/meta&#x27; \
+            <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/exchanges/single/meta&#x27; \
   -H &#x27;content-type: application/json&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;ETH&quot;,&quot;code&quot;:&quot;gemini&quot;,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/exchanges/single&#x27;</span>), {
+  -d &#x27;{&quot;currency&quot;:&quot;ETH&quot;,&quot;code&quot;:&quot;gemini&quot;,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/exchanges/single&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({
     <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -1150,9 +1149,9 @@
             </table>
             <h2 id="exchangeslist"><code>/exchanges/list</code></h2>
             <p>Assorted information on list of exchanges.</p>
-            <pre class="highlight shell"><code>curl -X POST &#x27;https://alpha-public-api.livecoinwatch.com/exchanges/single&#x27; \
+            <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/exchanges/single&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;limit&quot;:1,&quot;sort&quot;:&quot;visitors&quot;,&quot;order&quot;:&quot;descending&quot;,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://alpha-public-api.livecoinwatch.com/exchanges/single&#x27;</span>), {
+  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;limit&quot;:1,&quot;sort&quot;:&quot;visitors&quot;,&quot;order&quot;:&quot;descending&quot;,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> fetch(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/exchanges/single&#x27;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> Headers({
     <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -1401,11 +1400,12 @@
             <p>There&#39;s really not a lot of them.</p>
             <p>Here&#39;s a complete list:</p>
             <ul>
-               <li>you need to have <a href="https://alpha.livecoinwatch.com">Live Coin Watch account</a></li>
+               <li>you need to have <a href="https://www.livecoinwatch.com">Live Coin Watch account</a></li>
                <li>each request is mapped to a single <em>credit</em></li>
                <li>daily credit allowance is 10,000</li>
                <li>credits are renewed every UTC midnight</li>
-               <li>you can check your API status at your <a href="https://alpha.livecoinwatch.com/profile">Profile page</a></li>
+               <li>you can check your API status at your <a href="https://www.livecoinwatch.com/profile">Profile page</a></li>
+               <li>if you&#39;re using API in a public-facing manner, we require attribution that should consist of a link to <a href="https://www.livecoinwatch.com/profile">Live Coin Watch</a> in a legible font</li>
             </ul>
             <p>There you go, that&#39;s all.</p>
             <p>Have fun, be safe!</p>
