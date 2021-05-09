@@ -16,6 +16,18 @@ await fetch(new Request('https://api.livecoinwatch.com/status'), {
 })
 ```
 
+```php
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/status', 'r', false, $context);
+print_r(stream_get_contents($fp));
+```
+
 > If everything's fine, you should get...
 
 ```json
@@ -56,12 +68,26 @@ await fetch(new Request('https://api.livecoinwatch.com/credits'), {
 })
 ```
 
+```php
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n"
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/credits', 'r', false, $context);
+print_r(stream_get_contents($fp));
+```
+
 > Don't forget to replace `<YOUR_API_KEY>` with one you've got. Return response should be:
 
 ```json
 {
-  "dailyCreditsLimit": 10000,
-  "dailyCreditsRemaining": 4321
+  "dailyCreditsRemaining": 4321,
+  "dailyCreditsLimit": 10000
+  
 }
 ```
 
@@ -89,6 +115,18 @@ await fetch(new Request('https://api.livecoinwatch.com/status'), {
   method: 'GET',
   headers: new Headers({ 'content-type': 'application/json' })
 })
+```
+
+```php
+$context_options = array (
+    'http' => array (
+        'method' => 'GET',
+        'header' => "Content-type: application/json\r\n"
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/status', 'r', false, $context);
+print_r(stream_get_contents($fp));
 ```
 
 > This will fail with:
@@ -151,12 +189,25 @@ await fetch(new Request('https://api.livecoinwatch.com/credits'), {
 })
 ```
 
+```php
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n"
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/credits', 'r', false, $context);
+print_r(stream_get_contents($fp));
+```
+
 > Don't forget to replace `<YOUR_API_KEY>` with one you've got. Return response should be:
 
 ```json
 {
-  "dailyCreditsLimit": 100000,
-  "dailyCreditsRemaining": 4321
+  "dailyCreditsRemaining": 4321,
+  "dailyCreditsLimit": 100000
 }
 ```
 

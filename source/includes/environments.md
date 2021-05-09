@@ -30,3 +30,21 @@ await fetch(new Request('https://api.livecoinwatch.com'), {
 All the examples are written for modern browers.
 
 Most examples should be easily portable to run in other JavaScript environments like [Node.js](https://nodejs.org/en/about/releases/) or not even needing any changes from browser version with [Deno](https://deno.land).
+
+
+## PHP
+
+```php
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com', 'r', false, $context);
+print_r(stream_get_contents($fp));
+```
+
+All PHP examples are written using pure PHP without using any dependencies. These examples should work on versions of PHP that support [stream_context_create](https://www.php.net/manual/en/function.stream-context-create.php) & [stream_get_contents](https://www.php.net/manual/en/function.stream-get-contents.php) (Supported versions: PHP 5, PHP 7, PHP 8).
+
