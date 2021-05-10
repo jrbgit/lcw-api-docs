@@ -16,6 +16,18 @@ await fetch(new Request('https://api.livecoinwatch.com/status'), {
 })
 ```
 
+```php
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/status', 'r', false, $context);
+print_r(stream_get_contents($fp));
+```
+
 > ...and it returns nothing! Well, empty JSON object anyways.
 
 With this, find out is everything fine with the API. It is also only end-point that doesn't require `x-api-key` header.
@@ -46,12 +58,25 @@ await fetch(new Request('https://api.livecoinwatch.com/credits'), {
 })
 ```
 
+```php
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n"
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/credits', 'r', false, $context);
+print_r(stream_get_contents($fp));
+```
+
 > Let's see how much credits we have and what's the limit:
 
 ```json
 {
-  "dailyCreditsLimit": 10000,
-  "dailyCreditsRemaining": 4321
+  "dailyCreditsRemaining": 4321,
+  "dailyCreditsLimit": 10000
 }
 ```
 
@@ -77,8 +102,8 @@ Accepts no request parameters.
 
 key | type | description
 --- | ---- | -----------
-`dailyCreditsLimit` | number | total daily starting credits
 `dailyCreditsRemaining` | number | remaining daily credits
+`dailyCreditsLimit` | number | total daily starting credits
 
 ## `/overview`
 
@@ -100,6 +125,21 @@ await fetch(new Request('https://api.livecoinwatch.com/overview'), {
   }),
   body: JSON.stringify({ currency: 'USD' })
 })
+```
+
+```php
+$data = json_encode(array('currency' => 'USD'));
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n",
+        'content' => $data
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/overview', 'r', false, $context);
+print_r(stream_get_contents($fp));
 ```
 
 > How's all of crypto doing at the moment:
@@ -133,7 +173,7 @@ key | type | description
 Get historical aggregated data of entire market.
 
 ```shell
-curl -X POST'https://api.livecoinwatch.com/overview/history' \
+curl -X POST 'https://api.livecoinwatch.com/overview/history' \
   -H 'content-type: application/json' \
   -H 'x-api-key: <YOUR_API_KEY>' \
   -d '{"currency":"USD","start":1606232700000,"end":1606233000000}'
@@ -152,6 +192,21 @@ await fetch(new Request('https://api.livecoinwatch.com/overview/history'), {
     end: 1606233000000
   })
 })
+```
+
+```php
+$data = json_encode(array('currency' => 'USD', 'start' => 1606232700000, 'end' => 1606233000000));
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n",
+        'content' => $data
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/overview/history', 'r', false, $context);
+print_r(stream_get_contents($fp));
 ```
 
 > How's all of crypto trending across time:
@@ -219,6 +274,21 @@ await fetch(new Request('https://api.livecoinwatch.com/coins/single'), {
 })
 ```
 
+```php
+$data = json_encode(array('currency' => 'USD', 'code' => 'ETH', 'meta' => true));
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n",
+        'content' => $data
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/coins/single', 'r', false, $context);
+print_r(stream_get_contents($fp));
+```
+
 > Let's see all of current data on ETH, in USD currency:
 
 ```json
@@ -247,8 +317,8 @@ await fetch(new Request('https://api.livecoinwatch.com/coins/single'), {
 
 key | type | description
 --- | ---- | -----------
-`code` | string | coin code
 `currency` | string | any valid coin or fiat code
+`code` | string | coin code
 `meta` | boolean | to include full coin information or not
 
 ### Response
@@ -301,6 +371,21 @@ await fetch(new Request('https://api.livecoinwatch.com/coins/single/history'), {
     meta: true
   })
 })
+```
+
+```php
+$data = json_encode(array('currency' => 'USD', 'code' => 'BTC', 'start' => 1617035100000, 'end' => 1617035400000, 'meta' => true));
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n",
+        'content' => $data
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/coins/single/history', 'r', false, $context);
+print_r(stream_get_contents($fp));
 ```
 
 > How is BTC trending over a period of time:
@@ -378,7 +463,7 @@ Assorted information for a list of coins.
 curl -X POST 'https://api.livecoinwatch.com/coins/list' \
   -H 'content-type: application/json' \
   -H 'x-api-key: <YOUR_API_KEY>' \
-  -d '{"currency":"USD","limit":2,"sort":"rank","order":"ascending","meta":false}'
+  -d '{"currency":"USD","sort":"rank","order":"ascending","offset":0,"limit":2,"meta":false}'
 ```
 
 ```javascript
@@ -390,12 +475,28 @@ await fetch(new Request('https://api.livecoinwatch.com/coins/list'), {
   }),
   body: JSON.stringify({
     currency: 'USD',
-    limit: 2,
     sort: 'rank',
     order: 'ascending',
+    offset: 0,
+    limit: 2,
     meta: false
   })
 })
+```
+
+```php
+$data = json_encode(array('currency' => 'USD', 'sort' => 'rank', 'order' => 'ascending', 'offset' => 0, 'limit' => 2,'meta' => false));
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n",
+        'content' => $data
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/coins/list', 'r', false, $context);
+print_r(stream_get_contents($fp));
 ```
 
 > Let's see top two coins by rank, just frequently-changing data, please:
@@ -406,8 +507,7 @@ await fetch(new Request('https://api.livecoinwatch.com/coins/list'), {
     "code": "BTC",
     "rate": 59075.58195922644,
     "volume": 23100393182,
-    "cap": 1102979514307,
-    "maxCap": 1240587221143.7551
+    "cap": 1102979514307
   },
   {
     "code": "ETH",
@@ -433,7 +533,6 @@ key | type | description
 
 key | type | description
 --- | ---- | -----------
-`code` | string | coin's code
 `name` | string | coin's name
 `symbol` | string | coin's symbol
 `color` | string | hexadecimal color code (`#282a2a`)
@@ -448,6 +547,7 @@ key | type | description
 `circulatingSupply` | number | number of coins minted, but not locked
 `totalSupply` | number | number of coins minted, including locked
 `maxSupply` | number | maximum number of coins that can be minted
+`code` | string | coin's code
 `rate` | number | coin rate in the specified currency
 `volume` | number | 24-hour volume of coin
 `cap` | number | market cap of coin
@@ -470,6 +570,19 @@ await fetch(new Request('https://api.livecoinwatch.com/fiats/all'), {
     'x-api-key': '<YOUR_API_KEY>'
   })
 })
+```
+
+```php
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n"
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/fiats/all', 'r', false, $context);
+print_r(stream_get_contents($fp));
 ```
 
 > Array of all the fiat currencies supported:
@@ -505,17 +618,18 @@ An array of following:
 key | type | description
 --- | ---- | -----------
 `code` | string | fiat ISO code
-`name` | string | fiat name
-`symbol` | string | fiat symbol
 `countries` | array | ISO country code list
 `flag` | string | ISO country code of the flag
+`name` | string | fiat name
+`symbol` | string | fiat symbol
+
 
 ## `/exchanges/single`
 
 Assorted exchange information.
 
 ```shell
-curl -X POST 'https://api.livecoinwatch.com/exchanges/single/meta' \
+curl -X POST 'https://api.livecoinwatch.com/exchanges/single' \
   -H 'content-type: application/json' \
   -H 'x-api-key: <YOUR_API_KEY>' \
   -d '{"currency":"ETH","code":"gemini","meta":true}'
@@ -536,11 +650,25 @@ await fetch(new Request('https://api.livecoinwatch.com/exchanges/single'), {
 })
 ```
 
+```php
+$data = json_encode(array('currency' => 'ETH', 'code' => 'gemini', 'meta' => true));
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n",
+        'content' => $data
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/exchanges/single', 'r', false, $context);
+print_r(stream_get_contents($fp));
+```
+
 > Should get us all the information we have on Gemini exchange:
 
 ```json
 {
-  "code": "gemini",
   "name": "Gemini",
   "png64": "https://lcw.nyc3.cdn.digitaloceanspaces.com/development/exchanges/64/gemini.png",
   "png128": "https://lcw.nyc3.cdn.digitaloceanspaces.com/development/exchanges/128/gemini.png",
@@ -548,11 +676,12 @@ await fetch(new Request('https://api.livecoinwatch.com/exchanges/single'), {
   "webp128": "https://lcw.nyc3.cdn.digitaloceanspaces.com/development/exchanges/128/gemini.webp",
   "centralized": true,
   "usCompliant": true,
+  "code": "gemini",
   "markets": 43,
   "volume": 115473.97264617922,
-  "depth": 23151.76758456139,
   "bidTotal": 10968.751251210175,
   "askTotal": 12183.016333351212,
+  "depth": 23151.76758456139,
   "visitors": 31738,
   "volumePerVisitor": 3.638350641066835
 }
@@ -570,19 +699,19 @@ key | type | description
 
 key | type | description
 --- | ---- | -----------
-`code` | string | exchange code
 `name` | string | exchange name
-`png32` | string | 32-pixel png image of exchange icon
 `png64` | string | 64-pixel png image of exchange icon
-`webp32` | string | 32-pixel webp image of exchange icon
-`webp64` | string | 64-pixel webpg image of exchange icon
+`png128` | string | 128-pixel png image of exchange icon
+`webp64` | string | 64-pixel webp image of exchange icon
+`webp128` | string | 128-pixel webpg image of exchange icon
 `centralized` | boolean | is the exchange centralized or decentralized
 `usCompliant` | boolean | is the exchange compliant in the USA
+`code` | string | exchange code
 `markets` | number | count of currently active markets on the exchange
 `volume` | number | 24-hour volume in specified currency
-`depth` | number | 2% orderbook total depth
 `bidTotal` | number | 2% orderbook value bids
 `askTotal` | number | 2% orderbook value asks
+`depth` | number | 2% orderbook total depth
 `visitors` | number | number of daily visitors, estimate
 `volumePerVisitor`| number | daily volume per daily visitor
 
@@ -592,13 +721,13 @@ key | type | description
 Assorted information on list of exchanges.
 
 ```shell
-curl -X POST 'https://api.livecoinwatch.com/exchanges/single' \
+curl -X POST 'https://api.livecoinwatch.com/exchanges/list' \
   -H 'x-api-key: <YOUR_API_KEY>' \
-  -d '{"currency":"USD","limit":1,"sort":"visitors","order":"descending","meta":true}'
+  -d '{"currency":"USD","sort":"visitors","order":"descending","offset":0,"limit":1,"meta":true}'
 ```
 
 ```javascript
-await fetch(new Request('https://api.livecoinwatch.com/exchanges/single'), {
+await fetch(new Request('https://api.livecoinwatch.com/exchanges/list'), {
   method: 'POST',
   headers: new Headers({
     'content-type': 'application/json',
@@ -606,12 +735,28 @@ await fetch(new Request('https://api.livecoinwatch.com/exchanges/single'), {
   }),
   body: JSON.stringify({
     currency: 'USD',
-    limit: 1,
     sort: 'visitors',
     order: 'descending',
+    offset: 0,
+    limit: 1
     meta: true
   })
 })
+```
+
+```php
+$data = json_encode(array('currency' => 'USD', 'sort' => 'visitors', 'order' => 'descending', 'offset' => 0, 'limit' => 1, 'meta' => true));
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n",
+        'content' => $data
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/exchanges/list', 'r', false, $context);
+print_r(stream_get_contents($fp));
 ```
 
 > Top one exchange by number of visitors:
@@ -619,7 +764,6 @@ await fetch(new Request('https://api.livecoinwatch.com/exchanges/single'), {
 ```json
 [
   {
-    "code": "binance",
     "name": "Binance",
     "png64": "https://lcw.nyc3.cdn.digitaloceanspaces.com/development/exchanges/64/binance.png",
     "png128": "https://lcw.nyc3.cdn.digitaloceanspaces.com/development/exchanges/128/binance.png",
@@ -627,11 +771,12 @@ await fetch(new Request('https://api.livecoinwatch.com/exchanges/single'), {
     "webp128": "https://lcw.nyc3.cdn.digitaloceanspaces.com/development/exchanges/128/binance.webp",
     "centralized": true,
     "usCompliant": true,
+    "code": "binance",
     "markets": 935,
     "volume": 27523372418,
-    "depth": 465190859.1170668,
     "bidTotal": 225078060.0687528,
     "askTotal": 240112799.048314,
+    "depth": 465190859.1170668,
     "visitors": 779440,
     "volumePerVisitor": 35311.72690393103
   }
@@ -642,7 +787,7 @@ await fetch(new Request('https://api.livecoinwatch.com/exchanges/single'), {
 
 key | type | description
 --- | ---- | -----------
-`code` | string | exchange code
+`currency` | string | any valid coin or fiat code
 `sort` | string | sorting parameter, `volume`, `liquidity`, `code`, `name`
 `order` | string | sorting order, `ascending` or `descending`
 `offset` | number | offset of the list, default `0`
@@ -655,19 +800,19 @@ Returns array of objects containing:
 
 key | type | description
 --- | ---- | -----------
-`code` | string | exchange code
 `name` | string | exchange name
-`png32` | string | 32-pixel png image of exchange icon
 `png64` | string | 64-pixel png image of exchange icon
-`webp32` | string | 32-pixel webp image of exchange icon
-`webp64` | string | 64-pixel webpg image of exchange icon
+`png128` | string | 128-pixel png image of exchange icon
+`webp64` | string | 64-pixel webp image of exchange icon
+`webp128` | string | 128-pixel webpg image of exchange icon
 `centralized` | boolean | is the exchange centralized or decentralized
 `usCompliant` | boolean | is the exchange compliant in the USA
+`code` | string | exchange code
 `markets` | number | count of currently active markets on the exchange
 `volume` | number | 24-hour volume in specified currency
-`depth` | number | 2% orderbook total depth
 `bidTotal` | number | 2% orderbook value bids
 `askTotal` | number | 2% orderbook value asks
+`depth` | number | 2% orderbook total depth
 `visitors` | number | number of daily visitors, estimate
 `volumePerVisitor`| number | daily volume per daily visitor
 

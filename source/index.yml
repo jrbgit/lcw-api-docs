@@ -3,6 +3,7 @@ title: Live Coin Watch API Documentation
 language_tabs:
    - shell
    - javascript
+   - php
 
 toc_footers:
   - <a href="https://www.livecoinwatch.com/tools/api" target="_blank">Sign Up for Free Developer Key</a>
