@@ -22,4 +22,4 @@ search: true
 
 code_clipboard: true
 
-highlight_theme: gruvbox-dark
+highlight_theme: obsidian
