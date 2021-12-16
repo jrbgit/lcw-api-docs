@@ -117,4 +117,26 @@ semaphore.wait()
 ```
 
 All the examples use [URLRequest](https://developer.apple.com/documentation/foundation/urlrequest) and [URLSession](https://developer.apple.com/documentation/foundation/urlsession). 
-Examples work without installing any package! Just change the `x-api-key` to your key, and that's it!.
+Examples work without installing any package! Just change the `<YOUR_API_KEY>` to your key, and that's it!.
+
+## Ruby
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+
+response = https.request(request)
+puts response.read_body
+```
+
+All the examples use [Net::HTTP](https://ruby-doc.org/stdlib-2.7.0/libdoc/net/http/rdoc/Net/HTTP.html). 
+Examples work without installing any package! Just change the `<YOUR_API_KEY>` to your key, and that's it!. Don't forget to require "json" and "uri".
