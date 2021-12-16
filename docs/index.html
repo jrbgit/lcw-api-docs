@@ -126,7 +126,23 @@ request.httpMethod <span class="hljs-operator">=</span> <span class="hljs-string
 
 task.resume()
 semaphore.wait()</code></pre>
-            <p>All the examples use <a href="https://developer.apple.com/documentation/foundation/urlrequest">URLRequest</a> and <a href="https://developer.apple.com/documentation/foundation/urlsession">URLSession</a>. Examples work without installing any package! Just change the <code>x-api-key</code> to your key, and that&#39;s it!.</p>
+            <p>All the examples use <a href="https://developer.apple.com/documentation/foundation/urlrequest">URLRequest</a> and <a href="https://developer.apple.com/documentation/foundation/urlsession">URLSession</a>. Examples work without installing any package! Just change the <code>&lt;YOUR_API_KEY&gt;</code> to your key, and that&#39;s it!.</p>
+            <h2 id="ruby">Ruby</h2>
+            <pre class="highlight ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;uri&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;json&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;net/http&quot;</span>
+
+url = URI(<span class="hljs-string">&quot;https://api.livecoinwatch.com&quot;</span>)
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = <span class="hljs-literal">true</span>
+
+request = Net::HTTP::Post.new(url)
+request[<span class="hljs-string">&quot;content-type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>
+
+response = https.request(request)
+puts response.read_body</code></pre>
+            <p>All the examples use <a href="https://ruby-doc.org/stdlib-2.7.0/libdoc/net/http/rdoc/Net/HTTP.html">Net::HTTP</a>. Examples work without installing any package! Just change the <code>&lt;YOUR_API_KEY&gt;</code> to your key, and that&#39;s it!. Don&#39;t forget to require &quot;json&quot; and &quot;uri&quot;.</p>
             <h1 id="concepts">Concepts</h1>
             <p>We&#39;ve tried to keep the API surface simple and efficient, so let&#39;s discuss few <a href="#concepts">concepts</a> that apply to the entirety of the API.</p>
             <h2 id="there-is-only-one-domain">There Is Only One <strong>Domain</strong></h2>
@@ -299,7 +315,20 @@ request.httpMethod <span class="hljs-operator">=</span> <span class="hljs-string
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/status&quot;</span>);
+semaphore.wait()</code></pre><pre class="highlight ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;uri&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;json&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;net/http&quot;</span>
+
+url = URI(<span class="hljs-string">&quot;https://api.livecoinwatch.com/status&quot;</span>)
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = <span class="hljs-literal">true</span>
+
+request = Net::HTTP::Post.new(url)
+request[<span class="hljs-string">&quot;content-type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>
+
+response = https.request(request)
+puts response.read_body</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/status&quot;</span>);
 client.Timeout = <span class="hljs-number">-1</span>;
 <span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
@@ -382,7 +411,21 @@ response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, u
 );
 <span class="hljs-variable">$context</span> = stream_context_create(<span class="hljs-variable">$context_options</span>);
 <span class="hljs-variable">$fp</span> = fopen(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/credits&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-literal">false</span>, <span class="hljs-variable">$context</span>);
-print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre>
+print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre><pre class="highlight ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;uri&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;json&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;net/http&quot;</span>
+
+url = URI(<span class="hljs-string">&quot;https://api.livecoinwatch.com/credits&quot;</span>)
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = <span class="hljs-literal">true</span>
+
+request = Net::HTTP::Post.new(url)
+request[<span class="hljs-string">&quot;content-type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>
+request[<span class="hljs-string">&quot;x-api-key&quot;</span>] = <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>
+
+response = https.request(request)
+puts response.read_body</code></pre>
             <blockquote>
                <p>Let&#39;s see how much credits we have and what&#39;s the limit:</p>
             </blockquote>
@@ -444,7 +487,7 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
 
 <span class="hljs-keyword">var</span> semaphore <span class="hljs-operator">=</span> <span class="hljs-type">DispatchSemaphore</span> (value: <span class="hljs-number">0</span>)
 
-<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>CAD<span class="hljs-subst">\&quot;</span><span class="hljs-subst">\n</span>}&quot;</span>
+<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>USD<span class="hljs-subst">\&quot;</span><span class="hljs-subst">\n</span>}&quot;</span>
 <span class="hljs-keyword">let</span> postData <span class="hljs-operator">=</span> parameters.data(using: .utf8)
 
 <span class="hljs-keyword">var</span> request <span class="hljs-operator">=</span> <span class="hljs-type">URLRequest</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://api.livecoinwatch.com/overview&quot;</span>)<span class="hljs-operator">!</span>,timeoutInterval: <span class="hljs-type">Double</span>.infinity)
@@ -471,7 +514,7 @@ client.Timeout = <span class="hljs-number">-1</span>;
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
 request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
 <span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;USD&quot;&quot;&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;}&quot;</span>;
 request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
@@ -481,7 +524,7 @@ Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/overview&quot;</span>
 
 payload = json.dumps({
-  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;USD&quot;</span>
 })
 headers = {
   <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -501,7 +544,24 @@ response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, u
 );
 <span class="hljs-variable">$context</span> = stream_context_create(<span class="hljs-variable">$context_options</span>);
 <span class="hljs-variable">$fp</span> = fopen(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/overview&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-literal">false</span>, <span class="hljs-variable">$context</span>);
-print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre>
+print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre><pre class="highlight ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;uri&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;json&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;net/http&quot;</span>
+
+url = URI(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview&quot;</span>)
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = <span class="hljs-literal">true</span>
+
+request = Net::HTTP::Post.new(url)
+request[<span class="hljs-string">&quot;content-type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>
+request[<span class="hljs-string">&quot;x-api-key&quot;</span>] = <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>
+request.body = JSON.dump({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;USD&quot;</span>
+})
+
+response = https.request(request)
+puts response.read_body</code></pre>
             <blockquote>
                <p>How&#39;s all of crypto doing at the moment:</p>
             </blockquote>
@@ -583,7 +643,7 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
 
 <span class="hljs-keyword">var</span> semaphore <span class="hljs-operator">=</span> <span class="hljs-type">DispatchSemaphore</span> (value: <span class="hljs-number">0</span>)
 
-<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>CAD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>start<span class="hljs-subst">\&quot;</span>: 1639516285873,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>end<span class="hljs-subst">\&quot;</span>: 1639602685874<span class="hljs-subst">\n</span>}<span class="hljs-subst">\n</span>&quot;</span>
+<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>USD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>start<span class="hljs-subst">\&quot;</span>: 1606232700000,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>end<span class="hljs-subst">\&quot;</span>: 1606233000000<span class="hljs-subst">\n</span>}<span class="hljs-subst">\n</span>&quot;</span>
 <span class="hljs-keyword">let</span> postData <span class="hljs-operator">=</span> parameters.data(using: .utf8)
 
 <span class="hljs-keyword">var</span> request <span class="hljs-operator">=</span> <span class="hljs-type">URLRequest</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>)<span class="hljs-operator">!</span>,timeoutInterval: <span class="hljs-type">Double</span>.infinity)
@@ -604,16 +664,15 @@ request.httpBody <span class="hljs-operator">=</span> postData
 }
 
 task.resume()
-semaphore.wait()
-</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>);
+semaphore.wait()</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>);
 client.Timeout = <span class="hljs-number">-1</span>;
 <span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
 request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
 <span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;start&quot;&quot;: 1639516285873,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;end&quot;&quot;: 1639602685874&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;USD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;start&quot;&quot;: 1606232700000,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;end&quot;&quot;: 1606233000000&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;}&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;&quot;</span>;
 request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
@@ -624,9 +683,9 @@ Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>
 
 payload = json.dumps({
-  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>,
-  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">1639516285873</span>,
-  <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">1639602685874</span>
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;USD&quot;</span>,
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">1606232700000</span>,
+  <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">1606233000000</span>
 })
 headers = {
   <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -646,7 +705,26 @@ response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, u
 );
 <span class="hljs-variable">$context</span> = stream_context_create(<span class="hljs-variable">$context_options</span>);
 <span class="hljs-variable">$fp</span> = fopen(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/overview/history&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-literal">false</span>, <span class="hljs-variable">$context</span>);
-print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre>
+print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre><pre class="highlight ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;uri&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;json&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;net/http&quot;</span>
+
+url = URI(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>)
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = <span class="hljs-literal">true</span>
+
+request = Net::HTTP::Post.new(url)
+request[<span class="hljs-string">&quot;content-type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>
+request[<span class="hljs-string">&quot;x-api-key&quot;</span>] = <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>
+request.body = JSON.dump({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;USD&quot;</span>,
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">1606232700000</span>,
+  <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">1606233000000</span>
+})
+
+response = https.request(request)
+puts response.read_body</code></pre>
             <blockquote>
                <p>How&#39;s all of crypto trending across time:</p>
             </blockquote>
@@ -753,7 +831,7 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
 
 <span class="hljs-keyword">var</span> semaphore <span class="hljs-operator">=</span> <span class="hljs-type">DispatchSemaphore</span> (value: <span class="hljs-number">0</span>)
 
-<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>CAD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>code<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>BTC<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>meta<span class="hljs-subst">\&quot;</span>: true<span class="hljs-subst">\n</span>}&quot;</span>
+<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>USD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>code<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>ETH<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>meta<span class="hljs-subst">\&quot;</span>: true<span class="hljs-subst">\n</span>}&quot;</span>
 <span class="hljs-keyword">let</span> postData <span class="hljs-operator">=</span> parameters.data(using: .utf8)
 
 <span class="hljs-keyword">var</span> request <span class="hljs-operator">=</span> <span class="hljs-type">URLRequest</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single&quot;</span>)<span class="hljs-operator">!</span>,timeoutInterval: <span class="hljs-type">Double</span>.infinity)
@@ -780,8 +858,8 @@ client.Timeout = <span class="hljs-number">-1</span>;
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
 request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
 <span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;code&quot;&quot;: &quot;&quot;BTC&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;USD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;code&quot;&quot;: &quot;&quot;ETH&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;    &quot;&quot;meta&quot;&quot;: true&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;}&quot;</span>;
 request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
@@ -792,8 +870,8 @@ Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single&quot;</span>
 
 payload = json.dumps({
-  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>,
-  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;BTC&quot;</span>,
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;USD&quot;</span>,
+  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;ETH&quot;</span>,
   <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">True</span>
 })
 headers = {
@@ -803,8 +881,7 @@ headers = {
 
 response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
 
-<span class="hljs-built_in">print</span>(response.text)
-</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;code&#x27;</span> =&gt; <span class="hljs-string">&#x27;ETH&#x27;</span>, <span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">true</span>));
+<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;code&#x27;</span> =&gt; <span class="hljs-string">&#x27;ETH&#x27;</span>, <span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">true</span>));
 <span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
@@ -815,7 +892,26 @@ response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, u
 );
 <span class="hljs-variable">$context</span> = stream_context_create(<span class="hljs-variable">$context_options</span>);
 <span class="hljs-variable">$fp</span> = fopen(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/coins/single&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-literal">false</span>, <span class="hljs-variable">$context</span>);
-print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre>
+print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre><pre class="highlight ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;uri&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;json&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;net/http&quot;</span>
+
+url = URI(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single&quot;</span>)
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = <span class="hljs-literal">true</span>
+
+request = Net::HTTP::Post.new(url)
+request[<span class="hljs-string">&quot;content-type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>
+request[<span class="hljs-string">&quot;x-api-key&quot;</span>] = <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>
+request.body = JSON.dump({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;USD&quot;</span>,
+  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;ETH&quot;</span>,
+  <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">true</span>
+})
+
+response = https.request(request)
+puts response.read_body</code></pre>
             <blockquote>
                <p>Let&#39;s see all of current data on ETH, in USD currency:</p>
             </blockquote>
@@ -992,7 +1088,7 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
 
 <span class="hljs-keyword">var</span> semaphore <span class="hljs-operator">=</span> <span class="hljs-type">DispatchSemaphore</span> (value: <span class="hljs-number">0</span>)
 
-<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>CAD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>code<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>BTC<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>start<span class="hljs-subst">\&quot;</span>: 1639516647365,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>end<span class="hljs-subst">\&quot;</span>: 1639603047366<span class="hljs-subst">\n</span>}&quot;</span>
+<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>USD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>code<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>BTC<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>start<span class="hljs-subst">\&quot;</span>: 1617035100000,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>end<span class="hljs-subst">\&quot;</span>: 1617035400000,<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>meta<span class="hljs-subst">\&quot;</span>: true<span class="hljs-subst">\n</span>}&quot;</span>
 <span class="hljs-keyword">let</span> postData <span class="hljs-operator">=</span> parameters.data(using: .utf8)
 
 <span class="hljs-keyword">var</span> request <span class="hljs-operator">=</span> <span class="hljs-type">URLRequest</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single/history&quot;</span>)<span class="hljs-operator">!</span>,timeoutInterval: <span class="hljs-type">Double</span>.infinity)
@@ -1019,10 +1115,11 @@ client.Timeout = <span class="hljs-number">-1</span>;
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
 request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
 <span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;USD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;    &quot;&quot;code&quot;&quot;: &quot;&quot;BTC&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;start&quot;&quot;: 1639516647365,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;end&quot;&quot;: 1639603047366&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;start&quot;&quot;: 1617035100000,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;end&quot;&quot;: 1617035400000,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;meta&quot;&quot;: true&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;}&quot;</span>;
 request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
@@ -1032,10 +1129,11 @@ Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single/history&quot;</span>
 
 payload = json.dumps({
-  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>,
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;USD&quot;</span>,
   <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;BTC&quot;</span>,
-  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">1639516647365</span>,
-  <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">1639603047366</span>
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">1617035100000</span>,
+  <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">1617035400000</span>,
+  <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">True</span>
 })
 headers = {
   <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -1044,8 +1142,7 @@ headers = {
 
 response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
 
-<span class="hljs-built_in">print</span>(response.text)
-</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;code&#x27;</span> =&gt; <span class="hljs-string">&#x27;BTC&#x27;</span>, <span class="hljs-string">&#x27;start&#x27;</span> =&gt; <span class="hljs-number">1617035100000</span>, <span class="hljs-string">&#x27;end&#x27;</span> =&gt; <span class="hljs-number">1617035400000</span>, <span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">true</span>));
+<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;code&#x27;</span> =&gt; <span class="hljs-string">&#x27;BTC&#x27;</span>, <span class="hljs-string">&#x27;start&#x27;</span> =&gt; <span class="hljs-number">1617035100000</span>, <span class="hljs-string">&#x27;end&#x27;</span> =&gt; <span class="hljs-number">1617035400000</span>, <span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">true</span>));
 <span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
@@ -1056,7 +1153,28 @@ response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, u
 );
 <span class="hljs-variable">$context</span> = stream_context_create(<span class="hljs-variable">$context_options</span>);
 <span class="hljs-variable">$fp</span> = fopen(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/coins/single/history&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-literal">false</span>, <span class="hljs-variable">$context</span>);
-print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre>
+print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre><pre class="highlight ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;uri&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;json&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;net/http&quot;</span>
+
+url = URI(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single/history&quot;</span>)
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = <span class="hljs-literal">true</span>
+
+request = Net::HTTP::Post.new(url)
+request[<span class="hljs-string">&quot;content-type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>
+request[<span class="hljs-string">&quot;x-api-key&quot;</span>] = <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>
+request.body = JSON.dump({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;USD&quot;</span>,
+  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;BTC&quot;</span>,
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">1617035100000</span>,
+  <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">1617035400000</span>,
+  <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">true</span>
+})
+
+response = https.request(request)
+puts response.read_body</code></pre>
             <blockquote>
                <p>How is BTC trending over a period of time:</p>
             </blockquote>
@@ -1246,7 +1364,7 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
 
 <span class="hljs-keyword">var</span> semaphore <span class="hljs-operator">=</span> <span class="hljs-type">DispatchSemaphore</span> (value: <span class="hljs-number">0</span>)
 
-<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>CAD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>sort<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>rank<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>order<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>ascending<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>offset<span class="hljs-subst">\&quot;</span>: 0,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>limit<span class="hljs-subst">\&quot;</span>: 50,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>meta<span class="hljs-subst">\&quot;</span>: true<span class="hljs-subst">\n</span>}&quot;</span>
+<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>USD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>sort<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>rank<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>order<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>ascending<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>offset<span class="hljs-subst">\&quot;</span>: 0,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>limit<span class="hljs-subst">\&quot;</span>: 2,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>meta<span class="hljs-subst">\&quot;</span>: false<span class="hljs-subst">\n</span>}&quot;</span>
 <span class="hljs-keyword">let</span> postData <span class="hljs-operator">=</span> parameters.data(using: .utf8)
 
 <span class="hljs-keyword">var</span> request <span class="hljs-operator">=</span> <span class="hljs-type">URLRequest</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/list&quot;</span>)<span class="hljs-operator">!</span>,timeoutInterval: <span class="hljs-type">Double</span>.infinity)
@@ -1273,12 +1391,12 @@ client.Timeout = <span class="hljs-number">-1</span>;
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
 request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
 <span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;USD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;    &quot;&quot;sort&quot;&quot;: &quot;&quot;rank&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;    &quot;&quot;order&quot;&quot;: &quot;&quot;ascending&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;    &quot;&quot;offset&quot;&quot;: 0,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;limit&quot;&quot;: 50,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;meta&quot;&quot;: true&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;limit&quot;&quot;: 2,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;meta&quot;&quot;: false&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;}&quot;</span>;
 request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
@@ -1288,12 +1406,12 @@ Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/list&quot;</span>
 
 payload = json.dumps({
-  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>,
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;USD&quot;</span>,
   <span class="hljs-string">&quot;sort&quot;</span>: <span class="hljs-string">&quot;rank&quot;</span>,
   <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;ascending&quot;</span>,
   <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">50</span>,
-  <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">True</span>
+  <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">False</span>
 })
 headers = {
   <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -1313,7 +1431,29 @@ response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, u
 );
 <span class="hljs-variable">$context</span> = stream_context_create(<span class="hljs-variable">$context_options</span>);
 <span class="hljs-variable">$fp</span> = fopen(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/coins/list&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-literal">false</span>, <span class="hljs-variable">$context</span>);
-print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre>
+print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre><pre class="highlight ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;uri&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;json&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;net/http&quot;</span>
+
+url = URI(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/list&quot;</span>)
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = <span class="hljs-literal">true</span>
+
+request = Net::HTTP::Post.new(url)
+request[<span class="hljs-string">&quot;content-type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>
+request[<span class="hljs-string">&quot;x-api-key&quot;</span>] = <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>
+request.body = JSON.dump({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;USD&quot;</span>,
+  <span class="hljs-string">&quot;sort&quot;</span>: <span class="hljs-string">&quot;rank&quot;</span>,
+  <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;ascending&quot;</span>,
+  <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">false</span>
+})
+
+response = https.request(request)
+puts response.read_body</code></pre>
             <blockquote>
                <p>Let&#39;s see top two coins by rank, just frequently-changing data, please:</p>
             </blockquote>
@@ -1537,7 +1677,21 @@ Console.WriteLine(response.Content);</code></pre><pre class="highlight php"><cod
 );
 <span class="hljs-variable">$context</span> = stream_context_create(<span class="hljs-variable">$context_options</span>);
 <span class="hljs-variable">$fp</span> = fopen(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/fiats/all&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-literal">false</span>, <span class="hljs-variable">$context</span>);
-print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre>
+print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre><pre class="highlight ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;uri&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;json&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;net/http&quot;</span>
+
+url = URI(<span class="hljs-string">&quot;https://api.livecoinwatch.com/fiats/all&quot;</span>)
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = <span class="hljs-literal">true</span>
+
+request = Net::HTTP::Post.new(url)
+request[<span class="hljs-string">&quot;content-type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>
+request[<span class="hljs-string">&quot;x-api-key&quot;</span>] = <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>
+
+response = https.request(request)
+puts response.read_body</code></pre>
             <blockquote>
                <p>Array of all the fiat currencies supported:</p>
             </blockquote>
@@ -1621,7 +1775,7 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
 
 <span class="hljs-keyword">var</span> semaphore <span class="hljs-operator">=</span> <span class="hljs-type">DispatchSemaphore</span> (value: <span class="hljs-number">0</span>)
 
-<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>CAD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>code<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>binance<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>meta<span class="hljs-subst">\&quot;</span>: true<span class="hljs-subst">\n</span>}&quot;</span>
+<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>ETH<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>code<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>gemini<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>meta<span class="hljs-subst">\&quot;</span>: true<span class="hljs-subst">\n</span>}&quot;</span>
 <span class="hljs-keyword">let</span> postData <span class="hljs-operator">=</span> parameters.data(using: .utf8)
 
 <span class="hljs-keyword">var</span> request <span class="hljs-operator">=</span> <span class="hljs-type">URLRequest</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/single&quot;</span>)<span class="hljs-operator">!</span>,timeoutInterval: <span class="hljs-type">Double</span>.infinity)
@@ -1648,8 +1802,8 @@ client.Timeout = <span class="hljs-number">-1</span>;
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
 request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
 <span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;code&quot;&quot;: &quot;&quot;binance&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;ETH&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;code&quot;&quot;: &quot;&quot;gemini&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;    &quot;&quot;meta&quot;&quot;: true&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;}&quot;</span>;
 request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
@@ -1660,8 +1814,8 @@ Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/single&quot;</span>
 
 payload = json.dumps({
-  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>,
-  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;binance&quot;</span>,
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;ETH&quot;</span>,
+  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;gemini&quot;</span>,
   <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">True</span>
 })
 headers = {
@@ -1682,7 +1836,26 @@ response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, u
 );
 <span class="hljs-variable">$context</span> = stream_context_create(<span class="hljs-variable">$context_options</span>);
 <span class="hljs-variable">$fp</span> = fopen(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/exchanges/single&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-literal">false</span>, <span class="hljs-variable">$context</span>);
-print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre>
+print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre><pre class="highlight ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;uri&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;json&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;net/http&quot;</span>
+
+url = URI(<span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/single&quot;</span>)
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = <span class="hljs-literal">true</span>
+
+request = Net::HTTP::Post.new(url)
+request[<span class="hljs-string">&quot;content-type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>
+request[<span class="hljs-string">&quot;x-api-key&quot;</span>] = <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>
+request.body = JSON.dump({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;ETH&quot;</span>,
+  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;gemini&quot;</span>,
+  <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">true</span>
+})
+
+response = https.request(request)
+puts response.read_body</code></pre>
             <blockquote>
                <p>Should get us all the information we have on Gemini exchange:</p>
             </blockquote>
@@ -1842,7 +2015,7 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
 
 <span class="hljs-keyword">var</span> semaphore <span class="hljs-operator">=</span> <span class="hljs-type">DispatchSemaphore</span> (value: <span class="hljs-number">0</span>)
 
-<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>CAD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>sort<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>volume<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>order<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>descending<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>offset<span class="hljs-subst">\&quot;</span>: 0,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>limit<span class="hljs-subst">\&quot;</span>: 50,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>meta<span class="hljs-subst">\&quot;</span>: true<span class="hljs-subst">\n</span>}&quot;</span>
+<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>USD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>sort<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>visitors<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>order<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>descending<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>offset<span class="hljs-subst">\&quot;</span>: 0,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>limit<span class="hljs-subst">\&quot;</span>: 1,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>meta<span class="hljs-subst">\&quot;</span>: true<span class="hljs-subst">\n</span>}&quot;</span>
 <span class="hljs-keyword">let</span> postData <span class="hljs-operator">=</span> parameters.data(using: .utf8)
 
 <span class="hljs-keyword">var</span> request <span class="hljs-operator">=</span> <span class="hljs-type">URLRequest</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/list&quot;</span>)<span class="hljs-operator">!</span>,timeoutInterval: <span class="hljs-type">Double</span>.infinity)
@@ -1869,11 +2042,11 @@ client.Timeout = <span class="hljs-number">-1</span>;
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
 request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
 <span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;sort&quot;&quot;: &quot;&quot;volume&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;USD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;sort&quot;&quot;: &quot;&quot;visitors&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;    &quot;&quot;order&quot;&quot;: &quot;&quot;descending&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;    &quot;&quot;offset&quot;&quot;: 0,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
-<span class="hljs-string">@&quot;    &quot;&quot;limit&quot;&quot;: 50,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;limit&quot;&quot;: 1,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;    &quot;&quot;meta&quot;&quot;: true&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
 <span class="hljs-string">@&quot;}&quot;</span>;
 request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
@@ -1884,11 +2057,11 @@ Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/list&quot;</span>
 
 payload = json.dumps({
-  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>,
-  <span class="hljs-string">&quot;sort&quot;</span>: <span class="hljs-string">&quot;volume&quot;</span>,
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;USD&quot;</span>,
+  <span class="hljs-string">&quot;sort&quot;</span>: <span class="hljs-string">&quot;visitors&quot;</span>,
   <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;descending&quot;</span>,
   <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">50</span>,
+  <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">1</span>,
   <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">True</span>
 })
 headers = {
@@ -1909,7 +2082,29 @@ response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, u
 );
 <span class="hljs-variable">$context</span> = stream_context_create(<span class="hljs-variable">$context_options</span>);
 <span class="hljs-variable">$fp</span> = fopen(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/exchanges/list&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-literal">false</span>, <span class="hljs-variable">$context</span>);
-print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre>
+print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre><pre class="highlight ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;uri&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;json&quot;</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;net/http&quot;</span>
+
+url = URI(<span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/list&quot;</span>)
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = <span class="hljs-literal">true</span>
+
+request = Net::HTTP::Post.new(url)
+request[<span class="hljs-string">&quot;content-type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>
+request[<span class="hljs-string">&quot;x-api-key&quot;</span>] = <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>
+request.body = JSON.dump({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;USD&quot;</span>,
+  <span class="hljs-string">&quot;sort&quot;</span>: <span class="hljs-string">&quot;visitors&quot;</span>,
+  <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;descending&quot;</span>,
+  <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">true</span>
+})
+
+response = https.request(request)
+puts response.read_body</code></pre>
             <blockquote>
                <p>Top one exchange by number of visitors:</p>
             </blockquote>
