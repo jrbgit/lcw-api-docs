@@ -101,6 +101,32 @@ IRestResponse response = client.Execute(request);
 Console.WriteLine(response.Content);</code></pre>
             <p>All the examples are written using the <a href="https://restsharp.dev/">RestSharp</a>.</p>
             <p>Install the package and add it to your code. Everything is explained in their <a href="https://restsharp.dev/intro.html">documentation</a>.</p>
+            <h2 id="swift">Swift</h2>
+            <pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
+<span class="hljs-keyword">#if</span> canImport(<span class="hljs-type">FoundationNetworking</span>)
+<span class="hljs-keyword">import</span> FoundationNetworking
+<span class="hljs-keyword">#endif</span>
+
+<span class="hljs-keyword">var</span> semaphore <span class="hljs-operator">=</span> <span class="hljs-type">DispatchSemaphore</span> (value: <span class="hljs-number">0</span>)
+
+<span class="hljs-keyword">var</span> request <span class="hljs-operator">=</span> <span class="hljs-type">URLRequest</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://api.livecoinwatch.com&quot;</span>)<span class="hljs-operator">!</span>,timeoutInterval: <span class="hljs-type">Double</span>.infinity)
+request.addValue(<span class="hljs-string">&quot;application/json&quot;</span>, forHTTPHeaderField: <span class="hljs-string">&quot;content-type&quot;</span>)
+
+request.httpMethod <span class="hljs-operator">=</span> <span class="hljs-string">&quot;POST&quot;</span>
+
+<span class="hljs-keyword">let</span> task <span class="hljs-operator">=</span> <span class="hljs-type">URLSession</span>.shared.dataTask(with: request) { data, response, error <span class="hljs-keyword">in</span> 
+  <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> data <span class="hljs-operator">=</span> data <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">print</span>(<span class="hljs-type">String</span>(describing: error))
+    semaphore.signal()
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-built_in">print</span>(<span class="hljs-type">String</span>(data: data, encoding: .utf8)<span class="hljs-operator">!</span>)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()</code></pre>
+            <p>All the examples use <a href="https://developer.apple.com/documentation/foundation/urlrequest">URLRequest</a> and <a href="https://developer.apple.com/documentation/foundation/urlsession">URLSession</a>. Examples work without installing any package! Just change the <code>x-api-key</code> to your key, and that&#39;s it!.</p>
             <h1 id="concepts">Concepts</h1>
             <p>We&#39;ve tried to keep the API surface simple and efficient, so let&#39;s discuss few <a href="#concepts">concepts</a> that apply to the entirety of the API.</p>
             <h2 id="there-is-only-one-domain">There Is Only One <strong>Domain</strong></h2>
@@ -557,10 +583,10 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
 
 <span class="hljs-keyword">var</span> semaphore <span class="hljs-operator">=</span> <span class="hljs-type">DispatchSemaphore</span> (value: <span class="hljs-number">0</span>)
 
-<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>CAD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>code<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>BTC<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>meta<span class="hljs-subst">\&quot;</span>: true<span class="hljs-subst">\n</span>}&quot;</span>
+<span class="hljs-keyword">let</span> parameters <span class="hljs-operator">=</span> <span class="hljs-string">&quot;{<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>currency<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>CAD<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>start<span class="hljs-subst">\&quot;</span>: 1639516285873,<span class="hljs-subst">\n</span><span class="hljs-subst">\t</span><span class="hljs-subst">\&quot;</span>end<span class="hljs-subst">\&quot;</span>: 1639602685874<span class="hljs-subst">\n</span>}<span class="hljs-subst">\n</span>&quot;</span>
 <span class="hljs-keyword">let</span> postData <span class="hljs-operator">=</span> parameters.data(using: .utf8)
 
-<span class="hljs-keyword">var</span> request <span class="hljs-operator">=</span> <span class="hljs-type">URLRequest</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single&quot;</span>)<span class="hljs-operator">!</span>,timeoutInterval: <span class="hljs-type">Double</span>.infinity)
+<span class="hljs-keyword">var</span> request <span class="hljs-operator">=</span> <span class="hljs-type">URLRequest</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>)<span class="hljs-operator">!</span>,timeoutInterval: <span class="hljs-type">Double</span>.infinity)
 request.addValue(<span class="hljs-string">&quot;application/json&quot;</span>, forHTTPHeaderField: <span class="hljs-string">&quot;content-type&quot;</span>)
 request.addValue(<span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>, forHTTPHeaderField: <span class="hljs-string">&quot;x-api-key&quot;</span>)
 
@@ -578,7 +604,8 @@ request.httpBody <span class="hljs-operator">=</span> postData
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>);
+semaphore.wait()
+</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>);
 client.Timeout = <span class="hljs-number">-1</span>;
 <span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
