@@ -10,10 +10,26 @@ curl -X POST 'https://api.livecoinwatch.com/status' \
 ```
 
 ```javascript
-await fetch(new Request('https://api.livecoinwatch.com/status'), {
-  method: 'POST',
-  headers: new Headers({ 'content-type': 'application/json' })
-})
+await fetch(new Request("https://api.livecoinwatch.com/status"), {
+  method: "POST",
+  headers: new Headers({ "content-type": "application/json" }),
+});
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/status"
+
+payload={}
+headers = {
+  'content-type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
 ```
 
 ```php
@@ -49,13 +65,30 @@ curl -X POST 'https://api.livecoinwatch.com/credits' \
 ```
 
 ```javascript
-await fetch(new Request('https://api.livecoinwatch.com/credits'), {
-  method: 'POST',
+await fetch(new Request("https://api.livecoinwatch.com/credits"), {
+  method: "POST",
   headers: new Headers({
-    'content-type': 'application/json',
-    'x-api-key': '<YOUR_API_KEY>'
-  })
-})
+    "content-type": "application/json",
+    "x-api-key": "<YOUR_API_KEY>",
+  }),
+});
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/credits"
+
+payload={}
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
 ```
 
 ```php
@@ -100,10 +133,10 @@ Accepts no request parameters.
 
 ### Response
 
-key | type | description
---- | ---- | -----------
-`dailyCreditsRemaining` | number | remaining daily credits
-`dailyCreditsLimit` | number | total daily starting credits
+| key                     | type   | description                  |
+| ----------------------- | ------ | ---------------------------- |
+| `dailyCreditsRemaining` | number | remaining daily credits      |
+| `dailyCreditsLimit`     | number | total daily starting credits |
 
 ## `/overview`
 
@@ -117,14 +150,33 @@ curl -X POST 'https://api.livecoinwatch.com/overview' \
 ```
 
 ```javascript
-await fetch(new Request('https://api.livecoinwatch.com/overview'), {
-  method: 'POST',
+await fetch(new Request("https://api.livecoinwatch.com/overview"), {
+  method: "POST",
   headers: new Headers({
-    'content-type': 'application/json',
-    'x-api-key': '<YOUR_API_KEY>'
+    "content-type": "application/json",
+    "x-api-key": "<YOUR_API_KEY>",
   }),
-  body: JSON.stringify({ currency: 'USD' })
+  body: JSON.stringify({ currency: "USD" }),
+});
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/overview"
+
+payload = json.dumps({
+  "currency": "CAD"
 })
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
 ```
 
 ```php
@@ -155,18 +207,18 @@ print_r(stream_get_contents($fp));
 
 ### Request
 
-key | type | description
---- | ---- | -----------
-`currency` | string | any valid coin or fiat code
+| key        | type   | description                 |
+| ---------- | ------ | --------------------------- |
+| `currency` | string | any valid coin or fiat code |
 
 ### Response
 
-key | type | description
---- | ---- | -----------
-`cap` | number | market cap of all coins
-`volume` | number | volume of all coins
-`liquidity` | number | 2% liquidity of all coins
-`btcDominance` | number | percentage of BTC cap in total market cap
+| key            | type   | description                               |
+| -------------- | ------ | ----------------------------------------- |
+| `cap`          | number | market cap of all coins                   |
+| `volume`       | number | volume of all coins                       |
+| `liquidity`    | number | 2% liquidity of all coins                 |
+| `btcDominance` | number | percentage of BTC cap in total market cap |
 
 ## `/overview/history`
 
@@ -180,18 +232,39 @@ curl -X POST 'https://api.livecoinwatch.com/overview/history' \
 ```
 
 ```javascript
-await fetch(new Request('https://api.livecoinwatch.com/overview/history'), {
-  method: 'POST',
+await fetch(new Request("https://api.livecoinwatch.com/overview/history"), {
+  method: "POST",
   headers: new Headers({
-    'content-type': 'application/json',
-    'x-api-key': '<YOUR_API_KEY>'
+    "content-type": "application/json",
+    "x-api-key": "<YOUR_API_KEY>",
   }),
   body: JSON.stringify({
-    currency: 'USD',
+    currency: "USD",
     start: 1606232700000,
-    end: 1606233000000
-  })
+    end: 1606233000000,
+  }),
+});
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/overview/history"
+
+payload = json.dumps({
+  "currency": "CAD",
+  "start": 1639516285873,
+  "end": 1639602685874
 })
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
 ```
 
 ```php
@@ -232,21 +305,21 @@ print_r(stream_get_contents($fp));
 
 ### Request
 
-key | type | description
---- | ---- | -----------
-`currency` | string | any valid coin or fiat code
-`start` | number | UNIX timestamp in milliseconds of time interval start
-`end` | number | UNIX timestamp in milliseconds of time interval end
+| key        | type   | description                                           |
+| ---------- | ------ | ----------------------------------------------------- |
+| `currency` | string | any valid coin or fiat code                           |
+| `start`    | number | UNIX timestamp in milliseconds of time interval start |
+| `end`      | number | UNIX timestamp in milliseconds of time interval end   |
 
 ### Response
 
-key | type | description
---- | ---- | -----------
-`date` | number | UNIX timestamp in milliseconds of datapoint
-`cap` | number | market cap of all coins
-`volume` | number | volume of all coins
-`liquidity` | number | 2% liquidity of all coins
-`btcDominance` | number | percentage of BTC cap in total market cap
+| key            | type   | description                                 |
+| -------------- | ------ | ------------------------------------------- |
+| `date`         | number | UNIX timestamp in milliseconds of datapoint |
+| `cap`          | number | market cap of all coins                     |
+| `volume`       | number | volume of all coins                         |
+| `liquidity`    | number | 2% liquidity of all coins                   |
+| `btcDominance` | number | percentage of BTC cap in total market cap   |
 
 ## `/coins/single`
 
@@ -260,18 +333,40 @@ curl -X POST 'https://api.livecoinwatch.com/coins/single' \
 ```
 
 ```javascript
-await fetch(new Request('https://api.livecoinwatch.com/coins/single'), {
-  method: 'POST',
+await fetch(new Request("https://api.livecoinwatch.com/coins/single"), {
+  method: "POST",
   headers: new Headers({
-    'content-type': 'application/json',
-    'x-api-key': '<YOUR_API_KEY>'
+    "content-type": "application/json",
+    "x-api-key": "<YOUR_API_KEY>",
   }),
   body: JSON.stringify({
-    currency: 'USD',
-    code: 'ETH',
-    meta: true
-  })
+    currency: "USD",
+    code: "ETH",
+    meta: true,
+  }),
+});
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/coins/single"
+
+payload = json.dumps({
+  "currency": "CAD",
+  "code": "BTC",
+  "meta": True
 })
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+
 ```
 
 ```php
@@ -315,35 +410,34 @@ print_r(stream_get_contents($fp));
 
 ### Request
 
-key | type | description
---- | ---- | -----------
-`currency` | string | any valid coin or fiat code
-`code` | string | coin code
-`meta` | boolean | to include full coin information or not
+| key        | type    | description                             |
+| ---------- | ------- | --------------------------------------- |
+| `currency` | string  | any valid coin or fiat code             |
+| `code`     | string  | coin code                               |
+| `meta`     | boolean | to include full coin information or not |
 
 ### Response
 
-key | type | description
---- | ---- | -----------
-`name` | string | coin's name
-`symbol` | string | coin's symbol
-`color` | string | hexadecimal color code (`#282a2a`)
-`png32` | string | 32-pixel png image of coin icon
-`png64` | string | 64-pixel png image of coin icon
-`webp32` | string | 32-pixel webp image of coin icon
-`webp64` | string | 64-pixel webpg image of coin icon
-`exchanges` | number | number of exchange coin is present at
-`markets` | number | number of markets coin is present at
-`pairs` | number | number of unique markets coin is present at
-`allTimeHighUSD` | number | all-time high in USD
-`circulatingSupply` | number | number of coins minted, but not locked
-`totalSupply` | number | number of coins minted, including locked
-`maxSupply` | number | maximum number of coins that can be minted
-`rate` | number | price of coin in requested currency
-`volume` | number | reported trading volume of the coin in last 24 hours in requested currency
-`cap` | number | coin's market cap in requested currency
-`totalCap` | number | coin's hypothetical total capitalization at the moment
-
+| key                 | type   | description                                                                |
+| ------------------- | ------ | -------------------------------------------------------------------------- |
+| `name`              | string | coin's name                                                                |
+| `symbol`            | string | coin's symbol                                                              |
+| `color`             | string | hexadecimal color code (`#282a2a`)                                         |
+| `png32`             | string | 32-pixel png image of coin icon                                            |
+| `png64`             | string | 64-pixel png image of coin icon                                            |
+| `webp32`            | string | 32-pixel webp image of coin icon                                           |
+| `webp64`            | string | 64-pixel webpg image of coin icon                                          |
+| `exchanges`         | number | number of exchange coin is present at                                      |
+| `markets`           | number | number of markets coin is present at                                       |
+| `pairs`             | number | number of unique markets coin is present at                                |
+| `allTimeHighUSD`    | number | all-time high in USD                                                       |
+| `circulatingSupply` | number | number of coins minted, but not locked                                     |
+| `totalSupply`       | number | number of coins minted, including locked                                   |
+| `maxSupply`         | number | maximum number of coins that can be minted                                 |
+| `rate`              | number | price of coin in requested currency                                        |
+| `volume`            | number | reported trading volume of the coin in last 24 hours in requested currency |
+| `cap`               | number | coin's market cap in requested currency                                    |
+| `totalCap`          | number | coin's hypothetical total capitalization at the moment                     |
 
 ## `/coins/single/history`
 
@@ -357,20 +451,43 @@ curl -X POST 'https://api.livecoinwatch.com/coins/single/history' \
 ```
 
 ```javascript
-await fetch(new Request('https://api.livecoinwatch.com/coins/single/history'), {
-  method: 'POST',
+await fetch(new Request("https://api.livecoinwatch.com/coins/single/history"), {
+  method: "POST",
   headers: new Headers({
-    'content-type': 'application/json',
-    'x-api-key': '<YOUR_API_KEY>'
+    "content-type": "application/json",
+    "x-api-key": "<YOUR_API_KEY>",
   }),
   body: JSON.stringify({
-    currency: 'USD',
-    code: 'BTC',
+    currency: "USD",
+    code: "BTC",
     start: 1617035100000,
     end: 1617035400000,
-    meta: true
-  })
+    meta: true,
+  }),
+});
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/coins/single/history"
+
+payload = json.dumps({
+  "currency": "CAD",
+  "code": "BTC",
+  "start": 1639516647365,
+  "end": 1639603047366
 })
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+
 ```
 
 ```php
@@ -426,34 +543,34 @@ print_r(stream_get_contents($fp));
 
 ### Request
 
-key | type | description
---- | ---- | -----------
-`currency` | string | any valid coin or fiat code
-`code` | string | coin code
-`start` | number | UNIX timestamp in milliseconds of time interval start
-`end` | number | UNIX timestamp in milliseconds of time interval end
-`meta` | boolean | to include full coin information or not
+| key        | type    | description                                           |
+| ---------- | ------- | ----------------------------------------------------- |
+| `currency` | string  | any valid coin or fiat code                           |
+| `code`     | string  | coin code                                             |
+| `start`    | number  | UNIX timestamp in milliseconds of time interval start |
+| `end`      | number  | UNIX timestamp in milliseconds of time interval end   |
+| `meta`     | boolean | to include full coin information or not               |
 
 ### Response
 
-key | type | description
---- | ---- | -----------
-`code` | string | coin's own code
-`name` | string | coin's name
-`symbol` | string | coin's symbol
-`color` | string | hexadecimal color code (`#282a2a`)
-`png32` | string | 32-pixel png image of coin icon
-`png64` | string | 64-pixel png image of coin icon
-`webp32` | string | 32-pixel webp image of coin icon
-`webp64` | string | 64-pixel webpg image of coin icon
-`exchanges` | number | number of exchange coin is present at
-`markets` | number | number of markets coin is present at
-`pairs` | number | number of unique markets coin is present at
-`allTimeHighUSD` | number | all-time high in USD
-`circulatingSupply` | number | number of coins minted, but not locked
-`totalSupply` | number | number of coins minted, including locked
-`maxSupply` | number | maximum number of coins that can be minted
-`history` | array | list of `date`, `rate`, `volume` and `cap`
+| key                 | type   | description                                 |
+| ------------------- | ------ | ------------------------------------------- |
+| `code`              | string | coin's own code                             |
+| `name`              | string | coin's name                                 |
+| `symbol`            | string | coin's symbol                               |
+| `color`             | string | hexadecimal color code (`#282a2a`)          |
+| `png32`             | string | 32-pixel png image of coin icon             |
+| `png64`             | string | 64-pixel png image of coin icon             |
+| `webp32`            | string | 32-pixel webp image of coin icon            |
+| `webp64`            | string | 64-pixel webpg image of coin icon           |
+| `exchanges`         | number | number of exchange coin is present at       |
+| `markets`           | number | number of markets coin is present at        |
+| `pairs`             | number | number of unique markets coin is present at |
+| `allTimeHighUSD`    | number | all-time high in USD                        |
+| `circulatingSupply` | number | number of coins minted, but not locked      |
+| `totalSupply`       | number | number of coins minted, including locked    |
+| `maxSupply`         | number | maximum number of coins that can be minted  |
+| `history`           | array  | list of `date`, `rate`, `volume` and `cap`  |
 
 ## `/coins/list`
 
@@ -467,21 +584,45 @@ curl -X POST 'https://api.livecoinwatch.com/coins/list' \
 ```
 
 ```javascript
-await fetch(new Request('https://api.livecoinwatch.com/coins/list'), {
-  method: 'POST',
+await fetch(new Request("https://api.livecoinwatch.com/coins/list"), {
+  method: "POST",
   headers: new Headers({
-    'content-type': 'application/json',
-    'x-api-key': '<YOUR_API_KEY>'
+    "content-type": "application/json",
+    "x-api-key": "<YOUR_API_KEY>",
   }),
   body: JSON.stringify({
-    currency: 'USD',
-    sort: 'rank',
-    order: 'ascending',
+    currency: "USD",
+    sort: "rank",
+    order: "ascending",
     offset: 0,
     limit: 2,
-    meta: false
-  })
+    meta: false,
+  }),
+});
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/coins/list"
+
+payload = json.dumps({
+  "currency": "CAD",
+  "sort": "rank",
+  "order": "ascending",
+  "offset": 0,
+  "limit": 50,
+  "meta": True
 })
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
 ```
 
 ```php
@@ -520,37 +661,37 @@ print_r(stream_get_contents($fp));
 
 ### Request
 
-key | type | description
---- | ---- | -----------
-`currency` | string | any valid coin or fiat code
-`sort` | string | sorting parameter, `rank`, `price`, `volume`, `code`, `name`
-`order` | string | sorting order, `ascending` or `descending`
-`offset` | number | offset of the list, default `0`
-`limit` | number | limit of the list, default `10`, maximum `100`
-`meta` | boolean | to include full coin information or not
+| key        | type    | description                                                  |
+| ---------- | ------- | ------------------------------------------------------------ |
+| `currency` | string  | any valid coin or fiat code                                  |
+| `sort`     | string  | sorting parameter, `rank`, `price`, `volume`, `code`, `name` |
+| `order`    | string  | sorting order, `ascending` or `descending`                   |
+| `offset`   | number  | offset of the list, default `0`                              |
+| `limit`    | number  | limit of the list, default `10`, maximum `100`               |
+| `meta`     | boolean | to include full coin information or not                      |
 
 ### Response
 
-key | type | description
---- | ---- | -----------
-`name` | string | coin's name
-`symbol` | string | coin's symbol
-`color` | string | hexadecimal color code (`#282a2a`)
-`png32` | string | 32-pixel png image of coin icon
-`png64` | string | 64-pixel png image of coin icon
-`webp32` | string | 32-pixel webp image of coin icon
-`webp64` | string | 64-pixel webpg image of coin icon
-`exchanges` | number | number of exchange coin is present at
-`markets` | number | number of markets coin is present at
-`pairs` | number | number of unique markets coin is present at
-`allTimeHighUSD` | number | all-time high in USD
-`circulatingSupply` | number | number of coins minted, but not locked
-`totalSupply` | number | number of coins minted, including locked
-`maxSupply` | number | maximum number of coins that can be minted
-`code` | string | coin's code
-`rate` | number | coin rate in the specified currency
-`volume` | number | 24-hour volume of coin
-`cap` | number | market cap of coin
+| key                 | type   | description                                 |
+| ------------------- | ------ | ------------------------------------------- |
+| `name`              | string | coin's name                                 |
+| `symbol`            | string | coin's symbol                               |
+| `color`             | string | hexadecimal color code (`#282a2a`)          |
+| `png32`             | string | 32-pixel png image of coin icon             |
+| `png64`             | string | 64-pixel png image of coin icon             |
+| `webp32`            | string | 32-pixel webp image of coin icon            |
+| `webp64`            | string | 64-pixel webpg image of coin icon           |
+| `exchanges`         | number | number of exchange coin is present at       |
+| `markets`           | number | number of markets coin is present at        |
+| `pairs`             | number | number of unique markets coin is present at |
+| `allTimeHighUSD`    | number | all-time high in USD                        |
+| `circulatingSupply` | number | number of coins minted, but not locked      |
+| `totalSupply`       | number | number of coins minted, including locked    |
+| `maxSupply`         | number | maximum number of coins that can be minted  |
+| `code`              | string | coin's code                                 |
+| `rate`              | number | coin rate in the specified currency         |
+| `volume`            | number | 24-hour volume of coin                      |
+| `cap`               | number | market cap of coin                          |
 
 ## `/fiats/all`
 
@@ -563,13 +704,30 @@ curl -X POST 'https://api.livecoinwatch.com/fiats/all' \
 ```
 
 ```javascript
-await fetch(new Request('https://api.livecoinwatch.com/fiats/all'), {
-  method: 'POST',
+await fetch(new Request("https://api.livecoinwatch.com/fiats/all"), {
+  method: "POST",
   headers: new Headers({
-    'content-type': 'application/json',
-    'x-api-key': '<YOUR_API_KEY>'
-  })
-})
+    "content-type": "application/json",
+    "x-api-key": "<YOUR_API_KEY>",
+  }),
+});
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/fiats/all"
+
+payload={}
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
 ```
 
 ```php
@@ -615,14 +773,13 @@ Accepts no request parameters.
 
 An array of following:
 
-key | type | description
---- | ---- | -----------
-`code` | string | fiat ISO code
-`countries` | array | ISO country code list
-`flag` | string | ISO country code of the flag
-`name` | string | fiat name
-`symbol` | string | fiat symbol
-
+| key         | type   | description                  |
+| ----------- | ------ | ---------------------------- |
+| `code`      | string | fiat ISO code                |
+| `countries` | array  | ISO country code list        |
+| `flag`      | string | ISO country code of the flag |
+| `name`      | string | fiat name                    |
+| `symbol`    | string | fiat symbol                  |
 
 ## `/exchanges/single`
 
@@ -636,18 +793,39 @@ curl -X POST 'https://api.livecoinwatch.com/exchanges/single' \
 ```
 
 ```javascript
-await fetch(new Request('https://api.livecoinwatch.com/exchanges/single'), {
-  method: 'POST',
+await fetch(new Request("https://api.livecoinwatch.com/exchanges/single"), {
+  method: "POST",
   headers: new Headers({
-    'content-type': 'application/json',
-    'x-api-key': '<YOUR_API_KEY>'
+    "content-type": "application/json",
+    "x-api-key": "<YOUR_API_KEY>",
   }),
   body: JSON.stringify({
-    currency: 'ETH',
-    code: 'gemini',
-    meta: true
-  })
+    currency: "ETH",
+    code: "gemini",
+    meta: true,
+  }),
+});
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/exchanges/single"
+
+payload = json.dumps({
+  "currency": "CAD",
+  "code": "binance",
+  "meta": True
 })
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
 ```
 
 ```php
@@ -689,32 +867,31 @@ print_r(stream_get_contents($fp));
 
 ### Request
 
-key | type | description
---- | ---- | -----------
-`currency` | string | any valid coin or fiat code
-`code` | string | exchange code
-`meta` | boolean | to include full exchange information or not
+| key        | type    | description                                 |
+| ---------- | ------- | ------------------------------------------- |
+| `currency` | string  | any valid coin or fiat code                 |
+| `code`     | string  | exchange code                               |
+| `meta`     | boolean | to include full exchange information or not |
 
 ### Response
 
-key | type | description
---- | ---- | -----------
-`name` | string | exchange name
-`png64` | string | 64-pixel png image of exchange icon
-`png128` | string | 128-pixel png image of exchange icon
-`webp64` | string | 64-pixel webp image of exchange icon
-`webp128` | string | 128-pixel webpg image of exchange icon
-`centralized` | boolean | is the exchange centralized or decentralized
-`usCompliant` | boolean | is the exchange compliant in the USA
-`code` | string | exchange code
-`markets` | number | count of currently active markets on the exchange
-`volume` | number | 24-hour volume in specified currency
-`bidTotal` | number | 2% orderbook value bids
-`askTotal` | number | 2% orderbook value asks
-`depth` | number | 2% orderbook total depth
-`visitors` | number | number of daily visitors, estimate
-`volumePerVisitor`| number | daily volume per daily visitor
-
+| key                | type    | description                                       |
+| ------------------ | ------- | ------------------------------------------------- |
+| `name`             | string  | exchange name                                     |
+| `png64`            | string  | 64-pixel png image of exchange icon               |
+| `png128`           | string  | 128-pixel png image of exchange icon              |
+| `webp64`           | string  | 64-pixel webp image of exchange icon              |
+| `webp128`          | string  | 128-pixel webpg image of exchange icon            |
+| `centralized`      | boolean | is the exchange centralized or decentralized      |
+| `usCompliant`      | boolean | is the exchange compliant in the USA              |
+| `code`             | string  | exchange code                                     |
+| `markets`          | number  | count of currently active markets on the exchange |
+| `volume`           | number  | 24-hour volume in specified currency              |
+| `bidTotal`         | number  | 2% orderbook value bids                           |
+| `askTotal`         | number  | 2% orderbook value asks                           |
+| `depth`            | number  | 2% orderbook total depth                          |
+| `visitors`         | number  | number of daily visitors, estimate                |
+| `volumePerVisitor` | number  | daily volume per daily visitor                    |
 
 ## `/exchanges/list`
 
@@ -742,6 +919,30 @@ await fetch(new Request('https://api.livecoinwatch.com/exchanges/list'), {
     meta: true
   })
 })
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/exchanges/list"
+
+payload = json.dumps({
+  "currency": "CAD",
+  "sort": "volume",
+  "order": "descending",
+  "offset": 0,
+  "limit": 50,
+  "meta": True
+})
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
 ```
 
 ```php
@@ -785,34 +986,33 @@ print_r(stream_get_contents($fp));
 
 ### Request
 
-key | type | description
---- | ---- | -----------
-`currency` | string | any valid coin or fiat code
-`sort` | string | sorting parameter, `volume`, `liquidity`, `code`, `name`
-`order` | string | sorting order, `ascending` or `descending`
-`offset` | number | offset of the list, default `0`
-`limit` | number | limit of the list, default `50`, maximum `100`
-`meta` | boolean | to include full exchange information or not
+| key        | type    | description                                              |
+| ---------- | ------- | -------------------------------------------------------- |
+| `currency` | string  | any valid coin or fiat code                              |
+| `sort`     | string  | sorting parameter, `volume`, `liquidity`, `code`, `name` |
+| `order`    | string  | sorting order, `ascending` or `descending`               |
+| `offset`   | number  | offset of the list, default `0`                          |
+| `limit`    | number  | limit of the list, default `50`, maximum `100`           |
+| `meta`     | boolean | to include full exchange information or not              |
 
 ### Response
 
 Returns array of objects containing:
 
-key | type | description
---- | ---- | -----------
-`name` | string | exchange name
-`png64` | string | 64-pixel png image of exchange icon
-`png128` | string | 128-pixel png image of exchange icon
-`webp64` | string | 64-pixel webp image of exchange icon
-`webp128` | string | 128-pixel webpg image of exchange icon
-`centralized` | boolean | is the exchange centralized or decentralized
-`usCompliant` | boolean | is the exchange compliant in the USA
-`code` | string | exchange code
-`markets` | number | count of currently active markets on the exchange
-`volume` | number | 24-hour volume in specified currency
-`bidTotal` | number | 2% orderbook value bids
-`askTotal` | number | 2% orderbook value asks
-`depth` | number | 2% orderbook total depth
-`visitors` | number | number of daily visitors, estimate
-`volumePerVisitor`| number | daily volume per daily visitor
-
+| key                | type    | description                                       |
+| ------------------ | ------- | ------------------------------------------------- |
+| `name`             | string  | exchange name                                     |
+| `png64`            | string  | 64-pixel png image of exchange icon               |
+| `png128`           | string  | 128-pixel png image of exchange icon              |
+| `webp64`           | string  | 64-pixel webp image of exchange icon              |
+| `webp128`          | string  | 128-pixel webpg image of exchange icon            |
+| `centralized`      | boolean | is the exchange centralized or decentralized      |
+| `usCompliant`      | boolean | is the exchange compliant in the USA              |
+| `code`             | string  | exchange code                                     |
+| `markets`          | number  | count of currently active markets on the exchange |
+| `volume`           | number  | 24-hour volume in specified currency              |
+| `bidTotal`         | number  | 2% orderbook value bids                           |
+| `askTotal`         | number  | 2% orderbook value asks                           |
+| `depth`            | number  | 2% orderbook total depth                          |
+| `visitors`         | number  | number of daily visitors, estimate                |
+| `volumePerVisitor` | number  | daily volume per daily visitor                    |
