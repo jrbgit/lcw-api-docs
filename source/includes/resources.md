@@ -32,6 +32,33 @@ response = requests.request("POST", url, headers=headers, data=payload)
 print(response.text)
 ```
 
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/status")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
 ```csharp
 var client = new RestClient("https://api.livecoinwatch.com/status");
 client.Timeout = -1;
@@ -90,6 +117,33 @@ request.AddHeader("content-type", "application/json");
 request.AddHeader("x-api-key", "<YOUR_API_KEY>");
 IRestResponse response = client.Execute(request);
 Console.WriteLine(response.Content);
+```
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/credits")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
 ```
 
 ```python
@@ -177,6 +231,38 @@ await fetch(new Request("https://api.livecoinwatch.com/overview"), {
   body: JSON.stringify({ currency: "USD" }),
 });
 ```
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"CAD\"\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/overview")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
 ```csharp
 var client = new RestClient("https://api.livecoinwatch.com/overview");
 client.Timeout = -1;
@@ -190,8 +276,6 @@ request.AddParameter("application/json", body,  ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 Console.WriteLine(response.Content);
 ```
-
-
 
 ```python
 import requests
@@ -278,6 +362,39 @@ await fetch(new Request("https://api.livecoinwatch.com/overview/history"), {
   }),
 });
 ```
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"CAD\",\n\t\"code\": \"BTC\",\n\t\"meta\": true\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/coins/single")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+
 ```csharp
 var client = new RestClient("https://api.livecoinwatch.com/overview/history");
 client.Timeout = -1;
@@ -395,6 +512,40 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/single"), {
   }),
 });
 ```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"CAD\",\n\t\"code\": \"BTC\",\n\t\"meta\": true\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/coins/single")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+
 ```csharp
 var client = new RestClient("https://api.livecoinwatch.com/coins/single");
 client.Timeout = -1;
@@ -530,6 +681,39 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/single/history"), {
   }),
 });
 ```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"CAD\",\n\t\"code\": \"BTC\",\n\t\"start\": 1639516647365,\n\t\"end\": 1639603047366\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/coins/single/history")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
 ```csharp
 var client = new RestClient("https://api.livecoinwatch.com/coins/single/history");
 client.Timeout = -1;
@@ -680,6 +864,39 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/list"), {
   }),
 });
 ```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"CAD\",\n\t\"sort\": \"rank\",\n\t\"order\": \"ascending\",\n\t\"offset\": 0,\n\t\"limit\": 50,\n\t\"meta\": true\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/coins/list")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
 ```csharp
 var client = new RestClient("https://api.livecoinwatch.com/coins/list");
 client.Timeout = -1;
@@ -811,6 +1028,34 @@ await fetch(new Request("https://api.livecoinwatch.com/fiats/all"), {
 });
 ```
 
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/fiats/all")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
 ```python
 import requests
 import json
@@ -912,6 +1157,38 @@ await fetch(new Request("https://api.livecoinwatch.com/exchanges/single"), {
     meta: true,
   }),
 });
+```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"CAD\",\n\t\"code\": \"binance\",\n\t\"meta\": true\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/exchanges/single")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
 ```
 
 ```csharp
@@ -1044,6 +1321,39 @@ await fetch(new Request('https://api.livecoinwatch.com/exchanges/list'), {
   })
 })
 ```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"CAD\",\n\t\"sort\": \"volume\",\n\t\"order\": \"descending\",\n\t\"offset\": 0,\n\t\"limit\": 50,\n\t\"meta\": true\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/exchanges/list")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
 ```csharp
 var client = new RestClient("https://api.livecoinwatch.com/exchanges/list");
 client.Timeout = -1;
