@@ -10,7 +10,7 @@
       <link href=stylesheets/highlight-gruvbox-dark.css rel=stylesheet media=screen,print>
       <script src=javascripts/all.js></script>
    </head>
-   <body class="" data-languages="[&#34;shell&#34;,&#34;javascript&#34;,&#34;php&#34;]">
+   <body class="" data-languages="[&#34;shell&#34;,&#34;javascript&#34;,&#34;python&#34;,&#34;php&#34;]">
       <a href=# id=nav-button>
          <span>NAV <img alt=navbar class=image-navbar src=images/navbar.png></span>
       </a>
@@ -19,6 +19,7 @@
          <div class=lang-selector>
             <a href=# data-language-name="shell">shell</a>
             <a href=# data-language-name="javascript">javascript</a>
+            <a href=# data-language-name="python">python</a>
             <a href=# data-language-name="php">php</a>
          </div>
          <div class=search>
@@ -206,10 +207,22 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
             <p>This describes API resource fetching via HTTPS calls.</p>
             <h2 id="status"><code>/status</code></h2>
             <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/status&#x27; \
-  -H &#x27;content-type: application/json&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/status&#x27;</span>), {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
-  <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>({ <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span> })
-})</code></pre><pre class="highlight php"><code><span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
+  -H &#x27;content-type: application/json&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&quot;https://api.livecoinwatch.com/status&quot;</span>), {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,
+  <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>({ <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span> }),
+});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> json
+
+url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/status&quot;</span>
+
+payload={}
+headers = {
+  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>
+}
+
+response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
+
+<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight php"><code><span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
         <span class="hljs-string">&#x27;header&#x27;</span> =&gt; <span class="hljs-string">&quot;Content-type: application/json\r\n&quot;</span>
@@ -229,13 +242,26 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
             <h2 id="credits"><code>/credits</code></h2>
             <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/credits&#x27; \
   -H &#x27;content-type: application/json&#x27; \
-  -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/credits&#x27;</span>), {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+  -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&quot;https://api.livecoinwatch.com/credits&quot;</span>), {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>({
-    <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
-    <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
-  })
-})</code></pre><pre class="highlight php"><code><span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
+    <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,
+    <span class="hljs-string">&quot;x-api-key&quot;</span>: <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>,
+  }),
+});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> json
+
+url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/credits&quot;</span>
+
+payload={}
+headers = {
+  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+}
+
+response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
+
+<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight php"><code><span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
         <span class="hljs-string">&#x27;header&#x27;</span> =&gt; <span class="hljs-string">&quot;Content-type: application/json\r\n&quot;</span>
@@ -292,14 +318,29 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
             <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/overview&#x27; \
   -H &#x27;content-type: application/json&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/overview&#x27;</span>), {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview&quot;</span>), {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>({
-    <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
-    <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+    <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,
+    <span class="hljs-string">&quot;x-api-key&quot;</span>: <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>,
   }),
-  <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({ <span class="hljs-attr">currency</span>: <span class="hljs-string">&#x27;USD&#x27;</span> })
-})</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>));
+  <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({ <span class="hljs-attr">currency</span>: <span class="hljs-string">&quot;USD&quot;</span> }),
+});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> json
+
+url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/overview&quot;</span>
+
+payload = json.dumps({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>
+})
+headers = {
+  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+}
+
+response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
+
+<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>));
 <span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
@@ -374,18 +415,35 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
             <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/overview/history&#x27; \
   -H &#x27;content-type: application/json&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;start&quot;:1606232700000,&quot;end&quot;:1606233000000}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/overview/history&#x27;</span>), {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;start&quot;:1606232700000,&quot;end&quot;:1606233000000}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>), {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>({
-    <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
-    <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+    <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,
+    <span class="hljs-string">&quot;x-api-key&quot;</span>: <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>,
   }),
   <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">&#x27;USD&#x27;</span>,
+    <span class="hljs-attr">currency</span>: <span class="hljs-string">&quot;USD&quot;</span>,
     <span class="hljs-attr">start</span>: <span class="hljs-number">1606232700000</span>,
-    <span class="hljs-attr">end</span>: <span class="hljs-number">1606233000000</span>
-  })
-})</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;start&#x27;</span> =&gt; <span class="hljs-number">1606232700000</span>, <span class="hljs-string">&#x27;end&#x27;</span> =&gt; <span class="hljs-number">1606233000000</span>));
+    <span class="hljs-attr">end</span>: <span class="hljs-number">1606233000000</span>,
+  }),
+});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> json
+
+url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>
+
+payload = json.dumps({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>,
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">1639516285873</span>,
+  <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">1639602685874</span>
+})
+headers = {
+  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+}
+
+response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
+
+<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;start&#x27;</span> =&gt; <span class="hljs-number">1606232700000</span>, <span class="hljs-string">&#x27;end&#x27;</span> =&gt; <span class="hljs-number">1606233000000</span>));
 <span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
@@ -485,18 +543,36 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
             <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/coins/single&#x27; \
   -H &#x27;content-type: application/json&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;code&quot;:&quot;ETH&quot;,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/coins/single&#x27;</span>), {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;code&quot;:&quot;ETH&quot;,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single&quot;</span>), {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>({
-    <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
-    <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+    <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,
+    <span class="hljs-string">&quot;x-api-key&quot;</span>: <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>,
   }),
   <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">&#x27;USD&#x27;</span>,
-    <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;ETH&#x27;</span>,
-    <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>
-  })
-})</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;code&#x27;</span> =&gt; <span class="hljs-string">&#x27;ETH&#x27;</span>, <span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">true</span>));
+    <span class="hljs-attr">currency</span>: <span class="hljs-string">&quot;USD&quot;</span>,
+    <span class="hljs-attr">code</span>: <span class="hljs-string">&quot;ETH&quot;</span>,
+    <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>,
+  }),
+});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> json
+
+url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single&quot;</span>
+
+payload = json.dumps({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>,
+  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;BTC&quot;</span>,
+  <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">True</span>
+})
+headers = {
+  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+}
+
+response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
+
+<span class="hljs-built_in">print</span>(response.text)
+</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;code&#x27;</span> =&gt; <span class="hljs-string">&#x27;ETH&#x27;</span>, <span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">true</span>));
 <span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
@@ -664,20 +740,39 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
             <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/coins/single/history&#x27; \
   -H &#x27;content-type: application/json&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;code&quot;:&quot;BTC&quot;,&quot;start&quot;:1617035100000,&quot;end&quot;:1617035400000,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/coins/single/history&#x27;</span>), {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;code&quot;:&quot;BTC&quot;,&quot;start&quot;:1617035100000,&quot;end&quot;:1617035400000,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single/history&quot;</span>), {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>({
-    <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
-    <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+    <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,
+    <span class="hljs-string">&quot;x-api-key&quot;</span>: <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>,
   }),
   <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">&#x27;USD&#x27;</span>,
-    <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;BTC&#x27;</span>,
+    <span class="hljs-attr">currency</span>: <span class="hljs-string">&quot;USD&quot;</span>,
+    <span class="hljs-attr">code</span>: <span class="hljs-string">&quot;BTC&quot;</span>,
     <span class="hljs-attr">start</span>: <span class="hljs-number">1617035100000</span>,
     <span class="hljs-attr">end</span>: <span class="hljs-number">1617035400000</span>,
-    <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>
-  })
-})</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;code&#x27;</span> =&gt; <span class="hljs-string">&#x27;BTC&#x27;</span>, <span class="hljs-string">&#x27;start&#x27;</span> =&gt; <span class="hljs-number">1617035100000</span>, <span class="hljs-string">&#x27;end&#x27;</span> =&gt; <span class="hljs-number">1617035400000</span>, <span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">true</span>));
+    <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>,
+  }),
+});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> json
+
+url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single/history&quot;</span>
+
+payload = json.dumps({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>,
+  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;BTC&quot;</span>,
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">1639516647365</span>,
+  <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">1639603047366</span>
+})
+headers = {
+  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+}
+
+response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
+
+<span class="hljs-built_in">print</span>(response.text)
+</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;code&#x27;</span> =&gt; <span class="hljs-string">&#x27;BTC&#x27;</span>, <span class="hljs-string">&#x27;start&#x27;</span> =&gt; <span class="hljs-number">1617035100000</span>, <span class="hljs-string">&#x27;end&#x27;</span> =&gt; <span class="hljs-number">1617035400000</span>, <span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">true</span>));
 <span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
@@ -857,21 +952,41 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
             <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/coins/list&#x27; \
   -H &#x27;content-type: application/json&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;sort&quot;:&quot;rank&quot;,&quot;order&quot;:&quot;ascending&quot;,&quot;offset&quot;:0,&quot;limit&quot;:2,&quot;meta&quot;:false}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/coins/list&#x27;</span>), {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+  -d &#x27;{&quot;currency&quot;:&quot;USD&quot;,&quot;sort&quot;:&quot;rank&quot;,&quot;order&quot;:&quot;ascending&quot;,&quot;offset&quot;:0,&quot;limit&quot;:2,&quot;meta&quot;:false}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/list&quot;</span>), {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>({
-    <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
-    <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+    <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,
+    <span class="hljs-string">&quot;x-api-key&quot;</span>: <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>,
   }),
   <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">&#x27;USD&#x27;</span>,
-    <span class="hljs-attr">sort</span>: <span class="hljs-string">&#x27;rank&#x27;</span>,
-    <span class="hljs-attr">order</span>: <span class="hljs-string">&#x27;ascending&#x27;</span>,
+    <span class="hljs-attr">currency</span>: <span class="hljs-string">&quot;USD&quot;</span>,
+    <span class="hljs-attr">sort</span>: <span class="hljs-string">&quot;rank&quot;</span>,
+    <span class="hljs-attr">order</span>: <span class="hljs-string">&quot;ascending&quot;</span>,
     <span class="hljs-attr">offset</span>: <span class="hljs-number">0</span>,
     <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-attr">meta</span>: <span class="hljs-literal">false</span>
-  })
-})</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;sort&#x27;</span> =&gt; <span class="hljs-string">&#x27;rank&#x27;</span>, <span class="hljs-string">&#x27;order&#x27;</span> =&gt; <span class="hljs-string">&#x27;ascending&#x27;</span>, <span class="hljs-string">&#x27;offset&#x27;</span> =&gt; <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;limit&#x27;</span> =&gt; <span class="hljs-number">2</span>,<span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">false</span>));
+    <span class="hljs-attr">meta</span>: <span class="hljs-literal">false</span>,
+  }),
+});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> json
+
+url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/list&quot;</span>
+
+payload = json.dumps({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>,
+  <span class="hljs-string">&quot;sort&quot;</span>: <span class="hljs-string">&quot;rank&quot;</span>,
+  <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;ascending&quot;</span>,
+  <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">50</span>,
+  <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">True</span>
+})
+headers = {
+  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+}
+
+response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
+
+<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;sort&#x27;</span> =&gt; <span class="hljs-string">&#x27;rank&#x27;</span>, <span class="hljs-string">&#x27;order&#x27;</span> =&gt; <span class="hljs-string">&#x27;ascending&#x27;</span>, <span class="hljs-string">&#x27;offset&#x27;</span> =&gt; <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;limit&#x27;</span> =&gt; <span class="hljs-number">2</span>,<span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">false</span>));
 <span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
@@ -1048,13 +1163,26 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
             <p>List of all the fiats.</p>
             <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/fiats/all&#x27; \
   -H &#x27;content-type: application/json&#x27; \
-  -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/fiats/all&#x27;</span>), {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+  -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&quot;https://api.livecoinwatch.com/fiats/all&quot;</span>), {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>({
-    <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
-    <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
-  })
-})</code></pre><pre class="highlight php"><code><span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
+    <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,
+    <span class="hljs-string">&quot;x-api-key&quot;</span>: <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>,
+  }),
+});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> json
+
+url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/fiats/all&quot;</span>
+
+payload={}
+headers = {
+  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+}
+
+response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
+
+<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight php"><code><span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
         <span class="hljs-string">&#x27;header&#x27;</span> =&gt; <span class="hljs-string">&quot;Content-type: application/json\r\n&quot;</span>
@@ -1129,18 +1257,35 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
             <pre class="highlight shell"><code>curl -X POST &#x27;https://api.livecoinwatch.com/exchanges/single&#x27; \
   -H &#x27;content-type: application/json&#x27; \
   -H &#x27;x-api-key: &lt;YOUR_API_KEY&gt;&#x27; \
-  -d &#x27;{&quot;currency&quot;:&quot;ETH&quot;,&quot;code&quot;:&quot;gemini&quot;,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&#x27;https://api.livecoinwatch.com/exchanges/single&#x27;</span>), {
-  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+  -d &#x27;{&quot;currency&quot;:&quot;ETH&quot;,&quot;code&quot;:&quot;gemini&quot;,&quot;meta&quot;:true}&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/single&quot;</span>), {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>({
-    <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
-    <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+    <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,
+    <span class="hljs-string">&quot;x-api-key&quot;</span>: <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>,
   }),
   <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">&#x27;ETH&#x27;</span>,
-    <span class="hljs-attr">code</span>: <span class="hljs-string">&#x27;gemini&#x27;</span>,
-    <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>
-  })
-})</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;ETH&#x27;</span>, <span class="hljs-string">&#x27;code&#x27;</span> =&gt; <span class="hljs-string">&#x27;gemini&#x27;</span>, <span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">true</span>));
+    <span class="hljs-attr">currency</span>: <span class="hljs-string">&quot;ETH&quot;</span>,
+    <span class="hljs-attr">code</span>: <span class="hljs-string">&quot;gemini&quot;</span>,
+    <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>,
+  }),
+});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> json
+
+url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/single&quot;</span>
+
+payload = json.dumps({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>,
+  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;binance&quot;</span>,
+  <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">True</span>
+})
+headers = {
+  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+}
+
+response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
+
+<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;ETH&#x27;</span>, <span class="hljs-string">&#x27;code&#x27;</span> =&gt; <span class="hljs-string">&#x27;gemini&#x27;</span>, <span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">true</span>));
 <span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
@@ -1304,7 +1449,27 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
     <span class="hljs-attr">limit</span>: <span class="hljs-number">1</span>
     <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>
   })
-})</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;sort&#x27;</span> =&gt; <span class="hljs-string">&#x27;visitors&#x27;</span>, <span class="hljs-string">&#x27;order&#x27;</span> =&gt; <span class="hljs-string">&#x27;descending&#x27;</span>, <span class="hljs-string">&#x27;offset&#x27;</span> =&gt; <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;limit&#x27;</span> =&gt; <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">true</span>));
+})</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> json
+
+url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/list&quot;</span>
+
+payload = json.dumps({
+  <span class="hljs-string">&quot;currency&quot;</span>: <span class="hljs-string">&quot;CAD&quot;</span>,
+  <span class="hljs-string">&quot;sort&quot;</span>: <span class="hljs-string">&quot;volume&quot;</span>,
+  <span class="hljs-string">&quot;order&quot;</span>: <span class="hljs-string">&quot;descending&quot;</span>,
+  <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">50</span>,
+  <span class="hljs-string">&quot;meta&quot;</span>: <span class="hljs-literal">True</span>
+})
+headers = {
+  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;x-api-key&#x27;</span>: <span class="hljs-string">&#x27;&lt;YOUR_API_KEY&gt;&#x27;</span>
+}
+
+response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
+
+<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight php"><code><span class="hljs-variable">$data</span> = json_encode(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;currency&#x27;</span> =&gt; <span class="hljs-string">&#x27;USD&#x27;</span>, <span class="hljs-string">&#x27;sort&#x27;</span> =&gt; <span class="hljs-string">&#x27;visitors&#x27;</span>, <span class="hljs-string">&#x27;order&#x27;</span> =&gt; <span class="hljs-string">&#x27;descending&#x27;</span>, <span class="hljs-string">&#x27;offset&#x27;</span> =&gt; <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;limit&#x27;</span> =&gt; <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;meta&#x27;</span> =&gt; <span class="hljs-literal">true</span>));
 <span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
@@ -1565,6 +1730,7 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
             <div class=lang-selector>
                <a href=# data-language-name="shell">shell</a>
                <a href=# data-language-name="javascript">javascript</a>
+               <a href=# data-language-name="python">python</a>
                <a href=# data-language-name="php">php</a>
             </div>
          </div>
