@@ -370,10 +370,10 @@ import FoundationNetworking
 
 var semaphore = DispatchSemaphore (value: 0)
 
-let parameters = "{\n\t\"currency\": \"CAD\",\n\t\"code\": \"BTC\",\n\t\"meta\": true\n}"
+let parameters = "{\n\t\"currency\": \"CAD\",\n\t\"start\": 1639516285873,\n\t\"end\": 1639602685874\n}\n"
 let postData = parameters.data(using: .utf8)
 
-var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/coins/single")!,timeoutInterval: Double.infinity)
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/overview/history")!,timeoutInterval: Double.infinity)
 request.addValue("application/json", forHTTPHeaderField: "content-type")
 request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
 
@@ -392,6 +392,7 @@ let task = URLSession.shared.dataTask(with: request) { data, response, error in
 
 task.resume()
 semaphore.wait()
+
 ```
 
 
