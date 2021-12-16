@@ -10,7 +10,7 @@
       <link href=stylesheets/highlight-gruvbox-dark.css rel=stylesheet media=screen,print>
       <script src=javascripts/all.js></script>
    </head>
-   <body class="" data-languages="[&#34;shell&#34;,&#34;javascript&#34;,&#34;python&#34;,&#34;php&#34;]">
+   <body class="" data-languages="[&#34;shell&#34;,&#34;javascript&#34;,&#34;python&#34;,&#34;php&#34;,&#34;csharp&#34;]">
       <a href=# id=nav-button>
          <span>NAV <img alt=navbar class=image-navbar src=images/navbar.png></span>
       </a>
@@ -21,6 +21,7 @@
             <a href=# data-language-name="javascript">javascript</a>
             <a href=# data-language-name="python">python</a>
             <a href=# data-language-name="php">php</a>
+            <a href=# data-language-name="csharp">csharp</a>
          </div>
          <div class=search>
             <input type=text class=search id=input-search placeholder="Search">
@@ -222,7 +223,12 @@ headers = {
 
 response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
 
-<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight php"><code><span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
+<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/status&quot;</span>);
+client.Timeout = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
+request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);</code></pre><pre class="highlight php"><code><span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
         <span class="hljs-string">&#x27;header&#x27;</span> =&gt; <span class="hljs-string">&quot;Content-type: application/json\r\n&quot;</span>
@@ -248,7 +254,13 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
     <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,
     <span class="hljs-string">&quot;x-api-key&quot;</span>: <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>,
   }),
-});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+});</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/credits&quot;</span>);
+client.Timeout = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
+request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> json
 
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/credits&quot;</span>
@@ -325,7 +337,17 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
     <span class="hljs-string">&quot;x-api-key&quot;</span>: <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>,
   }),
   <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({ <span class="hljs-attr">currency</span>: <span class="hljs-string">&quot;USD&quot;</span> }),
-});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+});</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview&quot;</span>);
+client.Timeout = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
+request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
+<span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;}&quot;</span>;
+request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> json
 
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/overview&quot;</span>
@@ -426,7 +448,20 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
     <span class="hljs-attr">start</span>: <span class="hljs-number">1606232700000</span>,
     <span class="hljs-attr">end</span>: <span class="hljs-number">1606233000000</span>,
   }),
-});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+});</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>);
+client.Timeout = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
+request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
+<span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;start&quot;&quot;: 1639516285873,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;end&quot;&quot;: 1639602685874&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;}&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;&quot;</span>;
+request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> json
 
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>
@@ -554,7 +589,19 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
     <span class="hljs-attr">code</span>: <span class="hljs-string">&quot;ETH&quot;</span>,
     <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>,
   }),
-});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+});</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single&quot;</span>);
+client.Timeout = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
+request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
+<span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;code&quot;&quot;: &quot;&quot;BTC&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;meta&quot;&quot;: true&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;}&quot;</span>;
+request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> json
 
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single&quot;</span>
@@ -753,7 +800,20 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
     <span class="hljs-attr">end</span>: <span class="hljs-number">1617035400000</span>,
     <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>,
   }),
-});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+});</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single/history&quot;</span>);
+client.Timeout = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
+request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
+<span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;code&quot;&quot;: &quot;&quot;BTC&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;start&quot;&quot;: 1639516647365,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;end&quot;&quot;: 1639603047366&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;}&quot;</span>;
+request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> json
 
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single/history&quot;</span>
@@ -966,7 +1026,22 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
     <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,
     <span class="hljs-attr">meta</span>: <span class="hljs-literal">false</span>,
   }),
-});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+});</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/list&quot;</span>);
+client.Timeout = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
+request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
+<span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;sort&quot;&quot;: &quot;&quot;rank&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;order&quot;&quot;: &quot;&quot;ascending&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;offset&quot;&quot;: 0,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;limit&quot;&quot;: 50,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;meta&quot;&quot;: true&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;}&quot;</span>;
+request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> json
 
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/list&quot;</span>
@@ -1182,7 +1257,13 @@ headers = {
 
 response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
 
-<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight php"><code><span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
+<span class="hljs-built_in">print</span>(response.text)</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/fiats/all&quot;</span>);
+client.Timeout = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
+request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);</code></pre><pre class="highlight php"><code><span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
         <span class="hljs-string">&#x27;method&#x27;</span> =&gt; <span class="hljs-string">&#x27;POST&#x27;</span>,
         <span class="hljs-string">&#x27;header&#x27;</span> =&gt; <span class="hljs-string">&quot;Content-type: application/json\r\n&quot;</span>
@@ -1268,7 +1349,19 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
     <span class="hljs-attr">code</span>: <span class="hljs-string">&quot;gemini&quot;</span>,
     <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>,
   }),
-});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+});</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/single&quot;</span>);
+client.Timeout = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
+request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
+<span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;code&quot;&quot;: &quot;&quot;binance&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;meta&quot;&quot;: true&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;}&quot;</span>;
+request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> json
 
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/single&quot;</span>
@@ -1449,7 +1542,22 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
     <span class="hljs-attr">limit</span>: <span class="hljs-number">1</span>
     <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>
   })
-})</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+})</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/list&quot;</span>);
+client.Timeout = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
+request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
+<span class="hljs-keyword">var</span> body = <span class="hljs-string">@&quot;{&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;currency&quot;&quot;: &quot;&quot;CAD&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;sort&quot;&quot;: &quot;&quot;volume&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;order&quot;&quot;: &quot;&quot;descending&quot;&quot;,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;offset&quot;&quot;: 0,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;limit&quot;&quot;: 50,&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;    &quot;&quot;meta&quot;&quot;: true&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span> +
+<span class="hljs-string">@&quot;}&quot;</span>;
+request.AddParameter(<span class="hljs-string">&quot;application/json&quot;</span>, body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> json
 
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/list&quot;</span>
@@ -1732,6 +1840,7 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
                <a href=# data-language-name="javascript">javascript</a>
                <a href=# data-language-name="python">python</a>
                <a href=# data-language-name="php">php</a>
+               <a href=# data-language-name="csharp">csharp</a>
             </div>
          </div>
       </div>

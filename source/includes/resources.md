@@ -32,6 +32,15 @@ response = requests.request("POST", url, headers=headers, data=payload)
 print(response.text)
 ```
 
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/status");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
 ```php
 $context_options = array (
     'http' => array (
@@ -72,6 +81,15 @@ await fetch(new Request("https://api.livecoinwatch.com/credits"), {
     "x-api-key": "<YOUR_API_KEY>",
   }),
 });
+```
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/credits");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
 ```
 
 ```python
@@ -159,6 +177,21 @@ await fetch(new Request("https://api.livecoinwatch.com/overview"), {
   body: JSON.stringify({ currency: "USD" }),
 });
 ```
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/overview");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""CAD""" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+
 
 ```python
 import requests
@@ -244,6 +277,22 @@ await fetch(new Request("https://api.livecoinwatch.com/overview/history"), {
     end: 1606233000000,
   }),
 });
+```
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/overview/history");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""CAD""," + "\n" +
+@"	""start"": 1639516285873," + "\n" +
+@"	""end"": 1639602685874" + "\n" +
+@"}" + "\n" +
+@"";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
 ```
 
 ```python
@@ -345,6 +394,21 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/single"), {
     meta: true,
   }),
 });
+```
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/coins/single");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""CAD""," + "\n" +
+@"	""code"": ""BTC""," + "\n" +
+@"	""meta"": true" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
 ```
 
 ```python
@@ -465,6 +529,22 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/single/history"), {
     meta: true,
   }),
 });
+```
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/coins/single/history");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""CAD""," + "\n" +
+@"	""code"": ""BTC""," + "\n" +
+@"	""start"": 1639516647365," + "\n" +
+@"	""end"": 1639603047366" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
 ```
 
 ```python
@@ -600,6 +680,24 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/list"), {
   }),
 });
 ```
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/coins/list");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""CAD""," + "\n" +
+@"	""sort"": ""rank""," + "\n" +
+@"	""order"": ""ascending""," + "\n" +
+@"	""offset"": 0," + "\n" +
+@"	""limit"": 50," + "\n" +
+@"	""meta"": true" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
 
 ```python
 import requests
@@ -729,6 +827,15 @@ response = requests.request("POST", url, headers=headers, data=payload)
 
 print(response.text)
 ```
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/fiats/all");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
 
 ```php
 $context_options = array (
@@ -806,6 +913,23 @@ await fetch(new Request("https://api.livecoinwatch.com/exchanges/single"), {
   }),
 });
 ```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/exchanges/single");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""CAD""," + "\n" +
+@"	""code"": ""binance""," + "\n" +
+@"	""meta"": true" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
 
 ```python
 import requests
@@ -919,6 +1043,24 @@ await fetch(new Request('https://api.livecoinwatch.com/exchanges/list'), {
     meta: true
   })
 })
+```
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/exchanges/list");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""CAD""," + "\n" +
+@"	""sort"": ""volume""," + "\n" +
+@"	""order"": ""descending""," + "\n" +
+@"	""offset"": 0," + "\n" +
+@"	""limit"": 50," + "\n" +
+@"	""meta"": true" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
 ```
 
 ```python
