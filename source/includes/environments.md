@@ -31,6 +31,30 @@ All the examples are written for modern browers.
 
 Most examples should be easily portable to run in other JavaScript environments like [Node.js](https://nodejs.org/en/about/releases/) or not even needing any changes from browser version with [Deno](https://deno.land).
 
+## Python
+
+```python 
+import requests
+import json
+
+url = "https://api.livecoinwatch.com"
+
+payload={}
+headers = {
+  'content-type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+All the examples are written using [Python Requests](https://docs.python-requests.org/en/latest/).
+
+[Install the library](https://docs.python-requests.org/en/latest/user/install/#install) and import it along with the json library. 
+
+Note that you don't have to install the json library, only import it.
+
 
 ## PHP
 
@@ -48,3 +72,17 @@ print_r(stream_get_contents($fp));
 
 All PHP examples are written using pure PHP without using any dependencies. These examples should work on versions of PHP that support [stream_context_create](https://www.php.net/manual/en/function.stream-context-create.php) & [stream_get_contents](https://www.php.net/manual/en/function.stream-get-contents.php) (Supported versions: PHP 5, PHP 7, PHP 8).
 
+## C#
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+All the examples are written using the [RestSharp](https://restsharp.dev/).
+
+Install the package and add it to your code. Everything is explained in their [documentation](https://restsharp.dev/intro.html).

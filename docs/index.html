@@ -63,6 +63,23 @@
 })</code></pre>
             <p>All the examples are written for modern browers.</p>
             <p>Most examples should be easily portable to run in other JavaScript environments like <a href="https://nodejs.org/en/about/releases/">Node.js</a> or not even needing any changes from browser version with <a href="https://deno.land">Deno</a>.</p>
+            <h2 id="python">Python</h2>
+            <pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> json
+
+url = <span class="hljs-string">&quot;https://api.livecoinwatch.com&quot;</span>
+
+payload={}
+headers = {
+  <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>
+}
+
+response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, url, headers=headers, data=payload)
+
+<span class="hljs-built_in">print</span>(response.text)</code></pre>
+            <p>All the examples are written using <a href="https://docs.python-requests.org/en/latest/">Python Requests</a>.</p>
+            <p><a href="https://docs.python-requests.org/en/latest/user/install/#install">Install the library</a> and import it along with the json library. </p>
+            <p>Note that you don&#39;t have to install the json library, only import it.</p>
             <h2 id="php">PHP</h2>
             <pre class="highlight php"><code><span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
@@ -74,6 +91,15 @@
 <span class="hljs-variable">$fp</span> = fopen(<span class="hljs-string">&#x27;https://api.livecoinwatch.com&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-literal">false</span>, <span class="hljs-variable">$context</span>);
 print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pre>
             <p>All PHP examples are written using pure PHP without using any dependencies. These examples should work on versions of PHP that support <a href="https://www.php.net/manual/en/function.stream-context-create.php">stream_context_create</a> &amp; <a href="https://www.php.net/manual/en/function.stream-get-contents.php">stream_get_contents</a> (Supported versions: PHP 5, PHP 7, PHP 8).</p>
+            <h2 id="c">C#</h2>
+            <pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com&quot;</span>);
+client.Timeout = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
+request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);</code></pre>
+            <p>All the examples are written using the <a href="https://restsharp.dev/">RestSharp</a>.</p>
+            <p>Install the package and add it to your code. Everything is explained in their <a href="https://restsharp.dev/intro.html">documentation</a>.</p>
             <h1 id="concepts">Concepts</h1>
             <p>We&#39;ve tried to keep the API surface simple and efficient, so let&#39;s discuss few <a href="#concepts">concepts</a> that apply to the entirety of the API.</p>
             <h2 id="there-is-only-one-domain">There Is Only One <strong>Domain</strong></h2>
