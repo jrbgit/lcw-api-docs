@@ -124,11 +124,9 @@ const task = {
   },
   addHighlightStyle: () => {
     const config = readIndexYml();
-    // const cssPath =
-    //   "node_modules/highlight.js/styles/" + config.highlight_theme + ".css";
+    const cssPath =
+      "node_modules/highlight.js/styles/" + config.highlight_theme + ".css";
 
-    // Gruvbox Dark is deprecated in version 10.6, use a new style. This is a temporary solution.
-    const cssPath = "docs/stylesheets/gruvbox-dark.css";
     return gulp
       .src(cssPath)
       .pipe(rename({ prefix: "highlight-" }))

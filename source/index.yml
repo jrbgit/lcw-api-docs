@@ -5,6 +5,9 @@ language_tabs:
   - javascript
   - python
   - php
+  - csharp
+  - swift
+  - ruby
 
 toc_footers:
   - <a href="https://www.livecoinwatch.com/tools/api" target="_blank">Sign Up for Free Developer Key</a>
@@ -21,4 +24,4 @@ search: true
 
 code_clipboard: true
 
-highlight_theme: gruvbox-dark
+highlight_theme: obsidian

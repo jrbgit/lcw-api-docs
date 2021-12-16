@@ -32,6 +32,59 @@ response = requests.request("POST", url, headers=headers, data=payload)
 print(response.text)
 ```
 
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/status")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/status")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+
+response = https.request(request)
+puts response.read_body
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/status");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
 ```php
 $context_options = array (
     'http' => array (
@@ -74,6 +127,44 @@ await fetch(new Request("https://api.livecoinwatch.com/credits"), {
 });
 ```
 
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/credits");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/credits")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
 ```python
 import requests
 import json
@@ -102,6 +193,24 @@ $context_options = array (
 $context = stream_context_create($context_options);
 $fp = fopen('https://api.livecoinwatch.com/credits', 'r', false, $context);
 print_r(stream_get_contents($fp));
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/credits")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+
+response = https.request(request)
+puts response.read_body
 ```
 
 > Let's see how much credits we have and what's the limit:
@@ -160,6 +269,52 @@ await fetch(new Request("https://api.livecoinwatch.com/overview"), {
 });
 ```
 
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"USD\"\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/overview")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/overview");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""USD""" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
 ```python
 import requests
 import json
@@ -167,7 +322,7 @@ import json
 url = "https://api.livecoinwatch.com/overview"
 
 payload = json.dumps({
-  "currency": "CAD"
+  "currency": "USD"
 })
 headers = {
   'content-type': 'application/json',
@@ -192,6 +347,27 @@ $context_options = array (
 $context = stream_context_create($context_options);
 $fp = fopen('https://api.livecoinwatch.com/overview', 'r', false, $context);
 print_r(stream_get_contents($fp));
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/overview")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+request.body = JSON.dump({
+  "currency": "USD"
+})
+
+response = https.request(request)
+puts response.read_body
 ```
 
 > How's all of crypto doing at the moment:
@@ -246,6 +422,56 @@ await fetch(new Request("https://api.livecoinwatch.com/overview/history"), {
 });
 ```
 
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"USD\",\n\t\"start\": 1606232700000,\n\t\"end\": 1606233000000\n}\n"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/overview/history")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/overview/history");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""USD""," + "\n" +
+@"	""start"": 1606232700000," + "\n" +
+@"	""end"": 1606233000000" + "\n" +
+@"}" + "\n" +
+@"";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
 ```python
 import requests
 import json
@@ -253,9 +479,9 @@ import json
 url = "https://api.livecoinwatch.com/overview/history"
 
 payload = json.dumps({
-  "currency": "CAD",
-  "start": 1639516285873,
-  "end": 1639602685874
+  "currency": "USD",
+  "start": 1606232700000,
+  "end": 1606233000000
 })
 headers = {
   'content-type': 'application/json',
@@ -280,6 +506,29 @@ $context_options = array (
 $context = stream_context_create($context_options);
 $fp = fopen('https://api.livecoinwatch.com/overview/history', 'r', false, $context);
 print_r(stream_get_contents($fp));
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/overview/history")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+request.body = JSON.dump({
+  "currency": "USD",
+  "start": 1606232700000,
+  "end": 1606233000000
+})
+
+response = https.request(request)
+puts response.read_body
 ```
 
 > How's all of crypto trending across time:
@@ -347,6 +596,54 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/single"), {
 });
 ```
 
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"USD\",\n\t\"code\": \"ETH\",\n\t\"meta\": true\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/coins/single")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/coins/single");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""USD""," + "\n" +
+@"	""code"": ""ETH""," + "\n" +
+@"	""meta"": true" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
 ```python
 import requests
 import json
@@ -354,8 +651,8 @@ import json
 url = "https://api.livecoinwatch.com/coins/single"
 
 payload = json.dumps({
-  "currency": "CAD",
-  "code": "BTC",
+  "currency": "USD",
+  "code": "ETH",
   "meta": True
 })
 headers = {
@@ -366,7 +663,6 @@ headers = {
 response = requests.request("POST", url, headers=headers, data=payload)
 
 print(response.text)
-
 ```
 
 ```php
@@ -382,6 +678,29 @@ $context_options = array (
 $context = stream_context_create($context_options);
 $fp = fopen('https://api.livecoinwatch.com/coins/single', 'r', false, $context);
 print_r(stream_get_contents($fp));
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/coins/single")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+request.body = JSON.dump({
+  "currency": "USD",
+  "code": "ETH",
+  "meta": true
+})
+
+response = https.request(request)
+puts response.read_body
 ```
 
 > Let's see all of current data on ETH, in USD currency:
@@ -467,6 +786,56 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/single/history"), {
 });
 ```
 
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"USD\",\n\t\"code\": \"BTC\",\n\t\"start\": 1617035100000,\n\t\"end\": 1617035400000,\n    \"meta\": true\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/coins/single/history")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/coins/single/history");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""USD""," + "\n" +
+@"	""code"": ""BTC""," + "\n" +
+@"	""start"": 1617035100000," + "\n" +
+@"	""end"": 1617035400000," + "\n" +
+@"    ""meta"": true" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
 ```python
 import requests
 import json
@@ -474,10 +843,11 @@ import json
 url = "https://api.livecoinwatch.com/coins/single/history"
 
 payload = json.dumps({
-  "currency": "CAD",
+  "currency": "USD",
   "code": "BTC",
-  "start": 1639516647365,
-  "end": 1639603047366
+  "start": 1617035100000,
+  "end": 1617035400000,
+  "meta": True
 })
 headers = {
   'content-type': 'application/json',
@@ -487,7 +857,6 @@ headers = {
 response = requests.request("POST", url, headers=headers, data=payload)
 
 print(response.text)
-
 ```
 
 ```php
@@ -503,6 +872,31 @@ $context_options = array (
 $context = stream_context_create($context_options);
 $fp = fopen('https://api.livecoinwatch.com/coins/single/history', 'r', false, $context);
 print_r(stream_get_contents($fp));
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/coins/single/history")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+request.body = JSON.dump({
+  "currency": "USD",
+  "code": "BTC",
+  "start": 1617035100000,
+  "end": 1617035400000,
+  "meta": true
+})
+
+response = https.request(request)
+puts response.read_body
 ```
 
 > How is BTC trending over a period of time:
@@ -601,6 +995,57 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/list"), {
 });
 ```
 
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"USD\",\n\t\"sort\": \"rank\",\n\t\"order\": \"ascending\",\n\t\"offset\": 0,\n\t\"limit\": 2,\n\t\"meta\": false\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/coins/list")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/coins/list");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""USD""," + "\n" +
+@"	""sort"": ""rank""," + "\n" +
+@"	""order"": ""ascending""," + "\n" +
+@"	""offset"": 0," + "\n" +
+@"	""limit"": 2," + "\n" +
+@"	""meta"": false" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
 ```python
 import requests
 import json
@@ -608,12 +1053,12 @@ import json
 url = "https://api.livecoinwatch.com/coins/list"
 
 payload = json.dumps({
-  "currency": "CAD",
+  "currency": "USD",
   "sort": "rank",
   "order": "ascending",
   "offset": 0,
-  "limit": 50,
-  "meta": True
+  "limit": 2,
+  "meta": False
 })
 headers = {
   'content-type': 'application/json',
@@ -638,6 +1083,32 @@ $context_options = array (
 $context = stream_context_create($context_options);
 $fp = fopen('https://api.livecoinwatch.com/coins/list', 'r', false, $context);
 print_r(stream_get_contents($fp));
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/coins/list")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+request.body = JSON.dump({
+  "currency": "USD",
+  "sort": "rank",
+  "order": "ascending",
+  "offset": 0,
+  "limit": 2,
+  "meta": false
+})
+
+response = https.request(request)
+puts response.read_body
 ```
 
 > Let's see top two coins by rank, just frequently-changing data, please:
@@ -713,6 +1184,34 @@ await fetch(new Request("https://api.livecoinwatch.com/fiats/all"), {
 });
 ```
 
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/fiats/all")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
 ```python
 import requests
 import json
@@ -730,6 +1229,16 @@ response = requests.request("POST", url, headers=headers, data=payload)
 print(response.text)
 ```
 
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/fiats/all");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
 ```php
 $context_options = array (
     'http' => array (
@@ -741,6 +1250,24 @@ $context_options = array (
 $context = stream_context_create($context_options);
 $fp = fopen('https://api.livecoinwatch.com/fiats/all', 'r', false, $context);
 print_r(stream_get_contents($fp));
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/fiats/all")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+
+response = https.request(request)
+puts response.read_body
 ```
 
 > Array of all the fiat currencies supported:
@@ -807,6 +1334,55 @@ await fetch(new Request("https://api.livecoinwatch.com/exchanges/single"), {
 });
 ```
 
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"ETH\",\n\t\"code\": \"gemini\",\n\t\"meta\": true\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/exchanges/single")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/exchanges/single");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""ETH""," + "\n" +
+@"	""code"": ""gemini""," + "\n" +
+@"	""meta"": true" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+
 ```python
 import requests
 import json
@@ -814,8 +1390,8 @@ import json
 url = "https://api.livecoinwatch.com/exchanges/single"
 
 payload = json.dumps({
-  "currency": "CAD",
-  "code": "binance",
+  "currency": "ETH",
+  "code": "gemini",
   "meta": True
 })
 headers = {
@@ -841,6 +1417,29 @@ $context_options = array (
 $context = stream_context_create($context_options);
 $fp = fopen('https://api.livecoinwatch.com/exchanges/single', 'r', false, $context);
 print_r(stream_get_contents($fp));
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/exchanges/single")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+request.body = JSON.dump({
+  "currency": "ETH",
+  "code": "gemini",
+  "meta": true
+})
+
+response = https.request(request)
+puts response.read_body
 ```
 
 > Should get us all the information we have on Gemini exchange:
@@ -921,6 +1520,57 @@ await fetch(new Request('https://api.livecoinwatch.com/exchanges/list'), {
 })
 ```
 
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"USD\",\n\t\"sort\": \"visitors\",\n\t\"order\": \"descending\",\n\t\"offset\": 0,\n\t\"limit\": 1,\n\t\"meta\": true\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/exchanges/list")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/exchanges/list");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""USD""," + "\n" +
+@"	""sort"": ""visitors""," + "\n" +
+@"	""order"": ""descending""," + "\n" +
+@"	""offset"": 0," + "\n" +
+@"	""limit"": 1," + "\n" +
+@"	""meta"": true" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
 ```python
 import requests
 import json
@@ -928,11 +1578,11 @@ import json
 url = "https://api.livecoinwatch.com/exchanges/list"
 
 payload = json.dumps({
-  "currency": "CAD",
-  "sort": "volume",
+  "currency": "USD",
+  "sort": "visitors",
   "order": "descending",
   "offset": 0,
-  "limit": 50,
+  "limit": 1,
   "meta": True
 })
 headers = {
@@ -958,6 +1608,32 @@ $context_options = array (
 $context = stream_context_create($context_options);
 $fp = fopen('https://api.livecoinwatch.com/exchanges/list', 'r', false, $context);
 print_r(stream_get_contents($fp));
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/exchanges/list")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+request.body = JSON.dump({
+  "currency": "USD",
+  "sort": "visitors",
+  "order": "descending",
+  "offset": 0,
+  "limit": 1,
+  "meta": true
+})
+
+response = https.request(request)
+puts response.read_body
 ```
 
 > Top one exchange by number of visitors:

@@ -31,6 +31,30 @@ All the examples are written for modern browers.
 
 Most examples should be easily portable to run in other JavaScript environments like [Node.js](https://nodejs.org/en/about/releases/) or not even needing any changes from browser version with [Deno](https://deno.land).
 
+## Python
+
+```python 
+import requests
+import json
+
+url = "https://api.livecoinwatch.com"
+
+payload={}
+headers = {
+  'content-type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+All the examples are written using [Python Requests](https://docs.python-requests.org/en/latest/).
+
+[Install the library](https://docs.python-requests.org/en/latest/user/install/#install) and import it along with the json library. 
+
+Note that you don't have to install the json library, only import it.
+
 
 ## PHP
 
@@ -48,3 +72,71 @@ print_r(stream_get_contents($fp));
 
 All PHP examples are written using pure PHP without using any dependencies. These examples should work on versions of PHP that support [stream_context_create](https://www.php.net/manual/en/function.stream-context-create.php) & [stream_get_contents](https://www.php.net/manual/en/function.stream-get-contents.php) (Supported versions: PHP 5, PHP 7, PHP 8).
 
+## C#
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+All the examples are written using the [RestSharp](https://restsharp.dev/).
+
+Install the package and add it to your code. Everything is explained in their [documentation](https://restsharp.dev/intro.html).
+
+## Swift
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+All the examples use [URLRequest](https://developer.apple.com/documentation/foundation/urlrequest) and [URLSession](https://developer.apple.com/documentation/foundation/urlsession). 
+Examples work without installing any package! Just change the `<YOUR_API_KEY>` to your key, and that's it!.
+
+## Ruby
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+
+response = https.request(request)
+puts response.read_body
+```
+
+All the examples use [Net::HTTP](https://ruby-doc.org/stdlib-2.7.0/libdoc/net/http/rdoc/Net/HTTP.html). 
+Examples work without installing any package! Just change the `<YOUR_API_KEY>` to your key, and that's it!. Don't forget to require "json" and "uri".
