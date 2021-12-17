@@ -16,6 +16,53 @@ await fetch(new Request("https://api.livecoinwatch.com/status"), {
 });
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/status")
+  .header("content-type", "application/json")
+  .asString();
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/status"
+  method := "POST"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
 ```python
 import requests
 import json
@@ -127,6 +174,14 @@ await fetch(new Request("https://api.livecoinwatch.com/credits"), {
 });
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/credits")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .asString();
+```
+
 ```csharp
 var client = new RestClient("https://api.livecoinwatch.com/credits");
 client.Timeout = -1;
@@ -135,6 +190,47 @@ request.AddHeader("content-type", "application/json");
 request.AddHeader("x-api-key", "<YOUR_API_KEY>");
 IRestResponse response = client.Execute(request);
 Console.WriteLine(response.Content);
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/credits"
+  method := "POST"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
 ```
 
 ```swift
@@ -301,6 +397,61 @@ task.resume()
 semaphore.wait()
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/overview")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\"\n}")
+  .asString();
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/overview"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+	"currency": "USD"
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
 ```csharp
 var client = new RestClient("https://api.livecoinwatch.com/overview");
 client.Timeout = -1;
@@ -454,6 +605,63 @@ task.resume()
 semaphore.wait()
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/overview/history")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\",\n\t\"start\": 1606232700000,\n\t\"end\": 1606233000000\n}\n")
+  .asString();
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/overview/history"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+	"currency": "USD",
+	"start": 1606232700000,
+	"end": 1606233000000
+}
+`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
 
 ```csharp
 var client = new RestClient("https://api.livecoinwatch.com/overview/history");
@@ -596,6 +804,15 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/single"), {
 });
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/coins/single")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\",\n\t\"code\": \"ETH\",\n\t\"meta\": true\n}")
+  .asString();
+```
+
 ```swift
 import Foundation
 #if canImport(FoundationNetworking)
@@ -626,6 +843,54 @@ let task = URLSession.shared.dataTask(with: request) { data, response, error in
 
 task.resume()
 semaphore.wait()
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/coins/single"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+	"currency": "USD",
+	"code": "ETH",
+	"meta": true
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
 ```
 
 ```csharp
@@ -786,6 +1051,15 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/single/history"), {
 });
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/coins/single/history")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\",\n\t\"code\": \"BTC\",\n\t\"start\": 1617035100000,\n\t\"end\": 1617035400000,\n    \"meta\": true\n}")
+  .asString();
+```
+
 ```swift
 import Foundation
 #if canImport(FoundationNetworking)
@@ -816,6 +1090,56 @@ let task = URLSession.shared.dataTask(with: request) { data, response, error in
 
 task.resume()
 semaphore.wait()
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/coins/single/history"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+	"currency": "USD",
+	"code": "BTC",
+	"start": 1617035100000,
+	"end": 1617035400000,
+    "meta": true
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
 ```
 
 ```csharp
@@ -995,6 +1319,15 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/list"), {
 });
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/coins/list")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\",\n\t\"sort\": \"rank\",\n\t\"order\": \"ascending\",\n\t\"offset\": 0,\n\t\"limit\": 2,\n\t\"meta\": false\n}")
+  .asString();
+```
+
 ```swift
 import Foundation
 #if canImport(FoundationNetworking)
@@ -1025,6 +1358,57 @@ let task = URLSession.shared.dataTask(with: request) { data, response, error in
 
 task.resume()
 semaphore.wait()
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/coins/list"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+	"currency": "USD",
+	"sort": "rank",
+	"order": "ascending",
+	"offset": 0,
+	"limit": 2,
+	"meta": false
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
 ```
 
 ```csharp
@@ -1212,6 +1596,55 @@ task.resume()
 semaphore.wait()
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/fiats/all")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .asString();
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/fiats/all"
+  method := "POST"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
 ```python
 import requests
 import json
@@ -1334,6 +1767,54 @@ await fetch(new Request("https://api.livecoinwatch.com/exchanges/single"), {
 });
 ```
 
+```go
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/exchanges/single"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+	"currency": "ETH",
+	"code": "gemini",
+	"meta": true
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
 ```swift
 import Foundation
 #if canImport(FoundationNetworking)
@@ -1364,6 +1845,15 @@ let task = URLSession.shared.dataTask(with: request) { data, response, error in
 
 task.resume()
 semaphore.wait()
+```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/exchanges/single")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"ETH\",\n\t\"code\": \"gemini\",\n\t\"meta\": true\n}")
+  .asString();
 ```
 
 ```csharp
@@ -1550,6 +2040,66 @@ let task = URLSession.shared.dataTask(with: request) { data, response, error in
 
 task.resume()
 semaphore.wait()
+```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/exchanges/list")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\",\n\t\"sort\": \"visitors\",\n\t\"order\": \"descending\",\n\t\"offset\": 0,\n\t\"limit\": 1,\n\t\"meta\": true\n}")
+  .asString();
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/exchanges/list"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+	"currency": "USD",
+	"sort": "visitors",
+	"order": "descending",
+	"offset": 0,
+	"limit": 1,
+	"meta": true
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
 ```
 
 ```csharp

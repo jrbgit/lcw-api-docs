@@ -55,8 +55,7 @@ const jsFiles = {
 // Helper functions
 const renderer = new marked.Renderer();
 renderer.code = (code, language) => {
-  const highlighted = language
-    ? highlight.highlight(code, { language: language }).value
+  const highlighted = language ? highlight.highlight(code, { language: language }).value
     : highlight.highlightAuto(code).value;
   return `<pre class="highlight ${language}"><code>${highlighted}</code></pre>`;
 };
