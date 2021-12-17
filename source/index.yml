@@ -6,9 +6,9 @@ language_tabs:
   - python
   - php
   - csharp
+  - swift
   - ruby
   - go
-  - swift
   - java
 
 toc_footers:

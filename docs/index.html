@@ -10,7 +10,7 @@
       <link href=stylesheets/highlight-obsidian.css rel=stylesheet media=screen,print>
       <script src=javascripts/all.js></script>
    </head>
-   <body class="" data-languages="[&#34;shell&#34;,&#34;javascript&#34;,&#34;python&#34;,&#34;php&#34;,&#34;csharp&#34;,&#34;ruby&#34;,&#34;go&#34;,&#34;swift&#34;,&#34;java&#34;]">
+   <body class="" data-languages="[&#34;shell&#34;,&#34;javascript&#34;,&#34;python&#34;,&#34;php&#34;,&#34;csharp&#34;,&#34;swift&#34;,&#34;ruby&#34;,&#34;go&#34;,&#34;java&#34;]">
       <a href=# id=nav-button>
          <span>NAV <img alt=navbar class=image-navbar src=images/navbar.png></span>
       </a>
@@ -22,9 +22,9 @@
             <a href=# data-language-name="python">python</a>
             <a href=# data-language-name="php">php</a>
             <a href=# data-language-name="csharp">csharp</a>
+            <a href=# data-language-name="swift">swift</a>
             <a href=# data-language-name="ruby">ruby</a>
             <a href=# data-language-name="go">go</a>
-            <a href=# data-language-name="swift">swift</a>
             <a href=# data-language-name="java">java</a>
          </div>
          <div class=search>
@@ -104,6 +104,32 @@ IRestResponse response = client.Execute(request);
 Console.WriteLine(response.Content);</code></pre>
             <p>All the examples are written using the <a href="https://restsharp.dev/">RestSharp</a>.</p>
             <p>Install the package and add it to your code. Everything is explained in their <a href="https://restsharp.dev/intro.html">documentation</a>.</p>
+            <h2 id="swift">Swift</h2>
+            <pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
+<span class="hljs-keyword">#if</span> canImport(<span class="hljs-type">FoundationNetworking</span>)
+<span class="hljs-keyword">import</span> FoundationNetworking
+<span class="hljs-keyword">#endif</span>
+
+<span class="hljs-keyword">var</span> semaphore <span class="hljs-operator">=</span> <span class="hljs-type">DispatchSemaphore</span> (value: <span class="hljs-number">0</span>)
+
+<span class="hljs-keyword">var</span> request <span class="hljs-operator">=</span> <span class="hljs-type">URLRequest</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://api.livecoinwatch.com&quot;</span>)<span class="hljs-operator">!</span>,timeoutInterval: <span class="hljs-type">Double</span>.infinity)
+request.addValue(<span class="hljs-string">&quot;application/json&quot;</span>, forHTTPHeaderField: <span class="hljs-string">&quot;content-type&quot;</span>)
+
+request.httpMethod <span class="hljs-operator">=</span> <span class="hljs-string">&quot;POST&quot;</span>
+
+<span class="hljs-keyword">let</span> task <span class="hljs-operator">=</span> <span class="hljs-type">URLSession</span>.shared.dataTask(with: request) { data, response, error <span class="hljs-keyword">in</span> 
+  <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> data <span class="hljs-operator">=</span> data <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">print</span>(<span class="hljs-type">String</span>(describing: error))
+    semaphore.signal()
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-built_in">print</span>(<span class="hljs-type">String</span>(data: data, encoding: .utf8)<span class="hljs-operator">!</span>)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()</code></pre>
+            <p>All the examples use <a href="https://developer.apple.com/documentation/foundation/urlrequest">URLRequest</a> and <a href="https://developer.apple.com/documentation/foundation/urlsession">URLSession</a>. Examples work without installing any package! Just change the <code>&lt;YOUR_API_KEY&gt;</code> to your key, and that&#39;s it!.</p>
             <h2 id="ruby">Ruby</h2>
             <pre class="highlight ruby"><code><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;uri&quot;</span>
 <span class="hljs-keyword">require</span> <span class="hljs-string">&quot;json&quot;</span>
@@ -159,32 +185,6 @@ puts response.read_body</code></pre>
   fmt.Println(<span class="hljs-type">string</span>(body))
 }</code></pre>
             <p>All the examples are written using net/http. Everything is explained in their <a href="https://pkg.go.dev/net/http">documentation</a>!. Just copy and paste and you are ready to Go!. Remember to change <code>&lt;YOUR_API_KEY&gt;</code> to your API key.</p>
-            <h2 id="swift">Swift</h2>
-            <pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
-<span class="hljs-keyword">#if</span> canImport(<span class="hljs-type">FoundationNetworking</span>)
-<span class="hljs-keyword">import</span> FoundationNetworking
-<span class="hljs-keyword">#endif</span>
-
-<span class="hljs-keyword">var</span> semaphore <span class="hljs-operator">=</span> <span class="hljs-type">DispatchSemaphore</span> (value: <span class="hljs-number">0</span>)
-
-<span class="hljs-keyword">var</span> request <span class="hljs-operator">=</span> <span class="hljs-type">URLRequest</span>(url: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;https://api.livecoinwatch.com&quot;</span>)<span class="hljs-operator">!</span>,timeoutInterval: <span class="hljs-type">Double</span>.infinity)
-request.addValue(<span class="hljs-string">&quot;application/json&quot;</span>, forHTTPHeaderField: <span class="hljs-string">&quot;content-type&quot;</span>)
-
-request.httpMethod <span class="hljs-operator">=</span> <span class="hljs-string">&quot;POST&quot;</span>
-
-<span class="hljs-keyword">let</span> task <span class="hljs-operator">=</span> <span class="hljs-type">URLSession</span>.shared.dataTask(with: request) { data, response, error <span class="hljs-keyword">in</span> 
-  <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> data <span class="hljs-operator">=</span> data <span class="hljs-keyword">else</span> {
-    <span class="hljs-built_in">print</span>(<span class="hljs-type">String</span>(describing: error))
-    semaphore.signal()
-    <span class="hljs-keyword">return</span>
-  }
-  <span class="hljs-built_in">print</span>(<span class="hljs-type">String</span>(data: data, encoding: .utf8)<span class="hljs-operator">!</span>)
-  semaphore.signal()
-}
-
-task.resume()
-semaphore.wait()</code></pre>
-            <p>All the examples use <a href="https://developer.apple.com/documentation/foundation/urlrequest">URLRequest</a> and <a href="https://developer.apple.com/documentation/foundation/urlsession">URLSession</a>. Examples work without installing any package! Just change the <code>&lt;YOUR_API_KEY&gt;</code> to your key, and that&#39;s it!.</p>
             <h2 id="java">Java</h2>
             <pre class="highlight java"><code>Unirest.setTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
 HttpResponse&lt;String&gt; response = Unirest.post(<span class="hljs-string">&quot;https://api.livecoinwatch.com&quot;</span>)
@@ -3256,9 +3256,9 @@ puts response.read_body</code></pre>
                <a href=# data-language-name="python">python</a>
                <a href=# data-language-name="php">php</a>
                <a href=# data-language-name="csharp">csharp</a>
+               <a href=# data-language-name="swift">swift</a>
                <a href=# data-language-name="ruby">ruby</a>
                <a href=# data-language-name="go">go</a>
-               <a href=# data-language-name="swift">swift</a>
                <a href=# data-language-name="java">java</a>
             </div>
          </div>
