@@ -28,6 +28,122 @@ $fp = fopen('https://api.livecoinwatch.com/status', 'r', false, $context);
 print_r(stream_get_contents($fp));
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/status")
+  .header("content-type", "application/json")
+  .asString();
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/status");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/status")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+
+response = https.request(request)
+puts response.read_body
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/status"
+  method := "POST"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/status")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/status"
+
+payload={}
+headers = {
+  'content-type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
 > If everything's fine, you should get...
 
 ```json
@@ -81,6 +197,128 @@ $fp = fopen('https://api.livecoinwatch.com/credits', 'r', false, $context);
 print_r(stream_get_contents($fp));
 ```
 
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/credits"
+
+payload={}
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/credits");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/credits"
+  method := "POST"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/credits")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .asString();
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/credits")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+
+response = https.request(request)
+puts response.read_body
+```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/credits")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
 > Don't forget to replace `<YOUR_API_KEY>` with one you've got. Return response should be:
 
 ```json
@@ -128,6 +366,123 @@ $context = stream_context_create($context_options);
 $fp = fopen('https://api.livecoinwatch.com/status', 'r', false, $context);
 print_r(stream_get_contents($fp));
 ```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/status")
+  .header("content-type", "application/json")
+  .asString();
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/status");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/status")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+
+response = https.request(request)
+puts response.read_body
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/status"
+  method := "POST"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/status")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/status"
+
+payload={}
+headers = {
+  'content-type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
 
 > This will fail with:
 
@@ -200,6 +555,128 @@ $context_options = array (
 $context = stream_context_create($context_options);
 $fp = fopen('https://api.livecoinwatch.com/credits', 'r', false, $context);
 print_r(stream_get_contents($fp));
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/credits"
+
+payload={}
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/credits");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/credits"
+  method := "POST"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/credits")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .asString();
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/credits")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+
+response = https.request(request)
+puts response.read_body
+```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/credits")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
 ```
 
 > Don't forget to replace `<YOUR_API_KEY>` with one you've got. Return response should be:

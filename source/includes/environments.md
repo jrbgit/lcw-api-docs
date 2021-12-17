@@ -87,38 +87,6 @@ All the examples are written using the [RestSharp](https://restsharp.dev/).
 
 Install the package and add it to your code. Everything is explained in their [documentation](https://restsharp.dev/intro.html).
 
-## Swift
-
-```swift
-import Foundation
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
-var semaphore = DispatchSemaphore (value: 0)
-
-var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com")!,timeoutInterval: Double.infinity)
-request.addValue("application/json", forHTTPHeaderField: "content-type")
-
-request.httpMethod = "POST"
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in 
-  guard let data = data else {
-    print(String(describing: error))
-    semaphore.signal()
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-  semaphore.signal()
-}
-
-task.resume()
-semaphore.wait()
-```
-
-All the examples use [URLRequest](https://developer.apple.com/documentation/foundation/urlrequest) and [URLSession](https://developer.apple.com/documentation/foundation/urlsession). 
-Examples work without installing any package! Just change the `<YOUR_API_KEY>` to your key, and that's it!.
-
 ## Ruby
 
 ```ruby
@@ -186,6 +154,38 @@ func main() {
 All the examples are written using net/http. 
 Everything is explained in their [documentation](https://pkg.go.dev/net/http)!.
 Just copy and paste and you are ready to Go!. Remember to change `<YOUR_API_KEY>` to your API key.
+
+## Swift
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+All the examples use [URLRequest](https://developer.apple.com/documentation/foundation/urlrequest) and [URLSession](https://developer.apple.com/documentation/foundation/urlsession). 
+Examples work without installing any package! Just change the `<YOUR_API_KEY>` to your key, and that's it!.
 
 ## Java
 
