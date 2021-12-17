@@ -183,5 +183,6 @@ func main() {
 }
 ```
 
-All the examples are written with Go - Native. Everything is explained in their [documentation](https://pkg.go.dev/net/http).
-Just copy and paste and you are ready to go!. Remember to change `<YOUR_API_KEY>` to your API key.
+All the examples are written using net/http. 
+Everything is explained in their [documentation](https://pkg.go.dev/net/http)!.
+Just copy and paste and you are ready to Go!. Remember to change `<YOUR_API_KEY>` to your API key.

@@ -182,23 +182,18 @@ package main
 
 import (
   "fmt"
-  "strings"
   "net/http"
   "io/ioutil"
 )
 
 func main() {
 
-  url := "https://api.livecoinwatch.com/overview"
+  url := "https://api.livecoinwatch.com/credits"
   method := "POST"
-
-  payload := strings.NewReader(`{
-	"currency": "CAD"
-}`)
 
   client := &http.Client {
   }
-  req, err := http.NewRequest(method, url, payload)
+  req, err := http.NewRequest(method, url, nil)
 
   if err != nil {
     fmt.Println(err)

@@ -10,7 +10,7 @@
       <link href=stylesheets/highlight-obsidian.css rel=stylesheet media=screen,print>
       <script src=javascripts/all.js></script>
    </head>
-   <body class="" data-languages="[&#34;shell&#34;,&#34;javascript&#34;,&#34;python&#34;,&#34;php&#34;,&#34;csharp&#34;,&#34;swift&#34;,&#34;ruby&#34;]">
+   <body class="" data-languages="[&#34;shell&#34;,&#34;javascript&#34;,&#34;python&#34;,&#34;php&#34;,&#34;csharp&#34;,&#34;ruby&#34;,&#34;go&#34;,&#34;swift&#34;]">
       <a href=# id=nav-button>
          <span>NAV <img alt=navbar class=image-navbar src=images/navbar.png></span>
       </a>
@@ -22,8 +22,9 @@
             <a href=# data-language-name="python">python</a>
             <a href=# data-language-name="php">php</a>
             <a href=# data-language-name="csharp">csharp</a>
-            <a href=# data-language-name="swift">swift</a>
             <a href=# data-language-name="ruby">ruby</a>
+            <a href=# data-language-name="go">go</a>
+            <a href=# data-language-name="swift">swift</a>
          </div>
          <div class=search>
             <input type=text class=search id=input-search placeholder="Search">
@@ -144,6 +145,45 @@ request[<span class="hljs-string">&quot;content-type&quot;</span>] = <span class
 response = https.request(request)
 puts response.read_body</code></pre>
             <p>All the examples use <a href="https://ruby-doc.org/stdlib-2.7.0/libdoc/net/http/rdoc/Net/HTTP.html">Net::HTTP</a>. Examples work without installing any package! Just change the <code>&lt;YOUR_API_KEY&gt;</code> to your key, and that&#39;s it!. Don&#39;t forget to require &quot;json&quot; and &quot;uri&quot;.</p>
+            <h2 id="go">Go</h2>
+            <pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;fmt&quot;</span>
+  <span class="hljs-string">&quot;net/http&quot;</span>
+  <span class="hljs-string">&quot;io/ioutil&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+  url := <span class="hljs-string">&quot;https://api.livecoinwatch.com&quot;</span>
+  method := <span class="hljs-string">&quot;POST&quot;</span>
+
+  client := &amp;http.Client {
+  }
+  req, err := http.NewRequest(method, url, <span class="hljs-literal">nil</span>)
+
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  req.Header.Add(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+
+  res, err := client.Do(req)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-keyword">defer</span> res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  fmt.Println(<span class="hljs-type">string</span>(body))
+}</code></pre>
+            <p>All the examples are written using net/http. Everything is explained in their <a href="https://pkg.go.dev/net/http">documentation</a>!. Just copy and paste and you are ready to Go!. Remember to change <code>&lt;YOUR_API_KEY&gt;</code> to your API key.</p>
             <h1 id="concepts">Concepts</h1>
             <p>We&#39;ve tried to keep the API surface simple and efficient, so let&#39;s discuss few <a href="#concepts">concepts</a> that apply to the entirety of the API.</p>
             <h2 id="there-is-only-one-domain">There Is Only One <strong>Domain</strong></h2>
@@ -281,7 +321,43 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
   -H &#x27;content-type: application/json&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&quot;https://api.livecoinwatch.com/status&quot;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>({ <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span> }),
-});</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+});</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;fmt&quot;</span>
+  <span class="hljs-string">&quot;net/http&quot;</span>
+  <span class="hljs-string">&quot;io/ioutil&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+  url := <span class="hljs-string">&quot;https://api.livecoinwatch.com/status&quot;</span>
+  method := <span class="hljs-string">&quot;POST&quot;</span>
+
+  client := &amp;http.Client {
+  }
+  req, err := http.NewRequest(method, url, <span class="hljs-literal">nil</span>)
+
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  req.Header.Add(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+
+  res, err := client.Do(req)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-keyword">defer</span> res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  fmt.Println(<span class="hljs-type">string</span>(body))
+}</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> json
 
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/status&quot;</span>
@@ -366,7 +442,44 @@ client.Timeout = <span class="hljs-number">-1</span>;
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
 request.AddHeader(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>);
 IRestResponse response = client.Execute(request);
-Console.WriteLine(response.Content);</code></pre><pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
+Console.WriteLine(response.Content);</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;fmt&quot;</span>
+  <span class="hljs-string">&quot;net/http&quot;</span>
+  <span class="hljs-string">&quot;io/ioutil&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+  url := <span class="hljs-string">&quot;https://api.livecoinwatch.com/credits&quot;</span>
+  method := <span class="hljs-string">&quot;POST&quot;</span>
+
+  client := &amp;http.Client {
+  }
+  req, err := http.NewRequest(method, url, <span class="hljs-literal">nil</span>)
+
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  req.Header.Add(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  req.Header.Add(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+
+  res, err := client.Do(req)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-keyword">defer</span> res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  fmt.Println(<span class="hljs-type">string</span>(body))
+}</code></pre><pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
 <span class="hljs-keyword">#if</span> canImport(<span class="hljs-type">FoundationNetworking</span>)
 <span class="hljs-keyword">import</span> FoundationNetworking
 <span class="hljs-keyword">#endif</span>
@@ -509,7 +622,49 @@ request.httpBody <span class="hljs-operator">=</span> postData
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview&quot;</span>);
+semaphore.wait()</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;fmt&quot;</span>
+  <span class="hljs-string">&quot;strings&quot;</span>
+  <span class="hljs-string">&quot;net/http&quot;</span>
+  <span class="hljs-string">&quot;io/ioutil&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+  url := <span class="hljs-string">&quot;https://api.livecoinwatch.com/overview&quot;</span>
+  method := <span class="hljs-string">&quot;POST&quot;</span>
+
+  payload := strings.NewReader(<span class="hljs-string">`{
+    &quot;currency&quot;: &quot;USD&quot;
+}`</span>)
+
+  client := &amp;http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  req.Header.Add(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  req.Header.Add(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+
+  res, err := client.Do(req)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-keyword">defer</span> res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  fmt.Println(<span class="hljs-type">string</span>(body))
+}</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview&quot;</span>);
 client.Timeout = <span class="hljs-number">-1</span>;
 <span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
@@ -665,7 +820,52 @@ request.httpBody <span class="hljs-operator">=</span> postData
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>);
+semaphore.wait()</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;fmt&quot;</span>
+  <span class="hljs-string">&quot;strings&quot;</span>
+  <span class="hljs-string">&quot;net/http&quot;</span>
+  <span class="hljs-string">&quot;io/ioutil&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+  url := <span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>
+  method := <span class="hljs-string">&quot;POST&quot;</span>
+
+  payload := strings.NewReader(<span class="hljs-string">`{
+    &quot;currency&quot;: &quot;USD&quot;,
+    &quot;start&quot;: 1606232700000,
+    &quot;end&quot;: 1606233000000
+}
+`</span>)
+
+  client := &amp;http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  req.Header.Add(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  req.Header.Add(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+
+  res, err := client.Do(req)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-keyword">defer</span> res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  fmt.Println(<span class="hljs-type">string</span>(body))
+}</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>);
 client.Timeout = <span class="hljs-number">-1</span>;
 <span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
@@ -853,7 +1053,51 @@ request.httpBody <span class="hljs-operator">=</span> postData
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single&quot;</span>);
+semaphore.wait()</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;fmt&quot;</span>
+  <span class="hljs-string">&quot;strings&quot;</span>
+  <span class="hljs-string">&quot;net/http&quot;</span>
+  <span class="hljs-string">&quot;io/ioutil&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+  url := <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single&quot;</span>
+  method := <span class="hljs-string">&quot;POST&quot;</span>
+
+  payload := strings.NewReader(<span class="hljs-string">`{
+    &quot;currency&quot;: &quot;USD&quot;,
+    &quot;code&quot;: &quot;ETH&quot;,
+    &quot;meta&quot;: true
+}`</span>)
+
+  client := &amp;http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  req.Header.Add(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  req.Header.Add(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+
+  res, err := client.Do(req)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-keyword">defer</span> res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  fmt.Println(<span class="hljs-type">string</span>(body))
+}</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single&quot;</span>);
 client.Timeout = <span class="hljs-number">-1</span>;
 <span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
@@ -1110,7 +1354,53 @@ request.httpBody <span class="hljs-operator">=</span> postData
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single/history&quot;</span>);
+semaphore.wait()</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;fmt&quot;</span>
+  <span class="hljs-string">&quot;strings&quot;</span>
+  <span class="hljs-string">&quot;net/http&quot;</span>
+  <span class="hljs-string">&quot;io/ioutil&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+  url := <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single/history&quot;</span>
+  method := <span class="hljs-string">&quot;POST&quot;</span>
+
+  payload := strings.NewReader(<span class="hljs-string">`{
+    &quot;currency&quot;: &quot;USD&quot;,
+    &quot;code&quot;: &quot;BTC&quot;,
+    &quot;start&quot;: 1617035100000,
+    &quot;end&quot;: 1617035400000,
+    &quot;meta&quot;: true
+}`</span>)
+
+  client := &amp;http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  req.Header.Add(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  req.Header.Add(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+
+  res, err := client.Do(req)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-keyword">defer</span> res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  fmt.Println(<span class="hljs-type">string</span>(body))
+}</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single/history&quot;</span>);
 client.Timeout = <span class="hljs-number">-1</span>;
 <span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
@@ -1386,7 +1676,54 @@ request.httpBody <span class="hljs-operator">=</span> postData
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/list&quot;</span>);
+semaphore.wait()</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;fmt&quot;</span>
+  <span class="hljs-string">&quot;strings&quot;</span>
+  <span class="hljs-string">&quot;net/http&quot;</span>
+  <span class="hljs-string">&quot;io/ioutil&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+  url := <span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/list&quot;</span>
+  method := <span class="hljs-string">&quot;POST&quot;</span>
+
+  payload := strings.NewReader(<span class="hljs-string">`{
+    &quot;currency&quot;: &quot;USD&quot;,
+    &quot;sort&quot;: &quot;rank&quot;,
+    &quot;order&quot;: &quot;ascending&quot;,
+    &quot;offset&quot;: 0,
+    &quot;limit&quot;: 2,
+    &quot;meta&quot;: false
+}`</span>)
+
+  client := &amp;http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  req.Header.Add(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  req.Header.Add(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+
+  res, err := client.Do(req)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-keyword">defer</span> res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  fmt.Println(<span class="hljs-type">string</span>(body))
+}</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/list&quot;</span>);
 client.Timeout = <span class="hljs-number">-1</span>;
 <span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
@@ -1650,7 +1987,44 @@ request.httpMethod <span class="hljs-operator">=</span> <span class="hljs-string
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
+semaphore.wait()</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;fmt&quot;</span>
+  <span class="hljs-string">&quot;net/http&quot;</span>
+  <span class="hljs-string">&quot;io/ioutil&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+  url := <span class="hljs-string">&quot;https://api.livecoinwatch.com/fiats/all&quot;</span>
+  method := <span class="hljs-string">&quot;POST&quot;</span>
+
+  client := &amp;http.Client {
+  }
+  req, err := http.NewRequest(method, url, <span class="hljs-literal">nil</span>)
+
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  req.Header.Add(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  req.Header.Add(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+
+  res, err := client.Do(req)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-keyword">defer</span> res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  fmt.Println(<span class="hljs-type">string</span>(body))
+}</code></pre><pre class="highlight python"><code><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> json
 
 url = <span class="hljs-string">&quot;https://api.livecoinwatch.com/fiats/all&quot;</span>
@@ -1769,7 +2143,51 @@ puts response.read_body</code></pre>
     <span class="hljs-attr">code</span>: <span class="hljs-string">&quot;gemini&quot;</span>,
     <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>,
   }),
-});</code></pre><pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
+});</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;fmt&quot;</span>
+  <span class="hljs-string">&quot;strings&quot;</span>
+  <span class="hljs-string">&quot;net/http&quot;</span>
+  <span class="hljs-string">&quot;io/ioutil&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+  url := <span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/single&quot;</span>
+  method := <span class="hljs-string">&quot;POST&quot;</span>
+
+  payload := strings.NewReader(<span class="hljs-string">`{
+    &quot;currency&quot;: &quot;ETH&quot;,
+    &quot;code&quot;: &quot;gemini&quot;,
+    &quot;meta&quot;: true
+}`</span>)
+
+  client := &amp;http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  req.Header.Add(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  req.Header.Add(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+
+  res, err := client.Do(req)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-keyword">defer</span> res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  fmt.Println(<span class="hljs-type">string</span>(body))
+}</code></pre><pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
 <span class="hljs-keyword">#if</span> canImport(<span class="hljs-type">FoundationNetworking</span>)
 <span class="hljs-keyword">import</span> FoundationNetworking
 <span class="hljs-keyword">#endif</span>
@@ -2037,7 +2455,54 @@ request.httpBody <span class="hljs-operator">=</span> postData
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/list&quot;</span>);
+semaphore.wait()</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;fmt&quot;</span>
+  <span class="hljs-string">&quot;strings&quot;</span>
+  <span class="hljs-string">&quot;net/http&quot;</span>
+  <span class="hljs-string">&quot;io/ioutil&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+
+  url := <span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/list&quot;</span>
+  method := <span class="hljs-string">&quot;POST&quot;</span>
+
+  payload := strings.NewReader(<span class="hljs-string">`{
+    &quot;currency&quot;: &quot;USD&quot;,
+    &quot;sort&quot;: &quot;visitors&quot;,
+    &quot;order&quot;: &quot;descending&quot;,
+    &quot;offset&quot;: 0,
+    &quot;limit&quot;: 1,
+    &quot;meta&quot;: true
+}`</span>)
+
+  client := &amp;http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  req.Header.Add(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  req.Header.Add(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+
+  res, err := client.Do(req)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  <span class="hljs-keyword">defer</span> res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+  }
+  fmt.Println(<span class="hljs-type">string</span>(body))
+}</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/list&quot;</span>);
 client.Timeout = <span class="hljs-number">-1</span>;
 <span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
@@ -2358,8 +2823,9 @@ puts response.read_body</code></pre>
                <a href=# data-language-name="python">python</a>
                <a href=# data-language-name="php">php</a>
                <a href=# data-language-name="csharp">csharp</a>
-               <a href=# data-language-name="swift">swift</a>
                <a href=# data-language-name="ruby">ruby</a>
+               <a href=# data-language-name="go">go</a>
+               <a href=# data-language-name="swift">swift</a>
             </div>
          </div>
       </div>
