@@ -140,3 +140,48 @@ puts response.read_body
 
 All the examples use [Net::HTTP](https://ruby-doc.org/stdlib-2.7.0/libdoc/net/http/rdoc/Net/HTTP.html). 
 Examples work without installing any package! Just change the `<YOUR_API_KEY>` to your key, and that's it!. Don't forget to require "json" and "uri".
+
+## Go
+
+```go
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com"
+  method := "POST"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+All the examples are written with Go - Native. Everything is explained in their [documentation](https://pkg.go.dev/net/http).
+Just copy and paste and you are ready to go!. Remember to change `<YOUR_API_KEY>` to your API key.
