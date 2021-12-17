@@ -16,6 +16,13 @@ await fetch(new Request("https://api.livecoinwatch.com/status"), {
 });
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/status")
+  .header("content-type", "application/json")
+  .asString();
+```
+
 ```go
 package main
 
@@ -165,6 +172,14 @@ await fetch(new Request("https://api.livecoinwatch.com/credits"), {
     "x-api-key": "<YOUR_API_KEY>",
   }),
 });
+```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/credits")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .asString();
 ```
 
 ```csharp
@@ -382,6 +397,15 @@ task.resume()
 semaphore.wait()
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/overview")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\"\n}")
+  .asString();
+```
+
 ```go
 package main
 
@@ -581,6 +605,15 @@ task.resume()
 semaphore.wait()
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/overview/history")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\",\n\t\"start\": 1606232700000,\n\t\"end\": 1606233000000\n}\n")
+  .asString();
+```
+
 ```go
 package main
 
@@ -769,6 +802,15 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/single"), {
     meta: true,
   }),
 });
+```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/coins/single")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\",\n\t\"code\": \"ETH\",\n\t\"meta\": true\n}")
+  .asString();
 ```
 
 ```swift
@@ -1007,6 +1049,15 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/single/history"), {
     meta: true,
   }),
 });
+```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/coins/single/history")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\",\n\t\"code\": \"BTC\",\n\t\"start\": 1617035100000,\n\t\"end\": 1617035400000,\n    \"meta\": true\n}")
+  .asString();
 ```
 
 ```swift
@@ -1266,6 +1317,15 @@ await fetch(new Request("https://api.livecoinwatch.com/coins/list"), {
     meta: false,
   }),
 });
+```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/coins/list")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\",\n\t\"sort\": \"rank\",\n\t\"order\": \"ascending\",\n\t\"offset\": 0,\n\t\"limit\": 2,\n\t\"meta\": false\n}")
+  .asString();
 ```
 
 ```swift
@@ -1536,6 +1596,14 @@ task.resume()
 semaphore.wait()
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/fiats/all")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .asString();
+```
+
 ```go
 package main
 
@@ -1779,6 +1847,15 @@ task.resume()
 semaphore.wait()
 ```
 
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/exchanges/single")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"ETH\",\n\t\"code\": \"gemini\",\n\t\"meta\": true\n}")
+  .asString();
+```
+
 ```csharp
 var client = new RestClient("https://api.livecoinwatch.com/exchanges/single");
 client.Timeout = -1;
@@ -1963,6 +2040,15 @@ let task = URLSession.shared.dataTask(with: request) { data, response, error in
 
 task.resume()
 semaphore.wait()
+```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/exchanges/list")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\",\n\t\"sort\": \"visitors\",\n\t\"order\": \"descending\",\n\t\"offset\": 0,\n\t\"limit\": 1,\n\t\"meta\": true\n}")
+  .asString();
 ```
 
 ```go

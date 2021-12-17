@@ -10,7 +10,7 @@
       <link href=stylesheets/highlight-obsidian.css rel=stylesheet media=screen,print>
       <script src=javascripts/all.js></script>
    </head>
-   <body class="" data-languages="[&#34;shell&#34;,&#34;javascript&#34;,&#34;python&#34;,&#34;php&#34;,&#34;csharp&#34;,&#34;ruby&#34;,&#34;go&#34;,&#34;swift&#34;]">
+   <body class="" data-languages="[&#34;shell&#34;,&#34;javascript&#34;,&#34;python&#34;,&#34;php&#34;,&#34;csharp&#34;,&#34;ruby&#34;,&#34;go&#34;,&#34;swift&#34;,&#34;java&#34;]">
       <a href=# id=nav-button>
          <span>NAV <img alt=navbar class=image-navbar src=images/navbar.png></span>
       </a>
@@ -25,6 +25,7 @@
             <a href=# data-language-name="ruby">ruby</a>
             <a href=# data-language-name="go">go</a>
             <a href=# data-language-name="swift">swift</a>
+            <a href=# data-language-name="java">java</a>
          </div>
          <div class=search>
             <input type=text class=search id=input-search placeholder="Search">
@@ -184,6 +185,12 @@ puts response.read_body</code></pre>
   fmt.Println(<span class="hljs-type">string</span>(body))
 }</code></pre>
             <p>All the examples are written using net/http. Everything is explained in their <a href="https://pkg.go.dev/net/http">documentation</a>!. Just copy and paste and you are ready to Go!. Remember to change <code>&lt;YOUR_API_KEY&gt;</code> to your API key.</p>
+            <h2 id="java">Java</h2>
+            <pre class="highlight java"><code>Unirest.setTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+HttpResponse&lt;String&gt; response = Unirest.post(<span class="hljs-string">&quot;https://api.livecoinwatch.com&quot;</span>)
+  .header(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  .asString();</code></pre>
+            <p>The examples are written using <a href="https://kong.github.io/unirest-java/">Java Unirest</a>. You may want to follow this guide for <a href="https://www.baeldung.com/unirest">an example</a>. You can also read the <a href="https://kong.github.io/unirest-java/">documentation</a>.</p>
             <h1 id="concepts">Concepts</h1>
             <p>We&#39;ve tried to keep the API surface simple and efficient, so let&#39;s discuss few <a href="#concepts">concepts</a> that apply to the entirety of the API.</p>
             <h2 id="there-is-only-one-domain">There Is Only One <strong>Domain</strong></h2>
@@ -321,7 +328,10 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
   -H &#x27;content-type: application/json&#x27;</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&quot;https://api.livecoinwatch.com/status&quot;</span>), {
   <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,
   <span class="hljs-attr">headers</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>({ <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span> }),
-});</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+});</code></pre><pre class="highlight java"><code>Unirest.setTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+HttpResponse&lt;String&gt; response = Unirest.post(<span class="hljs-string">&quot;https://api.livecoinwatch.com/status&quot;</span>)
+  .header(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  .asString();</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
   <span class="hljs-string">&quot;fmt&quot;</span>
@@ -436,7 +446,11 @@ print_r(stream_get_contents(<span class="hljs-variable">$fp</span>));</code></pr
     <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,
     <span class="hljs-string">&quot;x-api-key&quot;</span>: <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>,
   }),
-});</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/credits&quot;</span>);
+});</code></pre><pre class="highlight java"><code>Unirest.setTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+HttpResponse&lt;String&gt; response = Unirest.post(<span class="hljs-string">&quot;https://api.livecoinwatch.com/credits&quot;</span>)
+  .header(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  .header(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+  .asString();</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/credits&quot;</span>);
 client.Timeout = <span class="hljs-number">-1</span>;
 <span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
@@ -622,7 +636,12 @@ request.httpBody <span class="hljs-operator">=</span> postData
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+semaphore.wait()</code></pre><pre class="highlight java"><code>Unirest.setTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+HttpResponse&lt;String&gt; response = Unirest.post(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview&quot;</span>)
+  .header(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  .header(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+  .body(<span class="hljs-string">&quot;{\n\t\&quot;currency\&quot;: \&quot;USD\&quot;\n}&quot;</span>)
+  .asString();</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
   <span class="hljs-string">&quot;fmt&quot;</span>
@@ -820,7 +839,12 @@ request.httpBody <span class="hljs-operator">=</span> postData
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+semaphore.wait()</code></pre><pre class="highlight java"><code>Unirest.setTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+HttpResponse&lt;String&gt; response = Unirest.post(<span class="hljs-string">&quot;https://api.livecoinwatch.com/overview/history&quot;</span>)
+  .header(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  .header(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+  .body(<span class="hljs-string">&quot;{\n\t\&quot;currency\&quot;: \&quot;USD\&quot;,\n\t\&quot;start\&quot;: 1606232700000,\n\t\&quot;end\&quot;: 1606233000000\n}\n&quot;</span>)
+  .asString();</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
   <span class="hljs-string">&quot;fmt&quot;</span>
@@ -1025,7 +1049,12 @@ puts response.read_body</code></pre>
     <span class="hljs-attr">code</span>: <span class="hljs-string">&quot;ETH&quot;</span>,
     <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>,
   }),
-});</code></pre><pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
+});</code></pre><pre class="highlight java"><code>Unirest.setTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+HttpResponse&lt;String&gt; response = Unirest.post(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single&quot;</span>)
+  .header(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  .header(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+  .body(<span class="hljs-string">&quot;{\n\t\&quot;currency\&quot;: \&quot;USD\&quot;,\n\t\&quot;code\&quot;: \&quot;ETH\&quot;,\n\t\&quot;meta\&quot;: true\n}&quot;</span>)
+  .asString();</code></pre><pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
 <span class="hljs-keyword">#if</span> canImport(<span class="hljs-type">FoundationNetworking</span>)
 <span class="hljs-keyword">import</span> FoundationNetworking
 <span class="hljs-keyword">#endif</span>
@@ -1326,7 +1355,12 @@ puts response.read_body</code></pre>
     <span class="hljs-attr">end</span>: <span class="hljs-number">1617035400000</span>,
     <span class="hljs-attr">meta</span>: <span class="hljs-literal">true</span>,
   }),
-});</code></pre><pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
+});</code></pre><pre class="highlight java"><code>Unirest.setTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+HttpResponse&lt;String&gt; response = Unirest.post(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/single/history&quot;</span>)
+  .header(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  .header(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+  .body(<span class="hljs-string">&quot;{\n\t\&quot;currency\&quot;: \&quot;USD\&quot;,\n\t\&quot;code\&quot;: \&quot;BTC\&quot;,\n\t\&quot;start\&quot;: 1617035100000,\n\t\&quot;end\&quot;: 1617035400000,\n    \&quot;meta\&quot;: true\n}&quot;</span>)
+  .asString();</code></pre><pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
 <span class="hljs-keyword">#if</span> canImport(<span class="hljs-type">FoundationNetworking</span>)
 <span class="hljs-keyword">import</span> FoundationNetworking
 <span class="hljs-keyword">#endif</span>
@@ -1648,7 +1682,12 @@ puts response.read_body</code></pre>
     <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,
     <span class="hljs-attr">meta</span>: <span class="hljs-literal">false</span>,
   }),
-});</code></pre><pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
+});</code></pre><pre class="highlight java"><code>Unirest.setTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+HttpResponse&lt;String&gt; response = Unirest.post(<span class="hljs-string">&quot;https://api.livecoinwatch.com/coins/list&quot;</span>)
+  .header(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  .header(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+  .body(<span class="hljs-string">&quot;{\n\t\&quot;currency\&quot;: \&quot;USD\&quot;,\n\t\&quot;sort\&quot;: \&quot;rank\&quot;,\n\t\&quot;order\&quot;: \&quot;ascending\&quot;,\n\t\&quot;offset\&quot;: 0,\n\t\&quot;limit\&quot;: 2,\n\t\&quot;meta\&quot;: false\n}&quot;</span>)
+  .asString();</code></pre><pre class="highlight swift"><code><span class="hljs-keyword">import</span> Foundation
 <span class="hljs-keyword">#if</span> canImport(<span class="hljs-type">FoundationNetworking</span>)
 <span class="hljs-keyword">import</span> FoundationNetworking
 <span class="hljs-keyword">#endif</span>
@@ -1987,7 +2026,11 @@ request.httpMethod <span class="hljs-operator">=</span> <span class="hljs-string
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+semaphore.wait()</code></pre><pre class="highlight java"><code>Unirest.setTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+HttpResponse&lt;String&gt; response = Unirest.post(<span class="hljs-string">&quot;https://api.livecoinwatch.com/fiats/all&quot;</span>)
+  .header(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  .header(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+  .asString();</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
   <span class="hljs-string">&quot;fmt&quot;</span>
@@ -2215,7 +2258,12 @@ request.httpBody <span class="hljs-operator">=</span> postData
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/single&quot;</span>);
+semaphore.wait()</code></pre><pre class="highlight java"><code>Unirest.setTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+HttpResponse&lt;String&gt; response = Unirest.post(<span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/single&quot;</span>)
+  .header(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  .header(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+  .body(<span class="hljs-string">&quot;{\n\t\&quot;currency\&quot;: \&quot;ETH\&quot;,\n\t\&quot;code\&quot;: \&quot;gemini\&quot;,\n\t\&quot;meta\&quot;: true\n}&quot;</span>)
+  .asString();</code></pre><pre class="highlight csharp"><code><span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> RestClient(<span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/single&quot;</span>);
 client.Timeout = <span class="hljs-number">-1</span>;
 <span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> RestRequest(Method.POST);
 request.AddHeader(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
@@ -2455,7 +2503,12 @@ request.httpBody <span class="hljs-operator">=</span> postData
 }
 
 task.resume()
-semaphore.wait()</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
+semaphore.wait()</code></pre><pre class="highlight java"><code>Unirest.setTimeouts(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+HttpResponse&lt;String&gt; response = Unirest.post(<span class="hljs-string">&quot;https://api.livecoinwatch.com/exchanges/list&quot;</span>)
+  .header(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  .header(<span class="hljs-string">&quot;x-api-key&quot;</span>, <span class="hljs-string">&quot;&lt;YOUR_API_KEY&gt;&quot;</span>)
+  .body(<span class="hljs-string">&quot;{\n\t\&quot;currency\&quot;: \&quot;USD\&quot;,\n\t\&quot;sort\&quot;: \&quot;visitors\&quot;,\n\t\&quot;order\&quot;: \&quot;descending\&quot;,\n\t\&quot;offset\&quot;: 0,\n\t\&quot;limit\&quot;: 1,\n\t\&quot;meta\&quot;: true\n}&quot;</span>)
+  .asString();</code></pre><pre class="highlight go"><code><span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> (
   <span class="hljs-string">&quot;fmt&quot;</span>
@@ -2826,6 +2879,7 @@ puts response.read_body</code></pre>
                <a href=# data-language-name="ruby">ruby</a>
                <a href=# data-language-name="go">go</a>
                <a href=# data-language-name="swift">swift</a>
+               <a href=# data-language-name="java">java</a>
             </div>
          </div>
       </div>

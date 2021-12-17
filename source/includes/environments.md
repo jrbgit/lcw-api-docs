@@ -186,3 +186,16 @@ func main() {
 All the examples are written using net/http. 
 Everything is explained in their [documentation](https://pkg.go.dev/net/http)!.
 Just copy and paste and you are ready to Go!. Remember to change `<YOUR_API_KEY>` to your API key.
+
+## Java
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com")
+  .header("content-type", "application/json")
+  .asString();
+```
+
+The examples are written using [Java Unirest](https://kong.github.io/unirest-java/).
+You may want to follow this guide for [an example](https://www.baeldung.com/unirest).
+You can also read the [documentation](https://kong.github.io/unirest-java/).
