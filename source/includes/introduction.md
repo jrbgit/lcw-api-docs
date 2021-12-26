@@ -8,8 +8,8 @@ In this document, you should be able to find everything you need to know to use 
 
 * [Simple mail](mailto:contact+api@livecoinwatch.com) always works.
 * [Trollbox](https://www.livecoinwatch.com) on our site.
-* [Our Twitter](https://twitter.com), if it's really that bad.
-* [Telegram channel](https://telegram.com) is very fun as well.
+* [Our Twitter](https://twitter.com/livecoinwatch), if it's really that bad.
+* [Telegram channel](https://t.me/livecoinwatchofficial) is very fun as well.
 
 Issues specific to the API documentation should be created at [Issues page](https://github.com/LiveCoinWatch/lcw-api-docs/issues).
 
