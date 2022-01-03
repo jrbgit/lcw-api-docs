@@ -55,6 +55,8 @@ All the examples are written using [Python Requests](https://docs.python-request
 
 Note that you don't have to install the json library, only import it.
 
+If you prefer a wrapped up library approach, you may try [this one](https://github.com/PlayErphil/pylivecoinwatch), written by one of our team members.
+
 
 ## PHP
 
