@@ -974,6 +974,7 @@ puts response.read_body
 {
   "name": "Ethereum",
   "symbol": "Ξ",
+  "rank": 2,
   "color": "#282a2a",
   "png32": "https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/eth.png",
   "png64": "https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/64/eth.png",
@@ -1006,6 +1007,7 @@ puts response.read_body
 | ------------------- | ------ | -------------------------------------------------------------------------- |
 | `name`              | string | coin's name                                                                |
 | `symbol`            | string | coin's symbol                                                              |
+| `rank`              | number | coin's rank                                                                |
 | `color`             | string | hexadecimal color code (`#282a2a`)                                         |
 | `png32`             | string | 32-pixel png image of coin icon                                            |
 | `png64`             | string | 64-pixel png image of coin icon                                            |
@@ -1230,6 +1232,7 @@ puts response.read_body
   "code": "BTC",
   "name": "Bitcoin",
   "symbol": "₿",
+  "rank": 1,
   "color": "#fa9e32",
   "png32": "https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/btc.png",
   "png64": "https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/64/btc.png",
@@ -1276,6 +1279,7 @@ puts response.read_body
 | `code`              | string | coin's own code                             |
 | `name`              | string | coin's name                                 |
 | `symbol`            | string | coin's symbol                               |
+| `rank`              | number | coin's rank                                 |
 | `color`             | string | hexadecimal color code (`#282a2a`)          |
 | `png32`             | string | 32-pixel png image of coin icon             |
 | `png64`             | string | 64-pixel png image of coin icon             |
@@ -1531,6 +1535,7 @@ puts response.read_body
 | ------------------- | ------ | ------------------------------------------- |
 | `name`              | string | coin's name                                 |
 | `symbol`            | string | coin's symbol                               |
+| `rank`              | rank   | coin's rank                                 |
 | `color`             | string | hexadecimal color code (`#282a2a`)          |
 | `png32`             | string | 32-pixel png image of coin icon             |
 | `png64`             | string | 64-pixel png image of coin icon             |
