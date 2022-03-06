@@ -84,6 +84,7 @@ response = requests.request(<span class="hljs-string">&quot;POST&quot;</span>, u
             <p>All the examples are written using <a href="https://docs.python-requests.org/en/latest/">Python Requests</a>.</p>
             <p><a href="https://docs.python-requests.org/en/latest/user/install/#install">Install the library</a> and import it along with the json library. </p>
             <p>Note that you don&#39;t have to install the json library, only import it.</p>
+            <p>If you prefer a wrapped up library approach, you may try <a href="https://github.com/PlayErphil/pylivecoinwatch">this one</a>, written by one of our team members.</p>
             <h2 id="php">PHP</h2>
             <pre class="highlight php"><code><span class="hljs-variable">$context_options</span> = <span class="hljs-keyword">array</span> (
     <span class="hljs-string">&#x27;http&#x27;</span> =&gt; <span class="hljs-keyword">array</span> (
@@ -1572,6 +1573,8 @@ puts response.read_body</code></pre>
             <pre class="highlight json"><code><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Ethereum&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;symbol&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Ξ&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;rank&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2411</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#282a2a&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;png32&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/eth.png&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;png64&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/64/eth.png&quot;</span><span class="hljs-punctuation">,</span>
@@ -1634,6 +1637,16 @@ puts response.read_body</code></pre>
                      <td><code>symbol</code></td>
                      <td>string</td>
                      <td>coin&#39;s symbol</td>
+                  </tr>
+                  <tr>
+                     <td><code>rank</code></td>
+                     <td>number</td>
+                     <td>coin&#39;s rank</td>
+                  </tr>
+                  <tr>
+                     <td><code>age</code></td>
+                     <td>number</td>
+                     <td>coin&#39;s age in days</td>
                   </tr>
                   <tr>
                      <td><code>color</code></td>
@@ -1887,8 +1900,10 @@ puts response.read_body</code></pre>
   <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;BTC&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Bitcoin&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;symbol&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;₿&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#fa9e32&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;png32&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/btc.png&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;rank&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-string">&quot;age: 4810,
+  &quot;</span>color<span class="hljs-string">&quot;: &quot;</span>#fa9e32<span class="hljs-string">&quot;,
+  &quot;</span>png32<span class="hljs-string">&quot;: &quot;</span>https<span class="hljs-punctuation">:</span><span class="hljs-comment">//lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/btc.png&quot;,</span>
   <span class="hljs-attr">&quot;png64&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/64/btc.png&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;webp32&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/btc.webp&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;webp64&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/64/btc.webp&quot;</span><span class="hljs-punctuation">,</span>
@@ -1975,6 +1990,16 @@ puts response.read_body</code></pre>
                      <td><code>symbol</code></td>
                      <td>string</td>
                      <td>coin&#39;s symbol</td>
+                  </tr>
+                  <tr>
+                     <td><code>rank</code></td>
+                     <td>number</td>
+                     <td>coin&#39;s rank</td>
+                  </tr>
+                  <tr>
+                     <td><code>age</code></td>
+                     <td>number</td>
+                     <td>coin&#39;s age in days</td>
                   </tr>
                   <tr>
                      <td><code>color</code></td>
@@ -2289,6 +2314,16 @@ puts response.read_body</code></pre>
                      <td><code>symbol</code></td>
                      <td>string</td>
                      <td>coin&#39;s symbol</td>
+                  </tr>
+                  <tr>
+                     <td><code>rank</code></td>
+                     <td>rank</td>
+                     <td>coin&#39;s rank</td>
+                  </tr>
+                  <tr>
+                     <td><code>age</code></td>
+                     <td>number</td>
+                     <td>coin&#39;s age in days</td>
                   </tr>
                   <tr>
                      <td><code>color</code></td>
