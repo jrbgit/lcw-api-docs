@@ -2172,12 +2172,10 @@ puts response.read_body
 [
   {
     "code": "BSC",
-    "coin": "BNB",
     "name": "BNB Chain"
   },
   {
     "code": "ETH",
-    "coin": "ETH",
     "name": "Ethereum"
   },
   ...
@@ -2195,7 +2193,6 @@ An array of following:
 | key         | type   | description                          |
 | ----------- | ------ | ------------------------------------ |
 | `code`      | string | platform code                        |
-| `coin`      | string | code of the coin platform's based on |
 | `name`      | string | platform name                        |
 
 
