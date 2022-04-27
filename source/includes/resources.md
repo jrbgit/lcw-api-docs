@@ -544,7 +544,7 @@ puts response.read_body
 | -------------- | ------ | ----------------------------------------- |
 | `cap`          | number | market cap of all coins                   |
 | `volume`       | number | volume of all coins                       |
-| `liquidity`    | number | 2% liquidity of all coins                 |
+| `liquidity`    | number | ±2% liquidity of all coins                 |
 | `btcDominance` | number | percentage of BTC cap in total market cap |
 
 ## `/overview/history`
@@ -775,7 +775,7 @@ puts response.read_body
 | `date`         | number | UNIX timestamp in milliseconds of datapoint |
 | `cap`          | number | market cap of all coins                     |
 | `volume`       | number | volume of all coins                         |
-| `liquidity`    | number | 2% liquidity of all coins                   |
+| `liquidity`    | number | ±2% liquidity of all coins                   |
 | `btcDominance` | number | percentage of BTC cap in total market cap   |
 
 ## `/coins/single`
@@ -1025,7 +1025,266 @@ puts response.read_body
 | `rate`              | number | price of coin in requested currency                                        |
 | `volume`            | number | reported trading volume of the coin in last 24 hours in requested currency |
 | `cap`               | number | coin's market cap in requested currency                                    |
+| `liquidity`         | number | ±2% orderbook depth                                                        |
 | `totalCap`          | number | coin's hypothetical total capitalization at the moment                     |
+
+## `/coins/contract`
+
+Get all information about a single coin at latest moment in time, based on its platform identifier and contract address.
+
+```shell
+curl -X POST 'https://api.livecoinwatch.com/coins/contract' \
+  -H 'content-type: application/json' \
+  -H 'x-api-key: <YOUR_API_KEY>' \
+  -d '{"currency":"USD","platform":"ETH","address":"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2","meta":true}'
+```
+
+```javascript
+await fetch(new Request("https://api.livecoinwatch.com/coins/contract"), {
+  method: "POST",
+  headers: new Headers({
+    "content-type": "application/json",
+    "x-api-key": "<YOUR_API_KEY>",
+  }),
+  body: JSON.stringify({
+    currency: "USD",
+    platform: 'ETH',
+    address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+    meta: true,
+  }),
+});
+```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/coins/contract")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"currency\": \"USD\",\n\t\"platform\": \"ETH\",\n\t\"address\": \"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\n\t\"meta\": true\n}")
+  .asString();
+```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"currency\": \"USD\",\n\t\"platform\": \"ETH\",\n\t\"address\": \"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\n\t\"meta\": true\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/coins/contract")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/coins/contract"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+	"currency": "USD",
+        "platform": "ETH",
+        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+	"meta": true
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/coins/contract");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"	""currency"": ""USD""," + "\n" +
+@"      ""platform"": ""ETH""," + "\n" +,
+@"      ""address"": ""0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2""," + "\n" +,
+@"	""meta"": true" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/coins/contract"
+
+payload = json.dumps({
+  "currency": "USD",
+  "platform": "ETH",
+  "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "meta": True
+})
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+$data = json_encode(array('currency' => 'USD', 'platform' => 'ETH', 'address': '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', 'meta' => true));
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n",
+        'content' => $data
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/coins/contract', 'r', false, $context);
+print_r(stream_get_contents($fp));
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/coins/contract")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+request.body = JSON.dump({
+  "currency": "USD",
+  "platform": "ETH",
+  "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "meta": true
+})
+
+response = https.request(request)
+puts response.read_body
+```
+
+> Let's see all of current data on ETH, in USD currency:
+
+```json
+{
+  "name": "Ethereum",
+  "symbol": "Ξ",
+  "rank": 2,
+  "age": 2411,
+  "color": "#282a2a",
+  "png32": "https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/eth.png",
+  "png64": "https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/64/eth.png",
+  "webp32": "https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/32/eth.webp",
+  "webp64": "https://lcw.nyc3.cdn.digitaloceanspaces.com/production/currencies/64/eth.webp",
+  "exchanges": 153,
+  "markets": 3717,
+  "pairs": 1773,
+  "allTimeHighUSD": 2036.3088032624153,
+  "circulatingSupply": 115250583,
+  "totalSupply": null,
+  "maxSupply": null,
+  "rate": 1786.6742250505124,
+  "volume": 11522748696,
+  "cap": 205915246068,
+  "liquidity": 1322914752
+}
+```
+
+### Request
+
+| key        | type    | description                             |
+| ---------- | ------- | --------------------------------------- |
+| `currency` | string  | any valid coin or fiat code             |
+| `platform` | string  | platform code                           |
+| `address`  | string  | contract address                        |
+| `meta`     | boolean | to include full coin information or not |
+
+### Response
+
+| key                 | type   | description                                                                |
+| ------------------- | ------ | -------------------------------------------------------------------------- |
+| `name`              | string | coin's name                                                                |
+| `symbol`            | string | coin's symbol                                                              |
+| `rank`              | number | coin's rank                                                                |
+| `age`               | number | coin's age in days                                    |
+| `color`             | string | hexadecimal color code (`#282a2a`)                                         |
+| `png32`             | string | 32-pixel png image of coin icon                                            |
+| `png64`             | string | 64-pixel png image of coin icon                                            |
+| `webp32`            | string | 32-pixel webp image of coin icon                                           |
+| `webp64`            | string | 64-pixel webpg image of coin icon                                          |
+| `exchanges`         | number | number of exchange coin is present at                                      |
+| `markets`           | number | number of markets coin is present at                                       |
+| `pairs`             | number | number of unique markets coin is present at                                |
+| `allTimeHighUSD`    | number | all-time high in USD                                                       |
+| `circulatingSupply` | number | number of coins minted, but not locked                                     |
+| `totalSupply`       | number | number of coins minted, including locked                                   |
+| `maxSupply`         | number | maximum number of coins that can be minted                                 |
+| `rate`              | number | price of coin in requested currency                                        |
+| `volume`            | number | reported trading volume of the coin in last 24 hours in requested currency |
+| `cap`               | number | coin's market cap in requested currency                                    |
+| `liquidity`         | number | ±2% orderbook depth                                                        |
+| `totalCap`          | number | coin's hypothetical total capitalization at the moment                     |
+
 
 ## `/coins/single/history`
 
@@ -1750,6 +2009,201 @@ An array of following:
 | `flag`      | string | ISO country code of the flag |
 | `name`      | string | fiat name                    |
 | `symbol`    | string | fiat symbol                  |
+
+
+## `/platforms/all`
+
+List of all the coin platforms.
+
+```shell
+curl -X POST 'https://api.livecoinwatch.com/platforms/all' \
+  -H 'content-type: application/json' \
+  -H 'x-api-key: <YOUR_API_KEY>'
+```
+
+```javascript
+await fetch(new Request("https://api.livecoinwatch.com/platforms/all"), {
+  method: "POST",
+  headers: new Headers({
+    "content-type": "application/json",
+    "x-api-key": "<YOUR_API_KEY>",
+  }),
+});
+```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/platforms/all")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/platforms/all")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .asString();
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/platforms/all"
+  method := "POST"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/platforms/all"
+
+payload={}
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/platforms/all");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+```php
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n"
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/platforms/all', 'r', false, $context);
+print_r(stream_get_contents($fp));
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/platforms/all")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+
+response = https.request(request)
+puts response.read_body
+```
+
+> Array of all the supported platforms:
+
+```json
+[
+  { code: 'BSC', coin: 'BNB', name: 'BNB Chain' },
+  { name: 'Ethereum', code: 'ETH', coin: 'ETH' },
+  { name: 'Binance Chain', code: 'BC', coin: 'BNB' },
+  { name: 'Polygon', code: 'MATIC', coin: 'MATIC' },
+]
+[
+  {
+    "code": "BSC",
+    "coin": "BNB",
+    "name": "BNB Chain"
+  },
+  {
+    "code": "ETH",
+    "coin": "ETH",
+    "name": "Ethereum"
+  },
+  ...
+]
+```
+
+### Request
+
+Accepts no request parameters.
+
+### Response
+
+An array of following:
+
+| key         | type   | description                          |
+| ----------- | ------ | ------------------------------------ |
+| `code`      | string | platform code                        |
+| `coin`      | string | code of the coin platform's based on |
+| `name`      | string | platform name                        |
+
 
 ## `/exchanges/single`
 
