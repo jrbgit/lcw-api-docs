@@ -2170,12 +2170,6 @@ puts response.read_body
 
 ```json
 [
-  { code: 'BSC', coin: 'BNB', name: 'BNB Chain' },
-  { name: 'Ethereum', code: 'ETH', coin: 'ETH' },
-  { name: 'Binance Chain', code: 'BC', coin: 'BNB' },
-  { name: 'Polygon', code: 'MATIC', coin: 'MATIC' },
-]
-[
   {
     "code": "BSC",
     "coin": "BNB",
