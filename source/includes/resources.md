@@ -1227,6 +1227,7 @@ puts response.read_body
 
 ```json
 {
+  "code": "ETH",
   "name": "Ethereum",
   "symbol": "Ξ",
   "rank": 2,
@@ -1263,10 +1264,11 @@ puts response.read_body
 
 | key                 | type   | description                                                                |
 | ------------------- | ------ | -------------------------------------------------------------------------- |
+| `code`              | string | coin's code                                                                |
 | `name`              | string | coin's name                                                                |
 | `symbol`            | string | coin's symbol                                                              |
 | `rank`              | number | coin's rank                                                                |
-| `age`               | number | coin's age in days                                    |
+| `age`               | number | coin's age in days                                                         |
 | `color`             | string | hexadecimal color code (`#282a2a`)                                         |
 | `png32`             | string | 32-pixel png image of coin icon                                            |
 | `png64`             | string | 64-pixel png image of coin icon                                            |
