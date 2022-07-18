@@ -990,7 +990,15 @@ puts response.read_body
   "maxSupply": null,
   "rate": 1786.6742250505124,
   "volume": 11522748696,
-  "cap": 205915246068
+  "cap": 205915246068,
+  "delta": {
+    "hour": 1.008,
+    "day": 1.0808,
+    "week": 1.2793,
+    "month": 1.4754,
+    "quarter": 0.4804,
+    "year": 0.7455
+  }
 }
 ```
 
@@ -1009,7 +1017,7 @@ puts response.read_body
 | `name`              | string | coin's name                                                                |
 | `symbol`            | string | coin's symbol                                                              |
 | `rank`              | number | coin's rank                                                                |
-| `age`               | number | coin's age in days                                    |
+| `age`               | number | coin's age in days                                                         |
 | `color`             | string | hexadecimal color code (`#282a2a`)                                         |
 | `png32`             | string | 32-pixel png image of coin icon                                            |
 | `png64`             | string | 64-pixel png image of coin icon                                            |
@@ -1027,6 +1035,12 @@ puts response.read_body
 | `cap`               | number | coin's market cap in requested currency                                    |
 | `liquidity`         | number | ±2% orderbook depth                                                        |
 | `totalCap`          | number | coin's hypothetical total capitalization at the moment                     |
+| `delta.hour`        | number | rate of change in the last hour                                            |
+| `delta.day`         | number | rate of change in the last 24 hours                                        |
+| `delta.week`        | number | rate of change in the last 7 days                                          |
+| `delta.month`       | number | rate of change in the last 30 days                                         |
+| `delta.quarter`     | number | rate of change in the last 90 days                                         |
+| `delta.year`        | number | rate of change in the last 365 days                                        |
 
 ## `/coins/contract`
 
@@ -1247,7 +1261,15 @@ puts response.read_body
   "rate": 1786.6742250505124,
   "volume": 11522748696,
   "cap": 205915246068,
-  "liquidity": 1322914752
+  "liquidity": 1322914752,
+  "delta": {
+    "hour": 1.008,
+    "day": 1.0808,
+    "week": 1.2793,
+    "month": 1.4754,
+    "quarter": 0.4804,
+    "year": 0.7455
+  }
 }
 ```
 
@@ -1286,6 +1308,12 @@ puts response.read_body
 | `cap`               | number | coin's market cap in requested currency                                    |
 | `liquidity`         | number | ±2% orderbook depth                                                        |
 | `totalCap`          | number | coin's hypothetical total capitalization at the moment                     |
+| `delta.hour`        | number | rate of change in the last hour                                            |
+| `delta.day`         | number | rate of change in the last 24 hours                                        |
+| `delta.week`        | number | rate of change in the last 7 days                                          |
+| `delta.month`       | number | rate of change in the last 30 days                                         |
+| `delta.quarter`     | number | rate of change in the last 90 days                                         |
+| `delta.year`        | number | rate of change in the last 365 days                                        |
 
 
 ## `/coins/single/history`
@@ -1772,13 +1800,29 @@ puts response.read_body
     "code": "BTC",
     "rate": 59075.58195922644,
     "volume": 23100393182,
-    "cap": 1102979514307
+    "cap": 1102979514307,
+    "delta": {
+      "hour": 1.008,
+      "day": 1.0808,
+      "week": 1.2793,
+      "month": 1.4754,
+      "quarter": 0.4804,
+      "year": 0.7455
+    }
   },
   {
     "code": "ETH",
     "rate": 1933.6392223621567,
     "volume": 12686119704,
-    "cap": 222928063223
+    "cap": 222928063223,
+    "delta": {
+      "hour": 1.0015,
+      "day": 1.0386,
+      "week": 1.0822,
+      "month": 1.158,
+      "quarter": 0.5436,
+      "year": 0.7004
+    }
   }
 ]
 ```
@@ -1818,6 +1862,12 @@ puts response.read_body
 | `rate`              | number | coin rate in the specified currency         |
 | `volume`            | number | 24-hour volume of coin                      |
 | `cap`               | number | market cap of coin                          |
+| `delta.hour`        | number | rate of change in the last hour             |
+| `delta.day`         | number | rate of change in the last 24 hours         |
+| `delta.week`        | number | rate of change in the last 7 days           |
+| `delta.month`       | number | rate of change in the last 30 days          |
+| `delta.quarter`     | number | rate of change in the last 90 days          |
+| `delta.year`        | number | rate of change in the last 365 days         |
 
 ## `/fiats/all`
 
