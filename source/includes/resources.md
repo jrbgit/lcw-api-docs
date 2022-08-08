@@ -988,6 +988,7 @@ puts response.read_body
   "circulatingSupply": 115250583,
   "totalSupply": null,
   "maxSupply": null,
+  "categories": ["smart_contract_platforms"],
   "rate": 1786.6742250505124,
   "volume": 11522748696,
   "cap": 205915246068,
@@ -1035,6 +1036,7 @@ puts response.read_body
 | `cap`               | number | coin's market cap in requested currency                                    |
 | `liquidity`         | number | ±2% orderbook depth                                                        |
 | `totalCap`          | number | coin's hypothetical total capitalization at the moment                     |
+| `categories`        | array  | array of category strings                                                  |
 | `delta.hour`        | number | rate of change in the last hour                                            |
 | `delta.day`         | number | rate of change in the last 24 hours                                        |
 | `delta.week`        | number | rate of change in the last 7 days                                          |
@@ -1258,6 +1260,7 @@ puts response.read_body
   "circulatingSupply": 115250583,
   "totalSupply": null,
   "maxSupply": null,
+  "categories": ["smart_contract_platform"],
   "rate": 1786.6742250505124,
   "volume": 11522748696,
   "cap": 205915246068,
@@ -1308,6 +1311,7 @@ puts response.read_body
 | `cap`               | number | coin's market cap in requested currency                                    |
 | `liquidity`         | number | ±2% orderbook depth                                                        |
 | `totalCap`          | number | coin's hypothetical total capitalization at the moment                     |
+| `categories`        | array  | array of category strings                                                  |
 | `delta.hour`        | number | rate of change in the last hour                                            |
 | `delta.day`         | number | rate of change in the last 24 hours                                        |
 | `delta.week`        | number | rate of change in the last 7 days                                          |
@@ -1537,6 +1541,7 @@ puts response.read_body
   "circulatingSupply": 18669593,
   "totalSupply": null,
   "maxSupply": 21000000,
+  "categories": ["ecommerce"],
   "history": [
     {
       "date": 1617035100000,
@@ -1585,6 +1590,7 @@ puts response.read_body
 | `circulatingSupply` | number | number of coins minted, but not locked      |
 | `totalSupply`       | number | number of coins minted, including locked    |
 | `maxSupply`         | number | maximum number of coins that can be minted  |
+| `categories`        | array  | array of category strings                   |
 | `history`           | array  | list of `date`, `rate`, `volume` and `cap`  |
 
 ## `/coins/list`
@@ -1862,6 +1868,7 @@ puts response.read_body
 | `rate`              | number | coin rate in the specified currency         |
 | `volume`            | number | 24-hour volume of coin                      |
 | `cap`               | number | market cap of coin                          |
+| `categories`        | array  | array of category strings                   |
 | `delta.hour`        | number | rate of change in the last hour             |
 | `delta.day`         | number | rate of change in the last 24 hours         |
 | `delta.week`        | number | rate of change in the last 7 days           |
@@ -2169,6 +2176,7 @@ puts response.read_body
 | `rate`              | number | coin rate in the specified currency         |
 | `volume`            | number | 24-hour volume of coin                      |
 | `cap`               | number | market cap of coin                          |
+| `categories`        | array  | array of category strings                   |
 | `delta.hour`        | number | rate of change in the last hour             |
 | `delta.day`         | number | rate of change in the last 24 hours         |
 | `delta.week`        | number | rate of change in the last 7 days           |
