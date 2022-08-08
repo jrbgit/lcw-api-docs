@@ -526,6 +526,12 @@ There is only one publicly available version of the API.
 
 [Watch this repository](https://github.com/LiveCoinWatch/lcw-api-docs)! It'll always update before the actual API updates.
 
+## There Is Only One **Delta**
+
+There is only one way rate of change is represented, and that's a floating-point number ranging from `0` to `2`, `1` meaning no change has happened.
+
+If you need percentages, it is easy to calculate with `(delta - `) * 100`.
+
 ## There Is Only One **Limit**
 
 ```shell

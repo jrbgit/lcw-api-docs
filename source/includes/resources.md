@@ -1869,6 +1869,313 @@ puts response.read_body
 | `delta.quarter`     | number | rate of change in the last 90 days          |
 | `delta.year`        | number | rate of change in the last 365 days         |
 
+
+## `/coins/map`
+
+Assorted information for a custom map of coins.
+
+```shell
+curl -X POST 'https://api.livecoinwatch.com/coins/map' \
+  -H 'content-type: application/json' \
+  -H 'x-api-key: <YOUR_API_KEY>' \
+  -d '{"codes":["ETH","GRIN","BTC"],"currency":"USD","sort":"rank","order":"ascending","offset":0,"limit":2,"meta":false}'
+```
+
+```javascript
+await fetch(new Request("https://api.livecoinwatch.com/coins/map"), {
+  method: "POST",
+  headers: new Headers({
+    "content-type": "application/json",
+    "x-api-key": "<YOUR_API_KEY>",
+  }),
+  body: JSON.stringify({
+    codes: ["ETH", "BTC","GRIN"],
+    currency: "USD",
+    sort: "rank",
+    order: "ascending",
+    offset: 0,
+    limit: 0,
+    meta: false,
+  }),
+});
+```
+
+```java
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.livecoinwatch.com/coins/map")
+  .header("content-type", "application/json")
+  .header("x-api-key", "<YOUR_API_KEY>")
+  .body("{\n\t\"codes\": [\"ETH\",\"BTC\",\"GRIN\"],\n\t\"currency\": \"USD\",\n\t\"sort\": \"rank\",\n\t\"order\": \"ascending\",\n\t\"offset\": 0,\n\t\"limit\": 0,\n\t\"meta\": false\n}")
+  .asString();
+```
+
+```swift
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+var semaphore = DispatchSemaphore (value: 0)
+
+let parameters = "{\n\t\"codes\": [\"ETH\",\"BTC\",\"GRIN\"],\n\t\"currency\": \"USD\",\n\t\"sort\": \"rank\",\n\t\"order\": \"ascending\",\n\t\"offset\": 0,\n\t\"limit\": 0,\n\t\"meta\": false\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "https://api.livecoinwatch.com/coins/map")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "content-type")
+request.addValue("<YOUR_API_KEY>", forHTTPHeaderField: "x-api-key")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+  guard let data = data else {
+    print(String(describing: error))
+    semaphore.signal()
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+  semaphore.signal()
+}
+
+task.resume()
+semaphore.wait()
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.livecoinwatch.com/coins/map"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+        "codes": ["ETH","BTC","GRIN"],
+	"currency": "USD",
+	"sort": "rank",
+	"order": "ascending",
+	"offset": 0,
+	"limit": 0,
+	"meta": false
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("content-type", "application/json")
+  req.Header.Add("x-api-key", "<YOUR_API_KEY>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```csharp
+var client = new RestClient("https://api.livecoinwatch.com/coins/map");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("x-api-key", "<YOUR_API_KEY>");
+var body = @"{" + "\n" +
+@"      ""codes"": [""ETH"",""BTC"",""GRIN""]," + "\n" +
+@"	""currency"": ""USD""," + "\n" +
+@"	""sort"": ""rank""," + "\n" +
+@"	""order"": ""ascending""," + "\n" +
+@"	""offset"": 0," + "\n" +
+@"	""limit"": 0," + "\n" +
+@"	""meta"": false" + "\n" +
+@"}";
+request.AddParameter("application/json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+```python
+import requests
+import json
+
+url = "https://api.livecoinwatch.com/coins/map"
+
+payload = json.dumps({
+  "codes": ["ETH","BTC","GRIN"],
+  "currency": "USD",
+  "sort": "rank",
+  "order": "ascending",
+  "offset": 0,
+  "limit": 0,
+  "meta": False
+})
+headers = {
+  'content-type': 'application/json',
+  'x-api-key': '<YOUR_API_KEY>'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+$data = json_encode(array('codes' => array('ETH','BTC','GRIN'), 'currency' => 'USD', 'sort' => 'rank', 'order' => 'ascending', 'offset' => 0, 'limit' => 0,'meta' => false));
+$context_options = array (
+    'http' => array (
+        'method' => 'POST',
+        'header' => "Content-type: application/json\r\n"
+            . "x-api-key: <YOUR_API_KEY>" . "\r\n",
+        'content' => $data
+    )
+);
+$context = stream_context_create($context_options);
+$fp = fopen('https://api.livecoinwatch.com/coins/map', 'r', false, $context);
+print_r(stream_get_contents($fp));
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.livecoinwatch.com/coins/map")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = "application/json"
+request["x-api-key"] = "<YOUR_API_KEY>"
+request.body = JSON.dump({
+  "codes": ["ETH", "BTC","GRIN"],
+  "currency": "USD",
+  "sort": "rank",
+  "order": "ascending",
+  "offset": 0,
+  "limit": 0,
+  "meta": false
+})
+
+response = https.request(request)
+puts response.read_body
+```
+
+> This should give us 3 coins we specifically requested with their codes.
+
+<aside class="notice">
+  Note that the `limit=0` will default your page limit to the size of `codes` specified.
+</aside>
+
+```json
+[
+  {
+    "code": "BTC",
+    "rate": 24033.24173657366,
+    "volume": 14151561000,
+    "cap": 459414930787,
+    "delta": {
+      "hour": 0.9975,
+      "day": 1.0445,
+      "week": 1.0454,
+      "month": 1.106,
+      "quarter": 0.7655,
+      "year": 0.5399
+    }
+  },
+  {
+    "code": "ETH",
+    "rate": 1771.4633449389692,
+    "volume": 9351819221,
+    "cap": 215903855069,
+    "delta": {
+      "hour": 1.0011,
+      "day": 1.0503,
+      "week": 1.0769,
+      "month": 1.4474,
+      "quarter": 0.7453,
+      "year": 0.5691
+    }
+  },
+  {
+    "code": "GRIN",
+    "rate": 0.07354315748650457,
+    "volume": 998880,
+    "cap": 4625806,
+    "delta": {
+      "hour": 0.9983,
+      "day": 1.0189,
+      "week": 1.1734,
+      "month": 1.1519,
+      "quarter": 0.7298,
+      "year": 0.214
+    }
+  }
+]
+```
+
+### Request
+
+| key        | type    | description                                                         |
+| ---------- | ------- | ------------------------------------------------------------------- |
+| `codes`    | array   | array any valid coin code strings                                   |
+| `currency` | string  | any valid coin or fiat code                                         |
+| `sort`     | string  | sorting parameter, `rank`, `price`, `volume`, `code`, `name`, `age` |
+| `order`    | string  | sorting order, `ascending` or `descending`                          |
+| `offset`   | number  | offset of the list, default `0`                                     |
+| `limit`    | number  | limit of the list, default `10`, maximum `100`                      |
+| `meta`     | boolean | to include full coin information or not                             |
+
+### Response
+
+| key                 | type   | description                                 |
+| ------------------- | ------ | ------------------------------------------- |
+| `name`              | string | coin's name                                 |
+| `symbol`            | string | coin's symbol                               |
+| `rank`              | rank   | coin's rank                                 |
+| `age`               | number | coin's age in days                          |
+| `color`             | string | hexadecimal color code (`#282a2a`)          |
+| `png32`             | string | 32-pixel png image of coin icon             |
+| `png64`             | string | 64-pixel png image of coin icon             |
+| `webp32`            | string | 32-pixel webp image of coin icon            |
+| `webp64`            | string | 64-pixel webpg image of coin icon           |
+| `exchanges`         | number | number of exchange coin is present at       |
+| `markets`           | number | number of markets coin is present at        |
+| `pairs`             | number | number of unique markets coin is present at |
+| `allTimeHighUSD`    | number | all-time high in USD                        |
+| `circulatingSupply` | number | number of coins minted, but not locked      |
+| `totalSupply`       | number | number of coins minted, including locked    |
+| `maxSupply`         | number | maximum number of coins that can be minted  |
+| `code`              | string | coin's code                                 |
+| `rate`              | number | coin rate in the specified currency         |
+| `volume`            | number | 24-hour volume of coin                      |
+| `cap`               | number | market cap of coin                          |
+| `delta.hour`        | number | rate of change in the last hour             |
+| `delta.day`         | number | rate of change in the last 24 hours         |
+| `delta.week`        | number | rate of change in the last 7 days           |
+| `delta.month`       | number | rate of change in the last 30 days          |
+| `delta.quarter`     | number | rate of change in the last 90 days          |
+| `delta.year`        | number | rate of change in the last 365 days         |
+
 ## `/fiats/all`
 
 List of all the fiats.
