@@ -530,7 +530,7 @@ There is only one publicly available version of the API.
 
 There is only one way rate of change is represented, and that's a floating-point number ranging from `0` to `2`, `1` meaning no change has happened.
 
-If you need percentages, it is easy to calculate with `(delta - `) * 100`.
+If you need percentages, it is easy to calculate with `(delta - 1) * 100`.
 
 ## There Is Only One **Limit**
 
